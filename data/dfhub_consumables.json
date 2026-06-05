@@ -1,0 +1,308 @@
+[
+  {
+    "名字": "简易注射器",
+    "品质": "白",
+    "图片": "https://playerhub.df.qq.com/playerhub/60004/object/14020000001.png",
+    "价格": 2390,
+    "重量": 0,
+    "长x宽": "1x1",
+    "object_id": 14020000001
+  },
+  {
+    "名字": "车载急救包",
+    "品质": "白",
+    "图片": "https://playerhub.df.qq.com/playerhub/60004/object/14020000002.png",
+    "价格": 4600,
+    "重量": 0,
+    "长x宽": "1x1",
+    "object_id": 14020000002
+  },
+  {
+    "名字": "强效注射器",
+    "品质": "绿",
+    "图片": "https://playerhub.df.qq.com/playerhub/60004/object/14020000003.png",
+    "价格": 10358,
+    "重量": 0,
+    "长x宽": "1x1",
+    "object_id": 14020000003
+  },
+  {
+    "名字": "野战急救包",
+    "品质": "蓝",
+    "图片": "https://playerhub.df.qq.com/playerhub/60004/object/14020000004.png",
+    "价格": 19123,
+    "重量": 1,
+    "长x宽": "2x1",
+    "object_id": 14020000004
+  },
+  {
+    "名字": "户外医疗箱",
+    "品质": "紫",
+    "图片": "https://playerhub.df.qq.com/playerhub/60004/object/14020000005.png",
+    "价格": 83844,
+    "重量": 1,
+    "长x宽": "3x1",
+    "object_id": 14020000005
+  },
+  {
+    "名字": "战地医疗箱",
+    "品质": "金",
+    "图片": "https://playerhub.df.qq.com/playerhub/60004/object/14020000006.png",
+    "价格": 272927,
+    "重量": 1,
+    "长x宽": "2x2",
+    "object_id": 14020000006
+  },
+  {
+    "名字": "简易手术包",
+    "品质": "白",
+    "图片": "https://playerhub.df.qq.com/playerhub/60004/object/14030000001.png",
+    "价格": 3548,
+    "重量": 0,
+    "长x宽": "1x1",
+    "object_id": 14030000001
+  },
+  {
+    "名字": "战术快拆手术包",
+    "品质": "绿",
+    "图片": "https://playerhub.df.qq.com/playerhub/60004/object/14030000002.png",
+    "价格": 13085,
+    "重量": 0,
+    "长x宽": "2x1",
+    "object_id": 14030000002
+  },
+  {
+    "名字": "DEK野战手术包",
+    "品质": "紫",
+    "图片": "https://playerhub.df.qq.com/playerhub/60004/object/14030000003.png",
+    "价格": 41171,
+    "重量": 1,
+    "长x宽": "3x1",
+    "object_id": 14030000003
+  },
+  {
+    "名字": "CAT止血带",
+    "品质": "白",
+    "图片": "https://playerhub.df.qq.com/playerhub/60004/object/14040000001.png",
+    "价格": 3958,
+    "重量": 0,
+    "长x宽": "1x1",
+    "object_id": 14040000001
+  },
+  {
+    "名字": "弹力绷带",
+    "品质": "白",
+    "图片": "https://playerhub.df.qq.com/playerhub/60004/object/14040000002.png",
+    "价格": 1646,
+    "重量": 0,
+    "长x宽": "1x1",
+    "object_id": 14040000002
+  },
+  {
+    "名字": "缓释止痛片",
+    "品质": "白",
+    "图片": "https://playerhub.df.qq.com/playerhub/60004/object/14050000001.png",
+    "价格": 3013,
+    "重量": 0,
+    "长x宽": "1x1",
+    "object_id": 14050000001
+  },
+  {
+    "名字": "瓶装抗生素",
+    "品质": "绿",
+    "图片": "https://playerhub.df.qq.com/playerhub/60004/object/14050000002.png",
+    "价格": 10020,
+    "重量": 0,
+    "长x宽": "1x1",
+    "object_id": 14050000002
+  },
+  {
+    "名字": "DVE止疼片",
+    "品质": "紫",
+    "图片": "https://playerhub.df.qq.com/playerhub/60004/object/14050000003.png",
+    "价格": 35811,
+    "重量": 0,
+    "长x宽": "1x1",
+    "object_id": 14050000003
+  },
+  {
+    "名字": "精密头盔维修包",
+    "品质": "金",
+    "图片": "https://playerhub.df.qq.com/playerhub/60004/object/14060000001.png",
+    "价格": 189926,
+    "重量": 2,
+    "长x宽": "3x1",
+    "object_id": 14060000001
+  },
+  {
+    "名字": "精密护甲维修包",
+    "品质": "金",
+    "图片": "https://playerhub.df.qq.com/playerhub/60004/object/14060000002.png",
+    "价格": 266559,
+    "重量": 3,
+    "长x宽": "2x2",
+    "object_id": 14060000002
+  },
+  {
+    "名字": "高级头盔维修组合",
+    "品质": "红",
+    "图片": "https://playerhub.df.qq.com/playerhub/60004/object/14060000003.png",
+    "价格": 461482,
+    "重量": 3,
+    "长x宽": "2x2",
+    "object_id": 14060000003
+  },
+  {
+    "名字": "高级护甲维修组合",
+    "品质": "红",
+    "图片": "https://playerhub.df.qq.com/playerhub/60004/object/14060000004.png",
+    "价格": 508434,
+    "重量": 4,
+    "长x宽": "2x2",
+    "object_id": 14060000004
+  },
+  {
+    "名字": "标准头盔维修包",
+    "品质": "紫",
+    "图片": "https://playerhub.df.qq.com/playerhub/60004/object/14060000005.png",
+    "价格": 85556,
+    "重量": 2,
+    "长x宽": "2x1",
+    "object_id": 14060000005
+  },
+  {
+    "名字": "标准护甲维修包",
+    "品质": "紫",
+    "图片": "https://playerhub.df.qq.com/playerhub/60004/object/14060000006.png",
+    "价格": 78955,
+    "重量": 2,
+    "长x宽": "3x1",
+    "object_id": 14060000006
+  },
+  {
+    "名字": "自制头盔维修包",
+    "品质": "蓝",
+    "图片": "https://playerhub.df.qq.com/playerhub/60004/object/14060000007.png",
+    "价格": 24213,
+    "重量": 1,
+    "长x宽": "2x1",
+    "object_id": 14060000007
+  },
+  {
+    "名字": "自制护甲维修包",
+    "品质": "蓝",
+    "图片": "https://playerhub.df.qq.com/playerhub/60004/object/14060000008.png",
+    "价格": 31343,
+    "重量": 1,
+    "长x宽": "2x1",
+    "object_id": 14060000008
+  },
+  {
+    "名字": "M1肌肉强化针",
+    "品质": "蓝",
+    "图片": "https://playerhub.df.qq.com/playerhub/60004/object/14070000001.png",
+    "价格": 23528,
+    "重量": 0,
+    "长x宽": "1x1",
+    "object_id": 14070000001
+  },
+  {
+    "名字": "M2肌肉注射剂",
+    "品质": "紫",
+    "图片": "https://playerhub.df.qq.com/playerhub/60004/object/14070000003.png",
+    "价格": 70163,
+    "重量": 0,
+    "长x宽": "1x1",
+    "object_id": 14070000003
+  },
+  {
+    "名字": "感知激活针",
+    "品质": "蓝",
+    "图片": "https://playerhub.df.qq.com/playerhub/60004/object/14070000004.png",
+    "价格": 31195,
+    "重量": 0,
+    "长x宽": "1x1",
+    "object_id": 14070000004
+  },
+  {
+    "名字": "感知强化剂",
+    "品质": "紫",
+    "图片": "https://playerhub.df.qq.com/playerhub/60004/object/14070000005.png",
+    "价格": 82883,
+    "重量": 0,
+    "长x宽": "1x1",
+    "object_id": 14070000005
+  },
+  {
+    "名字": "体能激活针",
+    "品质": "蓝",
+    "图片": "https://playerhub.df.qq.com/playerhub/60004/object/14070000006.png",
+    "价格": 42112,
+    "重量": 0,
+    "长x宽": "1x1",
+    "object_id": 14070000006
+  },
+  {
+    "名字": "体能强化剂",
+    "品质": "紫",
+    "图片": "https://playerhub.df.qq.com/playerhub/60004/object/14070000007.png",
+    "价格": 99851,
+    "重量": 0,
+    "长x宽": "1x1",
+    "object_id": 14070000007
+  },
+  {
+    "名字": "OE2战斗兴奋剂",
+    "品质": "蓝",
+    "图片": "https://playerhub.df.qq.com/playerhub/60004/object/14070000008.png",
+    "价格": 46125,
+    "重量": 0,
+    "长x宽": "1x1",
+    "object_id": 14070000008
+  },
+  {
+    "名字": "去甲肾上腺素",
+    "品质": "蓝",
+    "图片": "https://playerhub.df.qq.com/playerhub/60004/object/14070000009.png",
+    "价格": 14870,
+    "重量": 0,
+    "长x宽": "1x1",
+    "object_id": 14070000009
+  },
+  {
+    "名字": "普罗透斯干扰器",
+    "品质": "紫",
+    "图片": "https://playerhub.df.qq.com/playerhub/60004/object/14070000016.png",
+    "价格": "",
+    "重量": 0,
+    "长x宽": "1x1",
+    "object_id": 14070000016
+  },
+  {
+    "名字": "特殊装备补给",
+    "品质": "紫",
+    "图片": "https://playerhub.df.qq.com/playerhub/60004/object/14070000017.png",
+    "价格": "",
+    "重量": 0,
+    "长x宽": "2x1",
+    "object_id": 14070000017
+  },
+  {
+    "名字": "哈夫克脑机液-“超体”",
+    "品质": "金",
+    "图片": "https://playerhub.df.qq.com/playerhub/60004/object/14070000018.png",
+    "价格": "",
+    "重量": 0,
+    "长x宽": "1x1",
+    "object_id": 14070000018
+  },
+  {
+    "名字": "哈夫克端脑止疼剂",
+    "品质": "金",
+    "图片": "https://playerhub.df.qq.com/playerhub/60004/object/14070000019.png",
+    "价格": "",
+    "重量": 0,
+    "长x宽": "1x1",
+    "object_id": 14070000019
+  }
+]

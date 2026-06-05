@@ -1,0 +1,65 @@
+[
+  {
+    "名字": "5.56x45mm RRLP",
+    "品质": "白",
+    "图片": "https://playerhub.df.qq.com/playerhub/60004/object/gun/ammo/5.56x45mm.png",
+    "价格": 53,
+    "重量": 0,
+    "长x宽": "1x1",
+    "object_id": 37100100001
+  },
+  {
+    "名字": "5.56x45mm FMJ",
+    "品质": "绿",
+    "图片": "https://playerhub.df.qq.com/playerhub/60004/object/gun/ammo/5.56x45mm.png",
+    "价格": 119,
+    "重量": 0,
+    "长x宽": "1x1",
+    "object_id": 37100200001
+  },
+  {
+    "名字": "5.56x45mm M855",
+    "品质": "蓝",
+    "图片": "https://playerhub.df.qq.com/playerhub/60004/object/gun/ammo/5.56x45mm.png",
+    "价格": 456,
+    "重量": 0,
+    "长x宽": "1x1",
+    "object_id": 37100300001
+  },
+  {
+    "名字": "5.56*45mm M855 APC",
+    "品质": "蓝",
+    "图片": "https://playerhub.df.qq.com/playerhub/60004/object/gun/ammo/5.56x45mm.png",
+    "价格": 595,
+    "重量": 0,
+    "长x宽": "1x1",
+    "object_id": 37100300002
+  },
+  {
+    "名字": "5.56x45mm M855A1",
+    "品质": "紫",
+    "图片": "https://playerhub.df.qq.com/playerhub/60004/object/gun/ammo/5.56x45mm.png",
+    "价格": 1778,
+    "重量": 0,
+    "长x宽": "1x1",
+    "object_id": 37100400001
+  },
+  {
+    "名字": "5.56*45mm M855A1 APC+",
+    "品质": "紫",
+    "图片": "https://playerhub.df.qq.com/playerhub/60004/object/gun/ammo/5.56x45mm.png",
+    "价格": 2681,
+    "重量": 0,
+    "长x宽": "1x1",
+    "object_id": 37100400002
+  },
+  {
+    "名字": "5.56x45mm M995",
+    "品质": "金",
+    "图片": "https://playerhub.df.qq.com/playerhub/60004/object/gun/ammo/5.56x45mm.png",
+    "价格": 6151,
+    "重量": 0,
+    "长x宽": "1x1",
+    "object_id": 37100500001
+  }
+]
