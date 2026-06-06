@@ -16,6 +16,7 @@ import {
   getLocation,
   getLocationSearchProgress,
   getRevealDelayMs,
+  isHighValueContainer,
   itemMeta,
   loadSave,
   moveCarriedItem,
@@ -33,6 +34,7 @@ import {
   takeItem,
   takeItemToSpace,
   useTool,
+  RAID_LIMIT,
 } from "./domain/game.js";
 import { CONNECTIONS, LOCATIONS, MAP_IMAGE_SIZE, MAP_IMAGE_URL, MAP_VIEW } from "./data/map.js";
 
@@ -194,23 +196,85 @@ function renderRaid() {
       ${renderTacticalMap(raid, adjacent)}
     </section>
 
-    <section class="panel">
+    <section class="panel raid-search-panel">
       <div class="search-summary">
         <div>
           <p class="eyebrow">区域搜索度</p>
           <h2>${progress.percent}%</h2>
+          ${renderHighValueSearchHint(progress)}
         </div>
         ${button(progress.complete ? "已搜索完" : "搜索", { action: "search-area", class: "primary", disabled: progress.complete })}
       </div>
       <div class="search-progress" aria-label="区域搜索度">
         <span style="width:${progress.percent}%"></span>
       </div>
+      ${renderDiscoveredContainers(raid)}
     </section>
 
     ${renderBag()}
     ${renderTools()}
     ${renderLog()}
   `);
+}
+
+function renderHighValueSearchHint(progress) {
+  if (!progress.highValueTotal) return `<p class="high-value-hint muted">本区域无高价值容器</p>`;
+  return `<p class="high-value-hint">还有 <strong>${progress.highValueUnsearched}</strong> 个高价值容器未发现</p>`;
+}
+
+function renderDiscoveredContainers(raid) {
+  const containers = [...(raid.containersByLocation[raid.locationId] ?? [])]
+    .filter((container) => container.discovered)
+    .sort(compareDiscoveredContainers);
+  if (!containers.length) {
+    return `<p class="container-empty muted">尚未发现容器</p>`;
+  }
+  return `
+    <div class="discovered-containers" aria-label="已发现容器">
+      ${containers.map((container) => renderContainerChip(container)).join("")}
+    </div>
+  `;
+}
+
+function compareDiscoveredContainers(a, b) {
+  if (a.searched !== b.searched) return a.searched ? 1 : -1;
+  if ((b.discoveredAt ?? 0) !== (a.discoveredAt ?? 0)) return (b.discoveredAt ?? 0) - (a.discoveredAt ?? 0);
+  if (isHighValueContainer(a) !== isHighValueContainer(b)) return isHighValueContainer(a) ? -1 : 1;
+  return a.name.localeCompare(b.name, "zh-Hans-CN");
+}
+
+function renderContainerChip(container) {
+  const highValue = isHighValueContainer(container);
+  const classes = ["container-chip", container.searched ? "container-chip--searched" : "", highValue ? "container-chip--high" : ""].filter(Boolean).join(" ");
+  return `
+    <button class="${classes}" data-action="search" data-id="${container.id}" title="${container.name}">
+      <span class="container-icon container-icon--${containerIconType(container)}" aria-hidden="true">${containerIconText(container)}</span>
+      <span class="container-name">${container.name}</span>
+      ${container.searched ? `<span class="container-state">已搜索</span>` : ""}
+    </button>
+  `;
+}
+
+function containerIconType(container) {
+  if (container.typeId.includes("safe")) return "safe";
+  if (container.typeId.includes("pc") || container.typeId.includes("computer") || container.typeId.includes("server")) return "tech";
+  if (container.typeId.includes("weapon") || container.typeId.includes("ammo")) return "weapon";
+  if (container.typeId.includes("medical")) return "medical";
+  if (container.typeId.includes("briefcase") || container.typeId.includes("travel") || container.typeId.includes("aviation")) return "case";
+  if (container.typeId.includes("tool")) return "tool";
+  return "crate";
+}
+
+function containerIconText(container) {
+  return {
+    safe: "SAFE",
+    tech: "PC",
+    weapon: "ARM",
+    medical: "MED",
+    case: "CASE",
+    tool: "TOOL",
+    crate: "BOX",
+  }[containerIconType(container)];
 }
 
 function renderTacticalMap(raid, adjacent) {
@@ -297,7 +361,7 @@ function renderSettlement() {
       <div class="settlement-stats">
         <div><span>带出价值</span><strong>${formatMoney(result.totalValue)}</strong></div>
         <div><span>搜索容器</span><strong>${result.searchedCount}</strong></div>
-        <div><span>用时</span><strong>${result.timeUsed} 分钟</strong></div>
+        <div><span>用时</span><strong>${formatRaidTime(result.timeUsed)}</strong></div>
         <div><span>生命值</span><strong>${result.hp}</strong></div>
       </div>
       <div class="item-cloud">
@@ -313,15 +377,30 @@ function renderSettlement() {
 
 function renderStatus() {
   const debuffs = raid.debuffs.map((debuff, index) => `<span class="debuff">${debuffLabel(debuff.id)}${button("×", { action: "surgery-one", index, class: "mini", title: "用快拆手术包治疗" })}</span>`).join("");
+  const timePercent = Math.max(0, Math.min(100, (raid.timeLeft / RAID_LIMIT) * 100));
+  const timeTone = raid.timeLeft <= 5 ? "danger" : raid.timeLeft <= 10 ? "warning" : "normal";
   return `
     <section class="statusbar">
-      <div><span>时间</span><strong>${raid.timeLeft} 分</strong></div>
+      <div class="time-status time-status--${timeTone}">
+        <span>时间</span>
+        <strong>${formatRaidTime(raid.timeLeft)}</strong>
+        <div class="time-meter" aria-label="对局剩余时间">
+          <span style="width:${timePercent}%"></span>
+        </div>
+      </div>
       <div><span>生命</span><strong>${raid.hp}/${raid.maxHp}</strong></div>
       <div><span>背包</span><strong>${bagUsed(raid)}/${bagCapacity(raid)}</strong></div>
       <div><span>价值</span><strong>${formatMoney(carriedValue(raid))}</strong></div>
       <div class="debuffs">${debuffs || `<span class="muted">状态良好</span>`}${raid.painkillerUntil ? `<span class="tag">止痛 ${raid.painkillerUntil}分</span>` : ""}</div>
     </section>
   `;
+}
+
+function formatRaidTime(minutes) {
+  const totalSeconds = Math.max(0, Math.round(minutes * 60));
+  const wholeMinutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
+  return seconds ? `${wholeMinutes}:${String(seconds).padStart(2, "0")}` : `${wholeMinutes} 分`;
 }
 
 function renderTools() {
@@ -450,6 +529,11 @@ function findCarriedEntry(instanceId) {
   return null;
 }
 
+function getRaidContainer(containerId) {
+  if (!raid) return null;
+  return raid.containersByLocation[raid.locationId]?.find((container) => container.id === containerId) ?? null;
+}
+
 function renderItemModal() {
   if (!selectedCarryItemId) return "";
   const found = findCarriedEntry(selectedCarryItemId);
@@ -517,10 +601,18 @@ app.addEventListener("click", (event) => {
     return runActionAnimation("正在搜索", () => {
       const result = searchLocation(raid);
       setRaid(result.raid);
-      if (result.reason) setToast(result.reason);
+      if (result.found === "container") setToast(`发现了 ${result.discoveredCount} 个容器`);
+      else if (result.found === "open") setToast("发现了露天物资");
+      else if (result.reason) setToast(result.reason);
     });
   }
-  if (action === "search") return setRaid(searchContainer(raid, id));
+  if (action === "search") {
+    const container = getRaidContainer(id);
+    if (container && !container.searched) {
+      return runActionAnimation("正在打开", () => setRaid(searchContainer(raid, id)));
+    }
+    return setRaid(searchContainer(raid, id));
+  }
   if (action === "back-raid") return setRaid({ ...raid, screen: "raid", currentSearch: null });
   if (action === "reveal-all") return setRaid(revealAllCurrent(raid));
   if (action === "take") {

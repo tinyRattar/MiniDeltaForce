@@ -4,7 +4,9 @@ import { ITEM_BY_ID, ITEM_ICON_URLS, ITEMS, QUALITY_LABELS, REVEAL_SECONDS } fro
 import { CONNECTIONS, LOCATION_BY_ID, START_LOCATION_ID } from "../data/map.js";
 
 const SAVE_KEY = "mini-delta-force-save-v1";
-const RAID_LIMIT = 30;
+export const RAID_LIMIT = 30;
+const SEARCH_ACTION_COST = 0.5;
+const CONTAINER_OPEN_COST = 0.5;
 const BACKPACK_W = 5;
 const BACKPACK_H = 4;
 const SAFE_BOX_W = 3;
@@ -12,6 +14,19 @@ const SAFE_BOX_H = 3;
 const POCKET_COUNT = 6;
 const OPEN_LOOT_CHANCE = 0.5;
 const OPEN_LOOT_SIZE = [4, 3];
+const HIGH_VALUE_CONTAINER_TYPES = new Set([
+  "safe-small",
+  "safe-large",
+  "hacker-pc",
+  "server-rack",
+  "weapon-box-large",
+  "briefcase",
+  "travel-case-large",
+]);
+
+export function isHighValueContainer(container) {
+  return Boolean(container?.extraHighValue || HIGH_VALUE_CONTAINER_TYPES.has(container?.typeId));
+}
 
 const OPEN_LOOT_PROFILES = {
   construction: { points: 4, sources: [["tool-cabinet", 5], ["cement-truck", 4], ["supply-crate", 2]] },
@@ -223,6 +238,9 @@ function generateContainer(rng, locationId, typeId, index) {
     typeId,
     name: type.name,
     size,
+    discovered: false,
+    discoveredAt: null,
+    openedAt: null,
     searched: false,
     items,
   };
@@ -394,13 +412,14 @@ export function searchContainer(raid, containerId) {
   if (raid.over) return raid;
   const containers = raid.containersByLocation[raid.locationId];
   const container = containers.find((item) => item.id === containerId);
-  if (!container) return raid;
+  if (!container || !container.discovered) return raid;
 
-  let next = tickTime(raid, container.searched ? 0 : 1);
+  let next = tickTime(raid, container.searched ? 0 : CONTAINER_OPEN_COST);
   if (next.over) return next;
 
   const nextContainer = next.containersByLocation[next.locationId].find((item) => item.id === containerId);
   nextContainer.searched = true;
+  nextContainer.openedAt ??= RAID_LIMIT - next.timeLeft;
   next.currentSearch = { containerId };
   next.screen = "search";
   next.eventLog.unshift({ title: "搜索", text: `你打开了${nextContainer.name}。` });
@@ -413,7 +432,7 @@ export function searchContainer(raid, containerId) {
 
 export function searchLocation(raid) {
   if (raid.over) return { raid, ok: false, reason: "行动已经结束。" };
-  const containers = raid.containersByLocation[raid.locationId].filter((container) => !container.searched);
+  const containers = raid.containersByLocation[raid.locationId].filter((container) => !container.discovered);
   const openPoints = (raid.openLootByLocation?.[raid.locationId] ?? []).filter((point) => !point.searched);
   const candidates = [
     ...containers.map((container) => ({ kind: "container", id: container.id, weight: 1 })),
@@ -423,21 +442,29 @@ export function searchLocation(raid) {
 
   const rng = createRng(raid.seed + raid.timeLeft * 131 + candidates.length * 17 + raid.eventLog.length * 37);
   const pickedId = weightedPick(rng, candidates.map((candidate) => [{ kind: candidate.kind, id: candidate.id }, candidate.weight]));
-  let next = tickTime(raid, 1);
+  let next = tickTime(raid, SEARCH_ACTION_COST);
   if (next.over) return { raid: next, ok: true };
 
   if (pickedId.kind === "container") {
-    const container = next.containersByLocation[next.locationId].find((item) => item.id === pickedId.id);
+    const locationContainers = next.containersByLocation[next.locationId];
+    const container = locationContainers.find((item) => item.id === pickedId.id);
     if (!container) return { raid: next, ok: false, reason: "没有找到可搜索目标。" };
-    container.searched = true;
-    next.currentSearch = { containerId: container.id };
-    next.screen = "search";
+    const discoverable = isHighValueContainer(container)
+      ? [container]
+      : pickContainersToDiscover(rng, locationContainers.filter((item) => !item.discovered && !isHighValueContainer(item)), container.id);
+    const discoveredAt = RAID_LIMIT - next.timeLeft;
+    discoverable.forEach((item) => {
+      item.discovered = true;
+      item.discoveredAt = discoveredAt;
+    });
+    next.currentSearch = null;
+    next.screen = "raid";
     next.eventLog.unshift({ title: "搜索", text: `你发现了${container.name}。` });
     next = maybeTriggerEvent(next);
     if (next.over) return { raid: next, ok: true };
-    next.screen = "search";
-    next.currentSearch = { containerId: container.id };
-    return { raid: next, ok: true, found: "container" };
+    next.screen = "raid";
+    next.currentSearch = null;
+    return { raid: next, ok: true, found: "container", discoveredCount: discoverable.length };
   }
 
   const point = next.openLootByLocation[next.locationId].find((item) => item.id === pickedId.id);
@@ -458,6 +485,19 @@ export function searchLocation(raid) {
   next.screen = "search";
   next.currentSearch = { openLootPointId: point.id };
   return { raid: next, ok: true, found: "open" };
+}
+
+function pickContainersToDiscover(rng, candidates, preferredId) {
+  const preferred = candidates.find((container) => container.id === preferredId);
+  const shuffled = candidates
+    .filter((container) => container.id !== preferredId)
+    .map((container) => ({ container, sort: rng.next() }))
+    .sort((a, b) => a.sort - b.sort)
+    .map((entry) => entry.container);
+  const ordered = preferred ? [preferred, ...shuffled] : shuffled;
+  const roll = rng.next();
+  const count = roll < 0.6 ? 1 : roll < 0.9 ? 2 : 3;
+  return ordered.slice(0, Math.min(count, ordered.length));
 }
 
 export function revealItem(raid, instanceId) {
@@ -773,12 +813,16 @@ export function getLocationSearchProgress(raid, locationId = raid.locationId) {
   const containers = raid.containersByLocation[locationId] ?? [];
   const openPoints = raid.openLootByLocation?.[locationId] ?? [];
   const total = containers.length + openPoints.length;
-  const searched = containers.filter((container) => container.searched).length + openPoints.filter((point) => point.searched).length;
+  const searched = containers.filter((container) => container.discovered).length + openPoints.filter((point) => point.searched).length;
+  const highValueContainers = containers.filter((container) => isHighValueContainer(container));
+  const highValueUnsearched = highValueContainers.filter((container) => !container.discovered).length;
   return {
     searched,
     total,
     percent: total ? Math.round((searched / total) * 100) : 100,
     complete: total === 0 || searched >= total,
+    highValueTotal: highValueContainers.length,
+    highValueUnsearched,
   };
 }
 
