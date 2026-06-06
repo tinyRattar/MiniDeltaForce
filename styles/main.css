@@ -387,6 +387,48 @@ h2 {
   color: var(--muted);
 }
 
+.search-orbit {
+  position: relative;
+  width: 28px;
+  height: 28px;
+  animation: searchOrbit 1.6s linear infinite;
+}
+
+.search-orbit::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 2px;
+  width: 13px;
+  height: 13px;
+  border: 3px solid #dce4dc;
+  border-radius: 50%;
+  transform: translate(3px, 0);
+}
+
+.search-orbit::after {
+  content: "";
+  position: absolute;
+  left: 18px;
+  top: 18px;
+  width: 10px;
+  height: 3px;
+  border-radius: 999px;
+  background: #dce4dc;
+  transform: translate(3px, 0) rotate(45deg);
+  transform-origin: left center;
+}
+
+@keyframes searchOrbit {
+  from {
+    transform: rotate(0deg) translateX(3px) rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg) translateX(3px) rotate(-360deg);
+  }
+}
+
 .item-card--compact {
   grid-template-rows: 1fr;
   padding: 1px;

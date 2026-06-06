@@ -107,33 +107,54 @@ function placeItem(occupied, containerSize, item) {
   return null;
 }
 
-function findFirstPlacement(space, item, ignoredInstanceId = null) {
+function getEntryPlacement(entry) {
+  const item = ITEM_BY_ID[entry.itemId];
+  return entry.placement ?? { x: 0, y: 0, w: item.size[0], h: item.size[1] };
+}
+
+function getPlacementArea(placement) {
+  return placement.w * placement.h;
+}
+
+function getItemArea(item) {
+  return item.size[0] * item.size[1];
+}
+
+function getSizeCandidates(item, preferredPlacement = null) {
+  const preferred = preferredPlacement ? { w: preferredPlacement.w, h: preferredPlacement.h } : { w: item.size[0], h: item.size[1] };
+  const candidates = [preferred];
+  if (preferred.w !== preferred.h) candidates.push({ w: preferred.h, h: preferred.w });
+  return candidates.filter((candidate, index, list) => list.findIndex((itemSize) => itemSize.w === candidate.w && itemSize.h === candidate.h) === index);
+}
+
+function findFirstPlacement(space, item, ignoredInstanceId = null, preferredPlacement = null, allowRotate = false) {
   const occupied = Array.from({ length: space.height }, () => Array(space.width).fill(false));
   for (const entry of space.items) {
     if (entry.instanceId === ignoredInstanceId) continue;
-    const placedItem = ITEM_BY_ID[entry.itemId];
-    const placement = entry.placement ?? { x: 0, y: 0, w: placedItem.size[0], h: placedItem.size[1] };
+    const placement = getEntryPlacement(entry);
     markPlace(occupied, placement.x, placement.y, placement.w, placement.h);
   }
-  for (let y = 0; y < space.height; y += 1) {
-    for (let x = 0; x < space.width; x += 1) {
-      if (canPlace(occupied, space.width, space.height, x, y, item.size[0], item.size[1])) {
-        return { x, y, w: item.size[0], h: item.size[1] };
+  const candidates = allowRotate ? getSizeCandidates(item, preferredPlacement) : [preferredPlacement ? { w: preferredPlacement.w, h: preferredPlacement.h } : { w: item.size[0], h: item.size[1] }];
+  for (const size of candidates) {
+    for (let y = 0; y < space.height; y += 1) {
+      for (let x = 0; x < space.width; x += 1) {
+        if (canPlace(occupied, space.width, space.height, x, y, size.w, size.h)) {
+          return { x, y, w: size.w, h: size.h };
+        }
       }
     }
   }
   return null;
 }
 
-function canPlaceInSpace(space, item, placement, ignoredInstanceId = null) {
+function canPlaceInSpace(space, placement, ignoredInstanceId = null) {
   const occupied = Array.from({ length: space.height }, () => Array(space.width).fill(false));
   for (const entry of space.items) {
     if (entry.instanceId === ignoredInstanceId) continue;
-    const placedItem = ITEM_BY_ID[entry.itemId];
-    const placed = entry.placement ?? { x: 0, y: 0, w: placedItem.size[0], h: placedItem.size[1] };
+    const placed = getEntryPlacement(entry);
     markPlace(occupied, placed.x, placed.y, placed.w, placed.h);
   }
-  return canPlace(occupied, space.width, space.height, placement.x, placement.y, item.size[0], item.size[1]);
+  return canPlace(occupied, space.width, space.height, placement.x, placement.y, placement.w, placement.h);
 }
 
 function createCarrySpaces() {
@@ -340,12 +361,8 @@ export function revealAllCurrent(raid) {
   return next;
 }
 
-function getItemArea(item) {
-  return item.size[0] * item.size[1];
-}
-
 function usedSpaceArea(space) {
-  return space.items.reduce((sum, entry) => sum + getItemArea(ITEM_BY_ID[entry.itemId]), 0);
+  return space.items.reduce((sum, entry) => sum + getPlacementArea(getEntryPlacement(entry)), 0);
 }
 
 export function getCarrySpaces(raid) {
@@ -389,10 +406,11 @@ function getCarryTargetSpace(raid, target) {
 
 function placeInCarrySpace(raid, entry, target = null) {
   const item = ITEM_BY_ID[entry.itemId];
+  const entryPlacement = entry.placement ?? { x: 0, y: 0, w: item.size[0], h: item.size[1] };
   if (target) {
     const space = getCarryTargetSpace(raid, target);
-    const placement = { x: target.x, y: target.y, w: item.size[0], h: item.size[1] };
-    if (space && canPlaceInSpace(space, item, placement)) {
+    const placement = { x: target.x, y: target.y, w: entryPlacement.w, h: entryPlacement.h };
+    if (space && canPlaceInSpace(space, placement)) {
       space.items.push({ ...entry, placement });
       return target.spaceKey;
     }
@@ -402,7 +420,7 @@ function placeInCarrySpace(raid, entry, target = null) {
     if (key === "pockets") {
       for (let slotIndex = 0; slotIndex < raid.pockets.slots.length; slotIndex += 1) {
         const slot = raid.pockets.slots[slotIndex];
-        const placement = findFirstPlacement(slot, item);
+        const placement = findFirstPlacement(slot, item, null, entryPlacement, true);
         if (!placement) continue;
         slot.items.push({ ...entry, placement });
         return key;
@@ -410,7 +428,7 @@ function placeInCarrySpace(raid, entry, target = null) {
       continue;
     }
     const space = raid[key];
-    const placement = findFirstPlacement(space, item);
+    const placement = findFirstPlacement(space, item, null, entryPlacement, true);
     if (!placement) continue;
     space.items.push({ ...entry, placement });
     return key;
@@ -443,6 +461,7 @@ export function takeItemToSpace(raid, instanceId, target = null) {
   const carriedEntry = {
     instanceId: entry.instanceId,
     itemId: entry.itemId,
+    placement: getEntryPlacement(entry),
     ...(entry.quantity ? { quantity: entry.quantity } : {}),
   };
   const spaceKey = placeInCarrySpace(next, carriedEntry, target);
@@ -462,11 +481,11 @@ export function moveCarriedItem(raid, instanceId, target) {
   if (!found) return { raid, ok: false, reason: "没有找到这个物品。" };
   const { key: fromKey, entry } = found;
 
-  const item = ITEM_BY_ID[entry.itemId];
+  const currentPlacement = getEntryPlacement(entry);
   const targetSpace = getCarryTargetSpace(next, target);
-  const placement = { x: target.x, y: target.y, w: item.size[0], h: item.size[1] };
+  const placement = { x: target.x, y: target.y, w: currentPlacement.w, h: currentPlacement.h };
   const ignoredInstanceId = fromKey === target.spaceKey ? instanceId : null;
-  if (!targetSpace || !canPlaceInSpace(targetSpace, item, placement, ignoredInstanceId)) {
+  if (!targetSpace || !canPlaceInSpace(targetSpace, placement, ignoredInstanceId)) {
     return { raid, ok: false, reason: "这个位置放不下。" };
   }
 
@@ -479,16 +498,31 @@ export function moveCarriedItem(raid, instanceId, target) {
   return { raid: next, ok: true };
 }
 
+export function rotateCarriedItem(raid, instanceId) {
+  const next = structuredClone(raid);
+  const found = findEntryInCarrySpaces(next, instanceId);
+  if (!found) return { raid, ok: false, reason: "没有找到这个物品。" };
+  const space = found.key === "pockets" ? next.pockets.slots[found.slotIndex] : next[found.key];
+  const current = getEntryPlacement(found.entry);
+  if (current.w === current.h) return { raid, ok: false, reason: "这个物品旋转后占格不变。" };
+  const placement = { x: current.x, y: current.y, w: current.h, h: current.w };
+  if (!canPlaceInSpace(space, placement, instanceId)) {
+    return { raid, ok: false, reason: "当前位置放不下旋转后的尺寸。" };
+  }
+  found.entry.placement = placement;
+  return { raid: next, ok: true };
+}
+
 export function moveContainerItem(raid, instanceId, target) {
   const next = structuredClone(raid);
   const container = getCurrentContainer(next);
   if (!container) return { raid, ok: false, reason: "当前没有打开的容器。" };
   const entry = container.items.find((item) => item.instanceId === instanceId);
   if (!entry || !entry.revealed) return { raid, ok: false, reason: "物品还没有揭示。" };
-  const item = ITEM_BY_ID[entry.itemId];
-  const placement = { x: target.x, y: target.y, w: item.size[0], h: item.size[1] };
+  const currentPlacement = getEntryPlacement(entry);
+  const placement = { x: target.x, y: target.y, w: currentPlacement.w, h: currentPlacement.h };
   const containerSpace = { ...container, width: container.size[0], height: container.size[1] };
-  if (!canPlaceInSpace(containerSpace, item, placement, instanceId)) {
+  if (!canPlaceInSpace(containerSpace, placement, instanceId)) {
     return { raid, ok: false, reason: "这个位置放不下。" };
   }
   entry.placement = placement;
@@ -503,22 +537,14 @@ export function returnCarriedItemToContainer(raid, instanceId, target = null) {
   if (!found) return { raid, ok: false, reason: "没有找到这个物品。" };
 
   const item = ITEM_BY_ID[found.entry.itemId];
+  const currentPlacement = getEntryPlacement(found.entry);
   const size = getContainerSize(container);
   const containerSpace = { ...container, width: size[0], height: size[1] };
   const placement = target
-    ? { x: target.x, y: target.y, w: item.size[0], h: item.size[1] }
-    : placeItem(
-        container.items.reduce((occupied, entry) => {
-          const placedItem = ITEM_BY_ID[entry.itemId];
-          const placed = entry.placement ?? { x: 0, y: 0, w: placedItem.size[0], h: placedItem.size[1] };
-          markPlace(occupied, placed.x, placed.y, placed.w, placed.h);
-          return occupied;
-        }, Array.from({ length: size[1] }, () => Array(size[0]).fill(false))),
-        size,
-        item,
-      );
+    ? { x: target.x, y: target.y, w: currentPlacement.w, h: currentPlacement.h }
+    : findFirstPlacement(containerSpace, item, null, currentPlacement, true);
   if (!placement) return { raid, ok: false, reason: "容器里没有足够空间放回去。" };
-  if (target && !canPlaceInSpace(containerSpace, item, placement)) {
+  if (target && !canPlaceInSpace(containerSpace, placement)) {
     return { raid, ok: false, reason: "这个位置放不下。" };
   }
 

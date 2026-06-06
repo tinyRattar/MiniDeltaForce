@@ -24,6 +24,7 @@ import {
   returnCarriedItemToContainer,
   revealAllCurrent,
   revealItem,
+  rotateCarriedItem,
   saveGame,
   searchContainer,
   startRaid,
@@ -350,8 +351,7 @@ function renderLootEntry(entry) {
   const placementStyle = `grid-column:${placement.x + 1} / span ${placement.w}; grid-row:${placement.y + 1} / span ${placement.h};`;
   if (!entry.revealed) {
     return `<div class="loot-card hidden-loot" style="${placementStyle}">
-      <span>${item.size[0]}x${item.size[1]}</span>
-      <small>搜索中</small>
+      <span class="search-orbit" aria-hidden="true"></span>
     </div>`;
   }
   const takeAttrs = ` data-action="take" data-id="${entry.instanceId}" data-drag-source="loot" draggable="true" role="button" tabindex="0"`;
@@ -405,6 +405,8 @@ function renderItemModal() {
   const found = findCarriedEntry(selectedCarryItemId);
   if (!found) return "";
   const item = itemMeta(found.entry.itemId);
+  const placement = found.entry.placement ?? { x: 0, y: 0, w: item.size[0], h: item.size[1] };
+  const canRotate = placement.w !== placement.h;
   const canReturn = raid?.screen === "search" && getCurrentContainer(raid);
   return `
     <div class="modal-backdrop" data-action="close-item-modal">
@@ -420,11 +422,12 @@ function renderItemModal() {
           <div class="modal-icon quality-${item.quality}">${item.iconUrl ? `<img src="${item.iconUrl}" alt="">` : ""}</div>
           <div class="stat-row"><span>价值</span><strong>${formatMoney(getEntryValue(found.entry))}</strong></div>
           <div class="stat-row"><span>品质</span><strong>${item.qualityLabel}</strong></div>
-          <div class="stat-row"><span>尺寸</span><strong>${item.size[0]}x${item.size[1]}</strong></div>
+          <div class="stat-row"><span>尺寸</span><strong>${placement.w}x${placement.h}</strong></div>
           <div class="stat-row"><span>重量</span><strong>${item.weight}kg</strong></div>
         </div>
         <div class="actions wide">
           ${button("丢弃", { action: "drop", id: found.entry.instanceId, class: "bad-action" })}
+          ${button("旋转", { action: "rotate", id: found.entry.instanceId, disabled: !canRotate })}
           ${button("放回容器", { action: "return-to-container", id: found.entry.instanceId, disabled: !canReturn })}
         </div>
       </article>
@@ -476,6 +479,11 @@ app.addEventListener("click", (event) => {
     selectedCarryItemId = null;
     return setRaid(dropBagItem(raid, id));
   }
+  if (action === "rotate") {
+    const result = rotateCarriedItem(raid, id);
+    if (!result.ok) setToast(result.reason);
+    return setRaid(result.raid);
+  }
   if (action === "return-to-container") {
     const result = returnCarriedItemToContainer(raid, id);
     if (!result.ok) setToast(result.reason);
@@ -526,6 +534,13 @@ app.addEventListener("drop", (event) => {
   } else {
     result = moveCarriedItem(raid, payload.instanceId, target);
   }
+  if (!result.ok) setToast(result.reason);
+  setRaid(result.raid);
+});
+
+window.addEventListener("keydown", (event) => {
+  if (!raid || !selectedCarryItemId || event.key.toLowerCase() !== "r") return;
+  const result = rotateCarriedItem(raid, selectedCarryItemId);
   if (!result.ok) setToast(result.reason);
   setRaid(result.raid);
 });
