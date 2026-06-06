@@ -10,6 +10,7 @@ const TARGET_PRIMARY_CLASS = process.env.DFHUB_PRIMARY_CLASS ?? "props";
 const TARGET_SECOND_CLASS = process.env.DFHUB_SECOND_CLASS;
 const TARGET_LABEL = process.env.DFHUB_LABEL ?? "收集品";
 const OUT_BASENAME = process.env.DFHUB_OUT_BASENAME ?? "dfhub_collectibles";
+const DEBUG_ITEM_ID = process.env.DFHUB_DEBUG_ITEM_ID;
 const SECRET =
   "odw-response-v2-6750b2d9490bb1bad82d2b13b4d128275b0f7fd0d6f76428ec00e72943f5e0e0";
 const MAGIC = 57089;
@@ -164,7 +165,7 @@ function formatSize(item) {
 }
 
 function toCsv(rows) {
-  const headers = ["名字", "品质", "图片", "价格", "重量", "长x宽"];
+  const headers = ["名字", "品质", "类别", "图片", "价格", "重量", "长x宽"];
   const escape = (value) => {
     const text = value == null ? "" : String(value);
     return /[",\r\n]/.test(text) ? `"${text.replaceAll('"', '""')}"` : text;
@@ -187,6 +188,12 @@ async function mapLimit(values, limit, worker) {
 }
 
 async function main() {
+  if (DEBUG_ITEM_ID) {
+    const detail = await get(`/items/${DEBUG_ITEM_ID}`);
+    console.log(JSON.stringify(detail.data ?? detail, null, 2));
+    return;
+  }
+
   const categories = await get("/categories");
   const collectible = TARGET_SECOND_CLASS ? null : findCollectibleClass(categories);
   if (!TARGET_SECOND_CLASS && !collectible) {
@@ -211,6 +218,7 @@ async function main() {
     return {
       名字: detail.object_name ?? listItem.object_name ?? "",
       品质: gradeLabels[detail.grade ?? listItem.grade] ?? detail.grade ?? listItem.grade ?? "",
+      类别: detail.props_detail?.props_type ?? detail.third_class_cn ?? detail.category?.third_class_cn ?? detail.second_class_cn ?? "",
       图片: absoluteUrl(detail.pic_url || detail.pre_pic_url || listItem.pic_url || listItem.pre_pic_url),
       价格: avg,
       重量: detail.weight ?? "",
