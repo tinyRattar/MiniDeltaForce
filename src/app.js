@@ -40,14 +40,38 @@ import { CONNECTIONS, LOCATIONS, MAP_IMAGE_SIZE, MAP_IMAGE_URL, MAP_VIEW } from 
 import { CONTAINER_ICON_URLS } from "./data/container-icons.js";
 
 const app = document.querySelector("#app");
+const ACTIVE_RAID_KEY = "mini-delta-force-active-raid-v1";
+const ACTION_ANIMATION_MS = 650;
+const ACTION_FALLBACK_MS = 3000;
 
 let save = loadSave();
-let raid = null;
+let raid = loadActiveRaid();
 let toast = "";
 let revealTimer = null;
 let actionTimer = null;
+let actionFallbackTimer = null;
 let pendingAction = "";
 let selectedCarryItemId = null;
+
+function loadActiveRaid() {
+  try {
+    const raw = localStorage.getItem(ACTIVE_RAID_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    if (!parsed || parsed.over || parsed.result) return null;
+    return parsed;
+  } catch {
+    return null;
+  }
+}
+
+function saveActiveRaid() {
+  if (raid && !raid.over && raid.screen !== "settlement") {
+    localStorage.setItem(ACTIVE_RAID_KEY, JSON.stringify(raid));
+  } else {
+    localStorage.removeItem(ACTIVE_RAID_KEY);
+  }
+}
 
 function setToast(message) {
   toast = message;
@@ -67,6 +91,7 @@ function setRaid(nextRaid, options = {}) {
     save = applySettlementToSave(save, raid.result);
     raid.screen = "settlement";
   }
+  saveActiveRaid();
   render();
   if (options.scrollTop) scrollToTop();
   scheduleReveal();
@@ -77,13 +102,34 @@ function scrollToTop() {
 }
 
 function runActionAnimation(label, action) {
+  if (pendingAction) return setToast("上一段时间流逝还没结束，请稍候或取消重试。");
   window.clearTimeout(actionTimer);
+  window.clearTimeout(actionFallbackTimer);
   pendingAction = label;
   render();
   actionTimer = window.setTimeout(() => {
+    window.clearTimeout(actionFallbackTimer);
     pendingAction = "";
-    action();
-  }, 650);
+    try {
+      action();
+    } catch (error) {
+      console.error(error);
+      render();
+      setToast("行动执行失败，请重试。");
+    }
+  }, ACTION_ANIMATION_MS);
+  actionFallbackTimer = window.setTimeout(() => {
+    cancelActionAnimation("时间流逝卡住了，请重试。");
+  }, ACTION_FALLBACK_MS);
+}
+
+function cancelActionAnimation(message = "已取消时间流逝，请重试。") {
+  if (!pendingAction) return;
+  window.clearTimeout(actionTimer);
+  window.clearTimeout(actionFallbackTimer);
+  pendingAction = "";
+  render();
+  setToast(message);
 }
 
 function startNewRaid() {
@@ -94,6 +140,7 @@ function hardReset() {
   if (!window.confirm("确认重置本地存档？")) return;
   save = resetSave();
   raid = null;
+  saveActiveRaid();
   render();
 }
 
@@ -124,7 +171,8 @@ function renderShell(content) {
     <main class="shell">
       ${content}
       ${renderItemModal()}
-      ${pendingAction ? `<div class="action-overlay"><div class="action-pulse"></div><strong>${pendingAction}</strong><span>时间在流逝</span></div>` : ""}
+      ${renderEventModal()}
+      ${pendingAction ? `<div class="action-overlay"><div class="action-pulse"></div><strong>${pendingAction}</strong><span>时间在流逝</span>${button("取消并重试", { action: "cancel-action", class: "ghost" })}</div>` : ""}
       ${toast ? `<div class="toast">${toast}</div>` : ""}
     </main>
   `;
@@ -386,6 +434,8 @@ function renderStatus() {
   const debuffs = raid.debuffs.map((debuff, index) => `<span class="debuff">${debuffLabel(debuff.id)}${button("×", { action: "surgery-one", index, class: "mini", title: "用快拆手术包治疗" })}</span>`).join("");
   const timePercent = Math.max(0, Math.min(100, (raid.timeLeft / RAID_LIMIT) * 100));
   const timeTone = raid.timeLeft <= 5 ? "danger" : raid.timeLeft <= 10 ? "warning" : "normal";
+  const healthPercent = Math.max(0, Math.min(100, (raid.hp / raid.maxHp) * 100));
+  const healthTone = healthPercent < 30 ? "danger" : healthPercent < 50 ? "warning" : "normal";
   return `
     <section class="statusbar">
       <div class="time-status time-status--${timeTone}">
@@ -395,7 +445,13 @@ function renderStatus() {
           <span style="width:${timePercent}%"></span>
         </div>
       </div>
-      <div><span>生命</span><strong>${raid.hp}/${raid.maxHp}</strong></div>
+      <div class="health-status health-status--${healthTone}">
+        <span>生命</span>
+        <strong>${raid.hp}/${raid.maxHp}</strong>
+        <div class="health-meter" aria-label="生命值">
+          <span style="width:${healthPercent}%"></span>
+        </div>
+      </div>
       <div><span>背包</span><strong>${bagUsed(raid)}/${bagCapacity(raid)}</strong></div>
       <div><span>价值</span><strong>${formatMoney(carriedValue(raid))}</strong></div>
       <div class="debuffs">${debuffs || `<span class="muted">状态良好</span>`}${raid.painkillerUntil ? `<span class="tag">止痛 ${raid.painkillerUntil}分</span>` : ""}</div>
@@ -407,7 +463,7 @@ function formatRaidTime(minutes) {
   const totalSeconds = Math.max(0, Math.round(minutes * 60));
   const wholeMinutes = Math.floor(totalSeconds / 60);
   const seconds = totalSeconds % 60;
-  return seconds ? `${wholeMinutes}:${String(seconds).padStart(2, "0")}` : `${wholeMinutes} 分`;
+  return `${String(wholeMinutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
 }
 
 function renderTools() {
@@ -578,6 +634,22 @@ function renderItemModal() {
   `;
 }
 
+function renderEventModal() {
+  if (!raid?.pendingEvent) return "";
+  return `
+    <div class="modal-backdrop" data-action="close-event-modal">
+      <article class="event-modal" role="alertdialog" aria-modal="true">
+        <p class="eyebrow">突发事件</p>
+        <h2>${raid.pendingEvent.title}</h2>
+        <p>${raid.pendingEvent.text}</p>
+        <div class="actions wide">
+          ${button("确认", { action: "close-event-modal", class: "primary" })}
+        </div>
+      </article>
+    </div>
+  `;
+}
+
 function render() {
   if (!raid) return renderHome();
   if (raid.screen === "settlement") return renderSettlement();
@@ -593,9 +665,12 @@ app.addEventListener("click", (event) => {
   const id = target.dataset.id;
   const index = Number(target.dataset.index || 0);
 
+  if (action === "cancel-action") return cancelActionAnimation();
+
   if (action === "start") return startNewRaid();
   if (action === "home") {
     raid = null;
+    saveActiveRaid();
     return render();
   }
   if (action === "reset") return hardReset();
@@ -634,6 +709,9 @@ app.addEventListener("click", (event) => {
   if (action === "close-item-modal") {
     selectedCarryItemId = null;
     return render();
+  }
+  if (action === "close-event-modal") {
+    return setRaid({ ...raid, pendingEvent: null });
   }
   if (action === "drop") {
     selectedCarryItemId = null;
@@ -725,3 +803,4 @@ function getDropTarget(grid, event) {
 }
 
 render();
+scheduleReveal();

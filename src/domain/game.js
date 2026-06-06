@@ -14,6 +14,7 @@ const SAFE_BOX_H = 3;
 const POCKET_COUNT = 6;
 const OPEN_LOOT_CHANCE = 0.5;
 const OPEN_LOOT_SIZE = [4, 3];
+const HARMFUL_EVENT_GRACE_MINUTES = 3;
 const HIGH_VALUE_CONTAINER_TYPES = new Set([
   "safe-small",
   "safe-large",
@@ -392,6 +393,7 @@ function applyEventEffects(raid, event) {
     }
   });
   next.eventLog.unshift({ title: event.title, text: event.text });
+  next.pendingEvent = { title: event.title, text: event.text };
   if (next.hp <= 0) {
     next.over = true;
     next.result = createSettlement(next, false, "生命值归零，你倒在了撤离路上。");
@@ -399,13 +401,20 @@ function applyEventEffects(raid, event) {
   return next;
 }
 
+function isHarmfulEvent(event) {
+  return event.effects.some((effect) => effect.type === "damage" || effect.type === "debuff");
+}
+
 function maybeTriggerEvent(raid) {
   const rng = createRng(raid.seed + raid.timeLeft * 97 + raid.eventLog.length * 31);
-  if (rng.next() > 0.1) return raid;
+  if (rng.next() > 0.1) return { raid, event: null };
   const location = getLocation(raid);
-  const candidates = location.risk === "低" ? EVENTS.filter((event) => event.kind !== "soldier") : EVENTS;
+  const timeUsed = RAID_LIMIT - raid.timeLeft;
+  const candidates = (location.risk === "低" ? EVENTS.filter((event) => event.kind !== "soldier") : EVENTS)
+    .filter((event) => timeUsed >= HARMFUL_EVENT_GRACE_MINUTES || !isHarmfulEvent(event));
+  if (!candidates.length) return { raid, event: null };
   const event = candidates.find((candidate) => candidate.id === weightedPick(rng, candidates.map((item) => [item.id, item.weight])));
-  return applyEventEffects(raid, event);
+  return { raid: applyEventEffects(raid, event), event };
 }
 
 export function searchContainer(raid, containerId) {
@@ -423,7 +432,7 @@ export function searchContainer(raid, containerId) {
   next.currentSearch = { containerId };
   next.screen = "search";
   next.eventLog.unshift({ title: "搜索", text: `你打开了${nextContainer.name}。` });
-  next = maybeTriggerEvent(next);
+  next = maybeTriggerEvent(next).raid;
   if (next.over) return next;
   next.screen = "search";
   next.currentSearch = { containerId };
@@ -445,6 +454,10 @@ export function searchLocation(raid) {
   let next = tickTime(raid, SEARCH_ACTION_COST);
   if (next.over) return { raid: next, ok: true };
 
+  const eventResult = maybeTriggerEvent(next);
+  if (eventResult.event) return { raid: eventResult.raid, ok: true, found: "event" };
+  next = eventResult.raid;
+
   if (pickedId.kind === "container") {
     const locationContainers = next.containersByLocation[next.locationId];
     const container = locationContainers.find((item) => item.id === pickedId.id);
@@ -460,7 +473,6 @@ export function searchLocation(raid) {
     next.currentSearch = null;
     next.screen = "raid";
     next.eventLog.unshift({ title: "搜索", text: `你发现了${container.name}。` });
-    next = maybeTriggerEvent(next);
     if (next.over) return { raid: next, ok: true };
     next.screen = "raid";
     next.currentSearch = null;
@@ -474,13 +486,11 @@ export function searchLocation(raid) {
     next.screen = "raid";
     next.currentSearch = null;
     next.eventLog.unshift({ title: "搜索", text: "你翻找了一圈，什么也没找到。" });
-    next = maybeTriggerEvent(next);
     return { raid: next, ok: true, found: "nothing", reason: "什么也没找到" };
   }
   next.currentSearch = { openLootPointId: point.id };
   next.screen = "search";
   next.eventLog.unshift({ title: "搜索", text: "你发现了一些东西。" });
-  next = maybeTriggerEvent(next);
   if (next.over) return { raid: next, ok: true };
   next.screen = "search";
   next.currentSearch = { openLootPointId: point.id };

@@ -217,11 +217,13 @@ h2 {
   font-size: 16px;
 }
 
-.time-status {
+.time-status,
+.health-status {
   align-content: start;
 }
 
-.time-meter {
+.time-meter,
+.health-meter {
   height: 7px;
   overflow: hidden;
   border-radius: 999px;
@@ -229,7 +231,8 @@ h2 {
   margin-top: 4px;
 }
 
-.time-meter > span {
+.time-meter > span,
+.health-meter > span {
   display: block;
   height: 100%;
   border-radius: inherit;
@@ -245,11 +248,27 @@ h2 {
   background: var(--red);
 }
 
+.health-status--warning .health-meter > span {
+  background: var(--amber);
+}
+
+.health-status--danger .health-meter > span {
+  background: var(--red);
+}
+
 .time-status--warning strong {
   color: var(--amber);
 }
 
 .time-status--danger strong {
+  color: var(--red);
+}
+
+.health-status--warning strong {
+  color: var(--amber);
+}
+
+.health-status--danger strong {
   color: var(--red);
 }
 
@@ -935,6 +954,13 @@ h2 {
   font-weight: 800;
 }
 
+.action-overlay button {
+  margin-top: 4px;
+  border-color: rgba(224, 180, 93, 0.78);
+  background: rgba(17, 22, 20, 0.86);
+  color: #ffe2a1;
+}
+
 .action-pulse {
   width: 54px;
   height: 54px;
@@ -980,6 +1006,26 @@ h2 {
   background: #151a17;
   padding: 14px;
   box-shadow: 0 18px 60px rgba(0, 0, 0, 0.45);
+}
+
+.event-modal {
+  display: grid;
+  gap: 12px;
+  width: min(380px, 100%);
+  border: 1px solid rgba(224, 180, 93, 0.72);
+  border-radius: 8px;
+  background: #171510;
+  padding: 16px;
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.5);
+}
+
+.event-modal h2 {
+  margin-bottom: 0;
+}
+
+.event-modal p:not(.eyebrow) {
+  color: #f0e6cf;
+  line-height: 1.55;
 }
 
 .modal-header {
