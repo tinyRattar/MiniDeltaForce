@@ -250,9 +250,91 @@ h2 {
   gap: 8px;
 }
 
+.route-list--compact {
+  margin-top: 12px;
+}
+
 .extract-node {
   border-color: var(--amber);
   color: var(--amber);
+}
+
+.tactical-map {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: var(--map-aspect, 1);
+  margin-top: 16px;
+  border: 1px solid #475249;
+  border-radius: 8px;
+  background: #070908;
+}
+
+.tactical-map img,
+.map-routes,
+.map-nodes {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.tactical-map img {
+  display: block;
+  opacity: 0.78;
+}
+
+.map-routes {
+  pointer-events: none;
+}
+
+.map-route {
+  stroke: rgba(255, 255, 255, 0.7);
+  stroke-width: 18;
+  stroke-linecap: round;
+  stroke-dasharray: 36 34;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.7));
+}
+
+.map-route--active {
+  stroke: var(--green);
+  stroke-width: 24;
+  stroke-dasharray: none;
+}
+
+.map-node {
+  position: absolute;
+  z-index: 1;
+  width: clamp(10px, 1.7vw, 18px);
+  height: clamp(10px, 1.7vw, 18px);
+  min-width: 0;
+  min-height: 0;
+  border: 2px solid #fff;
+  border-radius: 0;
+  background: rgba(255, 255, 255, 0.42);
+  padding: 0;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.55);
+}
+
+.map-node:not([data-action]) {
+  cursor: default;
+}
+
+.map-node--adjacent {
+  background: rgba(255, 255, 255, 0.58);
+  box-shadow: 0 0 0 2px rgba(121, 192, 110, 0.8), 0 3px 8px rgba(0, 0, 0, 0.55);
+}
+
+.map-node--current {
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: 0 0 0 3px rgba(121, 192, 110, 0.95), 0 5px 12px rgba(0, 0, 0, 0.65);
+}
+
+.map-node--extract {
+  border-color: #8ff07e;
+  background: rgba(121, 192, 110, 0.46);
+  box-shadow: 0 0 0 2px rgba(121, 192, 110, 0.72), 0 3px 8px rgba(0, 0, 0, 0.55);
 }
 
 .container-list {
@@ -283,6 +365,35 @@ h2 {
 
 .searched {
   opacity: 0.72;
+}
+
+.search-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.search-summary h2 {
+  margin-bottom: 0;
+  font-size: 32px;
+}
+
+.search-progress {
+  height: 12px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #0d100f;
+  margin-top: 14px;
+}
+
+.search-progress span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--green), var(--amber));
+  transition: width 280ms ease;
 }
 
 .loot-grid {
@@ -650,6 +761,59 @@ h2 {
   padding: 12px 14px;
   font-weight: 800;
   text-align: center;
+}
+
+.action-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 10px;
+  background:
+    repeating-linear-gradient(90deg, rgba(224, 180, 93, 0.08) 0 2px, transparent 2px 28px),
+    rgba(6, 8, 7, 0.64);
+  animation: timeSweep 650ms ease both;
+  text-align: center;
+}
+
+.action-overlay strong {
+  font-size: 20px;
+}
+
+.action-overlay span {
+  color: var(--amber);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.action-pulse {
+  width: 54px;
+  height: 54px;
+  border: 3px solid var(--amber);
+  border-radius: 50%;
+  box-shadow: 0 0 0 0 rgba(224, 180, 93, 0.38);
+  animation: actionPulse 650ms ease-out infinite;
+}
+
+@keyframes actionPulse {
+  to {
+    box-shadow: 0 0 0 26px rgba(224, 180, 93, 0);
+    transform: scale(0.92);
+  }
+}
+
+@keyframes timeSweep {
+  from {
+    opacity: 0;
+    background-position: -80px 0, 0 0;
+  }
+
+  to {
+    opacity: 1;
+    background-position: 80px 0, 0 0;
+  }
 }
 
 .modal-backdrop {

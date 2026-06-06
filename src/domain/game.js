@@ -10,6 +10,38 @@ const BACKPACK_H = 4;
 const SAFE_BOX_W = 3;
 const SAFE_BOX_H = 3;
 const POCKET_COUNT = 6;
+const OPEN_LOOT_CHANCE = 0.5;
+const OPEN_LOOT_SIZE = [4, 3];
+
+const OPEN_LOOT_PROFILES = {
+  construction: { points: 4, sources: [["tool-cabinet", 5], ["cement-truck", 4], ["supply-crate", 2]] },
+  industrial: { points: 5, sources: [["tool-cabinet", 5], ["cement-truck", 5], ["supply-crate", 2], ["manhole", 1]] },
+  admin: { points: 5, sources: [["briefcase", 5], ["computer-case", 3], ["safe-small", 2], ["hacker-pc", 1]] },
+  electronics: { points: 5, sources: [["computer-case", 5], ["server-rack", 4], ["hacker-pc", 2], ["tool-cabinet", 1]] },
+  military: { points: 4, sources: [["ammo-box", 4], ["weapon-box", 2], ["weapon-box-large", 1], ["supply-crate", 2]] },
+  field: { points: 4, sources: [["supply-crate", 4], ["bird-nest", 2], ["clothes", 2], ["medical-box", 1]] },
+  logistics: { points: 5, sources: [["express-small", 4], ["express-box", 3], ["aviation-box", 2], ["supply-crate", 2]] },
+};
+
+const OPEN_LOOT_PROFILE_BY_LOCATION = {
+  "cement-plant": "industrial",
+  construction: "construction",
+  barracks: "military",
+  "new-pipe-zone": "construction",
+  river: "field",
+  "pipe-zone": "construction",
+  "admin-west": "admin",
+  "admin-east": "admin",
+  containers: "logistics",
+  "dam-inside": "electronics",
+  parking: "logistics",
+  "dam-top": "field",
+  maintenance: "field",
+  "main-substation": "electronics",
+  "backup-substation": "electronics",
+  "field-camp": "field",
+  "visitor-center": "admin",
+};
 
 export function createInitialSave() {
   return { version: 1, money: 50000, stash: [], lastSettlement: null, settings: { compactMoney: true } };
@@ -196,6 +228,42 @@ function generateContainer(rng, locationId, typeId, index) {
   };
 }
 
+function pickOpenLootItem(rng, profile) {
+  const sourceId = weightedPick(rng, profile.sources.map(([id, weight]) => ({ itemId: id, weight })));
+  const source = CONTAINER_TYPES[sourceId];
+  if (!source?.pools?.length) return null;
+  return weightedPick(rng, source.pools);
+}
+
+function generateOpenLootPoint(rng, locationId, index) {
+  const profile = OPEN_LOOT_PROFILES[OPEN_LOOT_PROFILE_BY_LOCATION[locationId] ?? "field"];
+  const itemId = rng.next() < OPEN_LOOT_CHANCE ? pickOpenLootItem(rng, profile) : null;
+  const item = itemId ? ITEM_BY_ID[itemId] : null;
+  const size = item ? [Math.max(OPEN_LOOT_SIZE[0], item.size[0]), Math.max(OPEN_LOOT_SIZE[1], item.size[1])] : OPEN_LOOT_SIZE;
+  return {
+    id: `${locationId}-open-${index}`,
+    typeId: "open-loot",
+    name: "现场",
+    size,
+    searched: false,
+    openLoot: true,
+    items: item
+      ? [{
+          instanceId: createInstanceId(item.id),
+          itemId,
+          placement: { x: 0, y: 0, w: item.size[0], h: item.size[1] },
+          ...(item.stackSize ? { quantity: randInt(rng, 1, item.stackSize) } : {}),
+          revealed: true,
+        }]
+      : [],
+  };
+}
+
+function generateOpenLootPoints(rng, locationId) {
+  const profile = OPEN_LOOT_PROFILES[OPEN_LOOT_PROFILE_BY_LOCATION[locationId] ?? "field"];
+  return Array.from({ length: profile.points }, (_, index) => generateOpenLootPoint(rng, locationId, index));
+}
+
 function addGeneratedContainer(containersByLocation, rng, locationId, typeId) {
   const index = containersByLocation[locationId].length;
   const container = generateContainer(rng, locationId, typeId, index);
@@ -219,8 +287,10 @@ function addExtraHighValueContainers(containersByLocation, rng) {
 export function startRaid(seed = Date.now()) {
   const rng = createRng(seed);
   const containersByLocation = {};
+  const openLootByLocation = {};
   Object.values(LOCATION_BY_ID).forEach((location) => {
     containersByLocation[location.id] = location.containers.map((typeId, index) => generateContainer(rng, location.id, typeId, index));
+    openLootByLocation[location.id] = generateOpenLootPoints(rng, location.id);
   });
   addExtraHighValueContainers(containersByLocation, rng);
 
@@ -241,6 +311,7 @@ export function startRaid(seed = Date.now()) {
     ...createCarrySpaces(),
     eventLog: [{ title: "进入战局", text: "你从西部撤离点附近进入大坝区域。时间够，但不值得浪费。" }],
     containersByLocation,
+    openLootByLocation,
     currentSearch: null,
     over: false,
     result: null,
@@ -340,11 +411,66 @@ export function searchContainer(raid, containerId) {
   return next;
 }
 
+export function searchLocation(raid) {
+  if (raid.over) return { raid, ok: false, reason: "行动已经结束。" };
+  const containers = raid.containersByLocation[raid.locationId].filter((container) => !container.searched);
+  const openPoints = (raid.openLootByLocation?.[raid.locationId] ?? []).filter((point) => !point.searched);
+  const candidates = [
+    ...containers.map((container) => ({ kind: "container", id: container.id, weight: 1 })),
+    ...openPoints.map((point) => ({ kind: "open", id: point.id, weight: 1 })),
+  ];
+  if (!candidates.length) return { raid, ok: false, reason: "这里已经搜得差不多了。" };
+
+  const rng = createRng(raid.seed + raid.timeLeft * 131 + candidates.length * 17 + raid.eventLog.length * 37);
+  const pickedId = weightedPick(rng, candidates.map((candidate) => [{ kind: candidate.kind, id: candidate.id }, candidate.weight]));
+  let next = tickTime(raid, 1);
+  if (next.over) return { raid: next, ok: true };
+
+  if (pickedId.kind === "container") {
+    const container = next.containersByLocation[next.locationId].find((item) => item.id === pickedId.id);
+    if (!container) return { raid: next, ok: false, reason: "没有找到可搜索目标。" };
+    container.searched = true;
+    next.currentSearch = { containerId: container.id };
+    next.screen = "search";
+    next.eventLog.unshift({ title: "搜索", text: `你发现了${container.name}。` });
+    next = maybeTriggerEvent(next);
+    if (next.over) return { raid: next, ok: true };
+    next.screen = "search";
+    next.currentSearch = { containerId: container.id };
+    return { raid: next, ok: true, found: "container" };
+  }
+
+  const point = next.openLootByLocation[next.locationId].find((item) => item.id === pickedId.id);
+  if (!point) return { raid: next, ok: false, reason: "没有找到可搜索目标。" };
+  point.searched = true;
+  if (!point.items.length) {
+    next.screen = "raid";
+    next.currentSearch = null;
+    next.eventLog.unshift({ title: "搜索", text: "你翻找了一圈，什么也没找到。" });
+    next = maybeTriggerEvent(next);
+    return { raid: next, ok: true, found: "nothing", reason: "什么也没找到" };
+  }
+  next.currentSearch = { openLootPointId: point.id };
+  next.screen = "search";
+  next.eventLog.unshift({ title: "搜索", text: "你发现了一些东西。" });
+  next = maybeTriggerEvent(next);
+  if (next.over) return { raid: next, ok: true };
+  next.screen = "search";
+  next.currentSearch = { openLootPointId: point.id };
+  return { raid: next, ok: true, found: "open" };
+}
+
 export function revealItem(raid, instanceId) {
   const next = structuredClone(raid);
   for (const containers of Object.values(next.containersByLocation)) {
     for (const container of containers) {
       const entry = container.items.find((item) => item.instanceId === instanceId);
+      if (entry) entry.revealed = true;
+    }
+  }
+  for (const points of Object.values(next.openLootByLocation ?? {})) {
+    for (const point of points) {
+      const entry = point.items.find((item) => item.instanceId === instanceId);
       if (entry) entry.revealed = true;
     }
   }
@@ -608,13 +734,14 @@ export function extract(raid) {
 function createSettlement(raid, success, message) {
   const carriedItems = allCarriedEntries(raid);
   const totalValue = carriedItems.reduce((sum, entry) => sum + getEntryValue(entry), 0);
+  const searchedOpenLootCount = Object.values(raid.openLootByLocation ?? {}).flat().filter((point) => point.searched).length;
   return {
     success,
     message,
     totalValue: success ? totalValue : 0,
     keptItems: success ? carriedItems : [],
     lostItems: success ? [] : carriedItems,
-    searchedCount: Object.values(raid.containersByLocation).flat().filter((container) => container.searched).length,
+    searchedCount: Object.values(raid.containersByLocation).flat().filter((container) => container.searched).length + searchedOpenLootCount,
     timeUsed: RAID_LIMIT - raid.timeLeft,
     hp: raid.hp,
   };
@@ -633,7 +760,26 @@ export function applySettlementToSave(save, result) {
 
 export function getCurrentContainer(raid) {
   if (!raid.currentSearch) return null;
-  return raid.containersByLocation[raid.locationId].find((container) => container.id === raid.currentSearch.containerId);
+  if (raid.currentSearch.containerId) {
+    return raid.containersByLocation[raid.locationId].find((container) => container.id === raid.currentSearch.containerId);
+  }
+  if (raid.currentSearch.openLootPointId) {
+    return raid.openLootByLocation?.[raid.locationId]?.find((point) => point.id === raid.currentSearch.openLootPointId) ?? null;
+  }
+  return null;
+}
+
+export function getLocationSearchProgress(raid, locationId = raid.locationId) {
+  const containers = raid.containersByLocation[locationId] ?? [];
+  const openPoints = raid.openLootByLocation?.[locationId] ?? [];
+  const total = containers.length + openPoints.length;
+  const searched = containers.filter((container) => container.searched).length + openPoints.filter((point) => point.searched).length;
+  return {
+    searched,
+    total,
+    percent: total ? Math.round((searched / total) * 100) : 100,
+    complete: total === 0 || searched >= total,
+  };
 }
 
 export function getContainerSize(container) {

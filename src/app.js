@@ -14,6 +14,7 @@ import {
   getContainerSize,
   getCurrentContainer,
   getLocation,
+  getLocationSearchProgress,
   getRevealDelayMs,
   itemMeta,
   loadSave,
@@ -27,11 +28,13 @@ import {
   rotateCarriedItem,
   saveGame,
   searchContainer,
+  searchLocation,
   startRaid,
   takeItem,
   takeItemToSpace,
   useTool,
 } from "./domain/game.js";
+import { CONNECTIONS, LOCATIONS, MAP_IMAGE_SIZE, MAP_IMAGE_URL, MAP_VIEW } from "./data/map.js";
 
 const app = document.querySelector("#app");
 
@@ -39,6 +42,8 @@ let save = loadSave();
 let raid = null;
 let toast = "";
 let revealTimer = null;
+let actionTimer = null;
+let pendingAction = "";
 let selectedCarryItemId = null;
 
 function setToast(message) {
@@ -61,6 +66,16 @@ function setRaid(nextRaid) {
   }
   render();
   scheduleReveal();
+}
+
+function runActionAnimation(label, action) {
+  window.clearTimeout(actionTimer);
+  pendingAction = label;
+  render();
+  actionTimer = window.setTimeout(() => {
+    pendingAction = "";
+    action();
+  }, 650);
 }
 
 function startNewRaid() {
@@ -101,6 +116,7 @@ function renderShell(content) {
     <main class="shell">
       ${content}
       ${renderItemModal()}
+      ${pendingAction ? `<div class="action-overlay"><div class="action-pulse"></div><strong>${pendingAction}</strong><span>时间在流逝</span></div>` : ""}
       ${toast ? `<div class="toast">${toast}</div>` : ""}
     </main>
   `;
@@ -163,7 +179,7 @@ function renderHome() {
 function renderRaid() {
   const location = getLocation(raid);
   const adjacent = getAdjacentLocations(raid);
-  const containers = raid.containersByLocation[raid.locationId];
+  const progress = getLocationSearchProgress(raid);
   renderShell(`
     ${renderStatus()}
     <section class="map-panel">
@@ -175,28 +191,19 @@ function renderRaid() {
         ${location.extract ? button("撤离", { action: "extract", class: "primary" }) : `<span class="tag">非撤离点</span>`}
       </div>
 
-      <div class="node-map">
-        <div class="current-node">${location.name}</div>
-        <div class="route-list">
-          ${adjacent.map((node) => button(node.name, { action: "move", id: node.id, class: node.extract ? "extract-node" : "" })).join("")}
-        </div>
-      </div>
+      ${renderTacticalMap(raid, adjacent)}
     </section>
 
     <section class="panel">
-      <h2>当前位置容器</h2>
-      <div class="container-list">
-        ${containers
-          .map((container) =>
-            `<div class="container-card ${container.searched ? "searched" : ""}">
-              <div>
-                <strong>${container.name}</strong>
-                <span>${container.searched ? "已搜索，可重看" : "未搜索"}</span>
-              </div>
-              ${button(container.searched ? "查看" : "搜索", { action: "search", id: container.id })}
-            </div>`,
-          )
-          .join("")}
+      <div class="search-summary">
+        <div>
+          <p class="eyebrow">区域搜索度</p>
+          <h2>${progress.percent}%</h2>
+        </div>
+        ${button(progress.complete ? "已搜索完" : "搜索", { action: "search-area", class: "primary", disabled: progress.complete })}
+      </div>
+      <div class="search-progress" aria-label="区域搜索度">
+        <span style="width:${progress.percent}%"></span>
       </div>
     </section>
 
@@ -204,6 +211,48 @@ function renderRaid() {
     ${renderTools()}
     ${renderLog()}
   `);
+}
+
+function renderTacticalMap(raid, adjacent) {
+  const adjacentIds = new Set(adjacent.map((node) => node.id));
+  const currentId = raid.locationId;
+  const lineKeys = new Set();
+  const lines = Object.entries(CONNECTIONS).flatMap(([fromId, toIds]) => {
+    const from = LOCATIONS.find((location) => location.id === fromId);
+    return toIds.flatMap((toId) => {
+      const key = [fromId, toId].sort().join(":");
+      if (lineKeys.has(key)) return [];
+      lineKeys.add(key);
+      const to = LOCATIONS.find((location) => location.id === toId);
+      if (!from?.map || !to?.map) return [];
+      const active = fromId === currentId || toId === currentId;
+      return `<line class="map-route ${active ? "map-route--active" : ""}" x1="${from.map.x}" y1="${from.map.y}" x2="${to.map.x}" y2="${to.map.y}" />`;
+    });
+  });
+
+  const nodes = LOCATIONS.map((node) => {
+    const isCurrent = node.id === currentId;
+    const isAdjacent = adjacentIds.has(node.id);
+    const classes = ["map-node", isCurrent ? "map-node--current" : "", isAdjacent ? "map-node--adjacent" : "", node.extract ? "map-node--extract" : ""].filter(Boolean).join(" ");
+    const style = `left:${((node.map.x - MAP_VIEW.x) / MAP_VIEW.width) * 100}%; top:${((node.map.y - MAP_VIEW.y) / MAP_VIEW.height) * 100}%;`;
+    const actionAttrs = isAdjacent ? ` data-action="move" data-id="${node.id}"` : "";
+    return `<button class="${classes}" style="${style}"${actionAttrs} title="${node.name}" aria-label="${node.name}"></button>`;
+  }).join("");
+
+  return `
+    <div class="tactical-map" style="--map-aspect:${MAP_VIEW.width} / ${MAP_VIEW.height};" aria-label="零号大坝地图">
+      <img src="${MAP_IMAGE_URL}" alt="零号大坝地图底图" style="left:${-(MAP_VIEW.x / MAP_VIEW.width) * 100}%; top:${-(MAP_VIEW.y / MAP_VIEW.height) * 100}%; width:${(MAP_IMAGE_SIZE / MAP_VIEW.width) * 100}%; height:${(MAP_IMAGE_SIZE / MAP_VIEW.height) * 100}%;" />
+      <svg class="map-routes" viewBox="${MAP_VIEW.x} ${MAP_VIEW.y} ${MAP_VIEW.width} ${MAP_VIEW.height}" aria-hidden="true">
+        ${lines.join("")}
+      </svg>
+      <div class="map-nodes">
+        ${nodes}
+      </div>
+    </div>
+    <div class="route-list route-list--compact">
+      ${adjacent.map((node) => button(node.name, { action: "move", id: node.id, class: node.extract ? "extract-node" : "" })).join("")}
+    </div>
+  `;
 }
 
 function renderSearch() {
@@ -214,13 +263,14 @@ function renderSearch() {
   }
   const hiddenCount = container.items.filter((entry) => !entry.revealed).length;
   const [containerWidth, containerHeight] = getContainerSize(container);
+  const searchTitle = container.openLoot ? "发现了一些东西" : container.name;
   renderShell(`
     ${renderStatus()}
     <section class="panel search-panel">
       <div class="location-header">
         <div>
           <p class="eyebrow">${getLocation(raid).name}</p>
-          <h1>${container.name}</h1>
+          <h1>${searchTitle}</h1>
         </div>
         <div class="actions">
           ${hiddenCount ? button("快速揭示", { action: "reveal-all", class: "ghost" }) : ""}
@@ -407,7 +457,9 @@ function renderItemModal() {
   const item = itemMeta(found.entry.itemId);
   const placement = found.entry.placement ?? { x: 0, y: 0, w: item.size[0], h: item.size[1] };
   const canRotate = placement.w !== placement.h;
-  const canReturn = raid?.screen === "search" && getCurrentContainer(raid);
+  const currentContainer = raid?.screen === "search" ? getCurrentContainer(raid) : null;
+  const canReturn = Boolean(currentContainer);
+  const returnLabel = currentContainer?.openLoot ? "放回" : "放回容器";
   return `
     <div class="modal-backdrop" data-action="close-item-modal">
       <article class="item-modal" role="dialog" aria-modal="true">
@@ -428,7 +480,7 @@ function renderItemModal() {
         <div class="actions wide">
           ${button("丢弃", { action: "drop", id: found.entry.instanceId, class: "bad-action" })}
           ${button("旋转", { action: "rotate", id: found.entry.instanceId, disabled: !canRotate })}
-          ${button("放回容器", { action: "return-to-container", id: found.entry.instanceId, disabled: !canReturn })}
+          ${button(returnLabel, { action: "return-to-container", id: found.entry.instanceId, disabled: !canReturn })}
         </div>
       </article>
     </div>
@@ -458,7 +510,16 @@ app.addEventListener("click", (event) => {
   if (action === "reset") return hardReset();
   if (!raid) return;
 
-  if (action === "move") return setRaid(moveTo(raid, id));
+  if (action === "move") {
+    return runActionAnimation("正在移动", () => setRaid(moveTo(raid, id)));
+  }
+  if (action === "search-area") {
+    return runActionAnimation("正在搜索", () => {
+      const result = searchLocation(raid);
+      setRaid(result.raid);
+      if (result.reason) setToast(result.reason);
+    });
+  }
   if (action === "search") return setRaid(searchContainer(raid, id));
   if (action === "back-raid") return setRaid({ ...raid, screen: "raid", currentSearch: null });
   if (action === "reveal-all") return setRaid(revealAllCurrent(raid));
