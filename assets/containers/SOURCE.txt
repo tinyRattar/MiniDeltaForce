@@ -1,0 +1,9 @@
+Container icons downloaded from Delta Force Database Zero Dam map resources.
+
+Source page:
+https://deltaforcedb.com/maps/zerodam/
+
+Resource path pattern:
+https://deltaforcedb.com/maps/zerodam/images/icons/containers/*.webp
+
+Downloaded for local use so the app does not hotlink third-party assets.

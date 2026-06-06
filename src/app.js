@@ -37,6 +37,7 @@ import {
   RAID_LIMIT,
 } from "./domain/game.js";
 import { CONNECTIONS, LOCATIONS, MAP_IMAGE_SIZE, MAP_IMAGE_URL, MAP_VIEW } from "./data/map.js";
+import { CONTAINER_ICON_URLS } from "./data/container-icons.js";
 
 const app = document.querySelector("#app");
 
@@ -246,9 +247,10 @@ function compareDiscoveredContainers(a, b) {
 function renderContainerChip(container) {
   const highValue = isHighValueContainer(container);
   const classes = ["container-chip", container.searched ? "container-chip--searched" : "", highValue ? "container-chip--high" : ""].filter(Boolean).join(" ");
+  const iconUrl = CONTAINER_ICON_URLS[container.typeId];
   return `
     <button class="${classes}" data-action="search" data-id="${container.id}" title="${container.name}">
-      <span class="container-icon container-icon--${containerIconType(container)}" aria-hidden="true">${containerIconText(container)}</span>
+      <span class="container-icon container-icon--${containerIconType(container)}" aria-hidden="true">${iconUrl ? `<img src="${iconUrl}" alt="">` : containerIconText(container)}</span>
       <span class="container-name">${container.name}</span>
       ${container.searched ? `<span class="container-state">已搜索</span>` : ""}
     </button>
