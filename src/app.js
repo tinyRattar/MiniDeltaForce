@@ -60,7 +60,7 @@ function setToast(message) {
   }, 2200);
 }
 
-function setRaid(nextRaid) {
+function setRaid(nextRaid, options = {}) {
   raid = nextRaid;
   if (selectedCarryItemId && !findCarriedEntry(selectedCarryItemId)) selectedCarryItemId = null;
   if (raid?.over && raid.result) {
@@ -68,7 +68,12 @@ function setRaid(nextRaid) {
     raid.screen = "settlement";
   }
   render();
+  if (options.scrollTop) scrollToTop();
   scheduleReveal();
+}
+
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: "auto" });
 }
 
 function runActionAnimation(label, action) {
@@ -185,18 +190,6 @@ function renderRaid() {
   const progress = getLocationSearchProgress(raid);
   renderShell(`
     ${renderStatus()}
-    <section class="map-panel">
-      <div class="location-header">
-        <div>
-          <p class="eyebrow">${location.risk}风险 ${location.highValue ? " / 高价值区" : ""}</p>
-          <h1>${location.name}</h1>
-        </div>
-        ${location.extract ? button("撤离", { action: "extract", class: "primary" }) : `<span class="tag">非撤离点</span>`}
-      </div>
-
-      ${renderTacticalMap(raid, adjacent)}
-    </section>
-
     <section class="panel raid-search-panel">
       <div class="search-summary">
         <div>
@@ -210,6 +203,18 @@ function renderRaid() {
         <span style="width:${progress.percent}%"></span>
       </div>
       ${renderDiscoveredContainers(raid)}
+    </section>
+
+    <section class="map-panel">
+      <div class="location-header">
+        <div>
+          <p class="eyebrow">${location.risk}风险 ${location.highValue ? " / 高价值区" : ""}</p>
+          <h1>${location.name}</h1>
+        </div>
+        ${location.extract ? button("撤离", { action: "extract", class: "primary" }) : `<span class="tag">非撤离点</span>`}
+      </div>
+
+      ${renderTacticalMap(raid, adjacent)}
     </section>
 
     ${renderBag()}
@@ -611,11 +616,11 @@ app.addEventListener("click", (event) => {
   if (action === "search") {
     const container = getRaidContainer(id);
     if (container && !container.searched) {
-      return runActionAnimation("正在打开", () => setRaid(searchContainer(raid, id)));
+      return runActionAnimation("正在打开", () => setRaid(searchContainer(raid, id), { scrollTop: true }));
     }
-    return setRaid(searchContainer(raid, id));
+    return setRaid(searchContainer(raid, id), { scrollTop: true });
   }
-  if (action === "back-raid") return setRaid({ ...raid, screen: "raid", currentSearch: null });
+  if (action === "back-raid") return setRaid({ ...raid, screen: "raid", currentSearch: null }, { scrollTop: true });
   if (action === "reveal-all") return setRaid(revealAllCurrent(raid));
   if (action === "take") {
     const result = takeItem(raid, id);
