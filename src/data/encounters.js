@@ -1,67 +1,50 @@
-// Costs and outcome probabilities are also shown before a player commits.
 export const ENCOUNTERS = [
-  { id: 'fish', title: '这不是摸鱼，是采样', tag: '职场生态', icon: '🐟', text: '一个穿着工牌的钓鱼佬对你比了个嘘。他的桶里没鱼，倒有一份盖了公章的文件。', choices: [
-    { text: '加入实地调研', hint: '体力 +3，获得摸鱼许可证', effects: { energy: 3, item: 'meme-fish' }, result: '两个人一起不干活，就叫跨部门协作。' },
-    { text: '借他的探鱼器找箱子', hint: '下个容器寻宝加成 +2', effects: { luck: 2 }, result: '探鱼器：前方检测到含金量较高的鱼。' },
+  { id: 'rat-signal', title: '拐角传来三声暗号', tag: '不打不打', icon: '🐭', text: '墙后有人切刀示意：「鼠鼠，自己人！」地上已经放下一个包。接受暗号，还是保持距离？', choices: [
+    { text: '回应暗号，接受馈赠', hint: '30 秒；75% 获得鼠鼠的谢礼，25% 遭背刺：掉血 45 并流血', seconds: 30, effects: {}, chance: .75, win: { item: 'rat-gift', luck: 1 }, lose: { damage: 45, bleed: true }, result: '你向拐角走了一步。', winText: '对方真的把东西留给你，摇头晃脑地溜走了。', loseText: '「不打」的后半句是「不打别人」。背后响起了枪声。' },
+    { text: '摇头示意，保持距离', hint: '20 秒；获得三声暗号哨，不受伤', seconds: 20, effects: { item: 'signal-whistle' }, result: '你们各走各的。地上的哨子，算是一次没有发生的合作。' },
   ] },
-  { id: 'cat', title: '如果我坐得下', tag: '猫箱叠加态', icon: '🐈', text: '纸箱里传来呼噜声。里面可能是珍宝，也可能是珍宝的主人。', choices: [
-    { text: '把整个箱子抱走', hint: '体力 −2，获得「纸箱的真正主人」', effects: { energy: -2, item: 'meme-cat' }, result: '箱子归你，猫归箱子，你归猫。所有权非常清晰。' },
-    { text: '挠挠下巴就走', hint: '体力 +3', effects: { energy: 3 }, result: '它没有给你金条，但给了你一点活下去的电量。' },
+  { id: 'haavk-patrol', title: '哈夫克巡逻兵', tag: '人机也会补枪', icon: '◎', text: '巡逻兵看见了你，正抬起枪口。血量不健康的话，先用药再做决定；硬吃一梭子真的会回特勤处。', choices: [
+    { text: '就地还击，搜走物资', hint: '55 秒；受到 18–32 点伤害，获得 9,000 零钱与一支强效注射器', seconds: 55, effects: { damageRange: [18,32], coins: 9000, item: 'consumable-14020000003' }, result: '巡逻兵倒下了，但你的护甲并不能替你回血。先看一眼状态栏。' },
+    { text: '借掩体绕开巡逻', hint: '90 秒；受到 8 点伤害', seconds: 90, effects: { damage: 8 }, result: '擦伤不重，就是绕了好大一个圈。时间也是成本。' },
   ] },
-  { id: 'cake', title: '这个项目很有前景', tag: '饼学大师', icon: '🥯', text: '废弃会议室里，投影仪还在自动播放第 108 页：我们的未来。桌上居然有一张实体大饼。', choices: [
-    { text: '把愿景装进背包', hint: '体力 −1，获得「老板画的大饼」', effects: { energy: -1, item: 'meme-cake' }, result: '终于有人把这东西变现了。' },
-    { text: '准点下班', hint: '体力 +4', effects: { energy: 4 }, result: '不参加最后五分钟的会，你得到了完整的一个下午。' },
+  { id: 'danger-search', title: '楼上正在清人', tag: '高危搜索', icon: '⚠', text: '密集脚步声从天花板传来。眼前的保险箱还没开。继续搜索会持续暴露位置，直到离开这个地点。', choices: [
+    { text: '来都来了，继续硬搜', hint: '15 秒；本地点每次搜索有 65% 概率掉血 30–55；下一箱寻宝 +2', seconds: 15, effects: { threat: true, luck: 2 }, result: '你选择了财富自由的捷径。现在每开一个箱子，都可能被推到脸上。' },
+    { text: '藏好，等他们离开', hint: '120 秒；清除本地点高危状态', seconds: 120, effects: { clearThreat: true }, result: '他们终于走了。箱子还在，命也还在。' },
   ] },
-  { id: 'rick', title: '绝密情报，点击播放', tag: '熟悉的前奏', icon: '📼', text: '一台播放器贴着「百万物资坐标」。封面的发型，让你产生了一种不妙的亲切感。', choices: [
-    { text: '赌它真是情报', hint: '体力 −2；25% 获得红色磁带，否则获得下次一定券', effects: { energy: -2 }, chance: 0.25, win: { item: 'meme-disc' }, lose: { item: 'meme-ticket' }, result: '音乐响起。你确实被留在了原地。', winText: '整活归整活，这竟然是限量母带！', loseText: '坐标没听到，前奏倒是会哼了。' },
-    { text: '我已经会背了', hint: '下个容器寻宝加成 +1', effects: { luck: 1 }, result: '识破经典套路，直觉 +1。' },
+  { id: 'saeed', title: '那身影像是赛伊德', tag: '首领活动', icon: '♜', text: '烟尘里传来熟悉的吼声。一只表掉在他的巡逻路线上，你的手开始痒了。', choices: [
+    { text: '趁间隙过去摸一下', hint: '60 秒；55% 获得金色旧腕表，45% 掉血 75 并流血', seconds: 60, effects: {}, chance: .55, win: { item: 'boss-watch' }, lose: { damage: 75, bleed: true }, result: '你掐着巡逻间隙冲了出去。', winText: '东西到手。赛伊德没回头，你也没敢回头。', loseText: '他回头了。你现在最需要的藏品是一支针。' },
+    { text: '绕路，首领我真打不过', hint: '90 秒；安全离开首领视线', seconds: 90, effects: {}, result: '懂得绕路，也是一种撤离技术。' },
   ] },
-  { id: 'duck', title: '全身上下嘴最硬', tag: '材料科学', icon: '🦆', text: '一只金属鸭子旁写着：「我才没有被丢在这里，我只是想静静。」', choices: [
-    { text: '好好好，带你走', hint: '获得「嘴硬的鸭子」', effects: { item: 'meme-duck' }, result: '它说不是想跟你走，只是刚好同路。' },
-    { text: '请教嘴硬的秘诀', hint: '体力 +2，下个容器寻宝加成 +1', effects: { energy: 2, luck: 1 }, result: '「没出货？那是我不想要。」学会了，精神好多了。' },
+  { id: 'mandel', title: '曼德尔砖的信号', tag: '全图都知道', icon: '🧱', text: '信号指向一个废弃货箱。附近安静得可疑，也可能所有人都在等第一个伸手的。', choices: [
+    { text: '抢先查验信号源', hint: '90 秒；60% 获得金色提货单，40% 遭伏击掉血 60', seconds: 90, effects: {}, chance: .6, win: { item: 'mandel-note' }, lose: { damage: 60 }, result: '箱子开了，信号突然消失。', winText: '真正的砖已被取走，好在提货单也值钱。', loseText: '不是信号消失，是你被架住了。' },
+    { text: '观察进出路线', hint: '45 秒；下一箱寻宝 +2', seconds: 45, effects: { luck: 2 }, result: '你记住了他们没搜过的角落。追热点不如捡漏。' },
   ] },
-  { id: 'stone', title: '拒绝精神内耗', tag: '路边哲学', icon: '🪨', text: '路边一块石头，安静得令人羡慕。旁边的牌子写着：遇事不决，先坐五分钟。', choices: [
-    { text: '和石头交流一下', hint: '体力 +4', effects: { energy: 4 }, result: '它一句话没说，但每一句都说到了心里。' },
-    { text: '聘为情绪顾问', hint: '获得「情绪稳定的石头」', effects: { item: 'meme-stone' }, result: '顾问不收工资，只占一个背包位置。' },
+  { id: 'medic', title: '蜂医留的急救点', tag: '先救一下', icon: '✚', text: '墙上画着一枚医疗标记，急救点还没被搜空。这里终于没有人骗你。', choices: [
+    { text: '包扎并恢复状态', hint: '45 秒；回血 50，停止流血', seconds: 45, effects: { heal: 50, stopBleed: true }, result: '伤口处理好了。别让救你的人白忙活。' },
+    { text: '带走备用注射器', hint: '20 秒；获得一支强效注射器，需要装包', seconds: 20, effects: { item: 'consumable-14020000003' }, result: '针带走了。记得放在口袋或者胸挂里。' },
   ] },
-  { id: 'delivery', title: '您的快递已签收', tag: '最后一公里', icon: '📦', text: '快递柜已经荒废，但屏幕还亮着：「不是本人也可以取一下。」', choices: [
-    { text: '输入万能取件码 6666', hint: '体力 −1；50% 获得 30,000，否则获得 3,000', effects: { energy: -1 }, chance: 0.5, win: { coins: 30000 }, lose: { coins: 3000 }, result: '门开了。确实万能，就是不知道是谁的。', winText: '是一箱硬通货。', loseText: '是一箱包装费比内容贵的填充纸。' },
-    { text: '回收门口的纸箱', hint: '本局背包容量 +2', effects: { capacity: 2 }, result: '尽头不是快递，是收废品。' },
+  { id: 'fake-body', title: '门口有个没搜过的盒', tag: '钓鱼执法', icon: '▣', text: '一个装备包躺在门正中央，姿势像是专门为你摆的。「这么巧？」你心里咯噔一下。', choices: [
+    { text: '试着摸走东西', hint: '40 秒；65% 获得 35,000 零钱，35% 掉血 35 并流血', seconds: 40, effects: {}, chance: .65, win: { coins: 35000 }, lose: { damage: 35, bleed: true }, result: '你趴下伸手。', winText: '包是真的，架枪的人已经走了。', loseText: '包是真的，架枪的人也是真的。' },
+    { text: '不当那个伸手的人', hint: '15 秒；安全放弃', seconds: 15, effects: {}, result: '没有上头，今天已经赢了一半。' },
   ] },
-  { id: 'v50', title: '疯狂星期箱', tag: '江湖暗号', icon: '🍗', text: '无线电传来：「我是这片区域的箱王。给我五千，恢复实力，带你吃香喝辣。」', choices: [
-    { text: '资助箱王', hint: '消耗本局零钱 5,000，下个容器寻宝加成 +3', requires: 5000, effects: { coins: -5000, luck: 3 }, result: '他没请你吃饭，但发来了一张颇为靠谱的藏宝便签。' },
-    { text: '先吃我自己的', hint: '体力 +2', effects: { energy: 2 }, result: '包里还有半块饼干。今天也是疯狂星期箱。' },
+  { id: 'ceasefire', title: '停火，只想做任务', tag: '大坝社交', icon: '🤝', text: '另一名干员把枪收了起来：「我只差最后一个任务，哥们别打。」你能选择信任，也能选择给彼此留条路。', choices: [
+    { text: '帮他架一下路口', hint: '75 秒；80% 获得停火铭牌与 12,000，20% 掉血 40', seconds: 75, effects: {}, chance: .8, win: { item: 'ceasefire-tag', coins: 12000 }, lose: { damage: 40 }, result: '你给他让开了身位。', winText: '任务完成。他把报酬放下，认真说了声谢谢。', loseText: '任务名原来叫「淘汰一名干员」。' },
+    { text: '各走一边，互不干扰', hint: '20 秒；安全通过', seconds: 20, effects: {}, result: '谁也没回头。不是每次相遇都要有个盒。' },
   ] },
-  { id: 'npc', title: '你醒啦', tag: '熟悉的开场', icon: '🛒', text: '一辆小推车从坡上滑过来。车上的玩偶认真看着你：「你终于醒啦。」', choices: [
-    { text: '把小推车征用', hint: '本局背包容量 +3，体力 −1', effects: { capacity: 3, energy: -1 }, result: '主线任务没接，载具倒是先解锁了。' },
-    { text: '跳过片头', hint: '体力 +2，下个容器寻宝加成 +1', effects: { energy: 2, luck: 1 }, result: '熟练玩家，已经在想第一个箱子在哪里了。' },
+  { id: 'rat-trade', title: '鼠鼠的地摊', tag: '以物会友', icon: '🐾', text: '楼梯底下摆着三块布，摊主压低声音：「一万二，你拿走，我收摊。」', choices: [
+    { text: '零钱成交', hint: '20 秒；花本局零钱 12,000，获得鼠鼠的谢礼', seconds: 20, requires: 12000, effects: { coins: -12000, item: 'rat-gift' }, result: '没有交易行手续费，只有一声心照不宣的蹲起。' },
+    { text: '钱没带够，下次一定', hint: '10 秒；下一箱寻宝 +1', seconds: 10, effects: { luck: 1 }, result: '他没生气，顺手指了个还没被搜过的方向。' },
   ] },
-  { id: 'loading', title: '正在加载，99%', tag: '永恒的一秒', icon: '💾', text: '电脑卡在最后百分之一。机箱里似乎有东西在闪，像是宇宙在给你发信号。', choices: [
-    { text: '再等最后一下', hint: '体力 −2；40% 获得 45,000，否则获得 5,000', effects: { energy: -2 }, chance: 0.4, win: { coins: 45000 }, lose: { coins: 5000 }, result: '进度条终于走完了。', winText: '一份可变现的收藏密钥已导出。', loseText: '更新内容：修复了进度条不动的问题。' },
-    { text: '重启解决一切', hint: '下个容器寻宝加成 +2', effects: { luck: 2 }, result: '玄学维修，偶尔比专业的还管用。' },
+  { id: 'locked-door', title: '钥匙带错了', tag: '门禁文学', icon: '⚿', text: '你掏出钥匙，发现门上根本不是这个锁。隔壁有条狭窄通道，能挤过去，代价是有点扎人。', choices: [
+    { text: '挤过去，搜房间', hint: '90 秒；掉血 20，获得 45,000 零钱', seconds: 90, effects: { damage: 20, coins: 45000 }, result: '绕过去拿到东西了。下次记得看门牌。' },
+    { text: '记下位置，找别的箱子', hint: '15 秒；下一箱寻宝 +1', seconds: 15, effects: { luck: 1 }, result: '不是每扇门都需要打开。鸟窝也可能出红。' },
   ] },
-  { id: 'luck', title: '欧气共享充电站', tag: '玄学服务', icon: '👑', text: '机器上写着：「不出金不要钱。」小字补充：「因为我们根本不收钱。」', choices: [
-    { text: '把欧气充满', hint: '体力 −2，下个容器寻宝加成 +4', effects: { energy: -2, luck: 4 }, result: '指示灯由非转欧。仪式感已经拉满。' },
-    { text: '只领体验卡', hint: '获得「欧皇体验卡」', effects: { item: 'meme-crown' }, result: '不用抽，直接给。这才是真正的体验。' },
+  { id: 'extract-radio', title: '接应频段的杂音', tag: '撤离情报', icon: '📻', text: '无线电里传来一段残缺的接应录音，夹着不知道谁的求救声。继续听需要时间。', choices: [
+    { text: '完整抄收录音', hint: '90 秒；20% 获得红色接应凭证，否则获得 15,000', seconds: 90, effects: {}, chance: .2, win: { item: 'extract-ticket' }, lose: { coins: 15000 }, result: '录音终于放完。', winText: '你在电池仓找到一张特殊接应凭证。', loseText: '没有特殊凭证，但设备本身也能卖点钱。' },
+    { text: '先看时间，别听了', hint: '10 秒；下一箱寻宝 +1', seconds: 10, effects: { luck: 1 }, result: '最值钱的情报是：你还来得及撤。' },
   ] },
-  { id: 'fridge', title: '来都来了', tag: '四字真言', icon: '🧊', text: '冰箱门上有三张便签：「来都来了」「大过节的」「还是孩子」。你决定只相信第一张。', choices: [
-    { text: '开都开了', hint: '体力 −1，获得 12,000', effects: { energy: -1, coins: 12000 }, result: '冷冻层里藏着一罐私房钱。物理意义上的冷资产。' },
-    { text: '吃都吃了', hint: '体力 +3', effects: { energy: 3 }, result: '你找到一瓶没过期的汽水。快乐就是这么具体。' },
-  ] },
-  { id: 'pigeon', title: '下次一定', tag: '咕咕认证', icon: '🕊️', text: '一只鸽子叼着兑奖券，约你明天来同一个地方。它的眼神特别真诚。', choices: [
-    { text: '先把券给我', hint: '获得「下次一定兑换券」', effects: { item: 'meme-ticket' }, result: '它飞走前又咕了一声。至少券是真的。' },
-    { text: '今天就要点实际的', hint: '获得 8,000', effects: { coins: 8000 }, result: '鸽子从窝里掏出零钱。原来它有预算。' },
-  ] },
-  { id: 'boss', title: '你管这叫普通箱子？', tag: '反向虚标', icon: '🧰', text: '铁箱外写着「全是垃圾」。旁边还有一张看起来过于刻意的免责声明。', choices: [
-    { text: '相信自己的直觉', hint: '体力 −2；35% 获得 60,000，否则获得 6,000', effects: { energy: -2 }, chance: 0.35, win: { coins: 60000 }, lose: { coins: 6000 }, result: '你把里面的零件就地卖给了回收机器人。', winText: '全是高端零件。它只是比较谦虚。', loseText: '普通零件。不过垃圾也有垃圾的价格。' },
-    { text: '把箱子本身拿走', hint: '本局背包容量 +2', effects: { capacity: 2 }, result: '至少这箱子结实，属于所见即所得。' },
-  ] },
-  { id: 'wifi', title: '密码是八个八', tag: '沟通的艺术', icon: '📡', text: '墙上写着 Wi-Fi 密码：八个八。你输入 88888888，连接失败。', choices: [
-    { text: '输入「八个八」', hint: '下个容器寻宝加成 +3', effects: { luck: 3 }, result: '连接成功。收藏室位置已经缓存到脑子里。' },
-    { text: '断网休息一会儿', hint: '体力 +4', effects: { energy: 4 }, result: '没有消息的几分钟，意外地安静。' },
-  ] },
-  { id: 'mirror', title: '问题不大', tag: '乐观主义', icon: '🪞', text: '镜子里的人看起来满载而归。你低头看看自己的包：它似乎用了美颜。', choices: [
-    { text: '相信这张饼', hint: '下个容器寻宝加成 +2', effects: { luck: 2 }, result: '包可以是空的，气势不能输。' },
-    { text: '整理一下仪容', hint: '体力 +2，获得 3,000', effects: { energy: 2, coins: 3000 }, result: '顺手从外套夹层找到零钱。你果然比想象中富。' },
+  { id: 'sniper-lane', title: '红点从墙上掠过', tag: '有人架枪', icon: '⊕', text: '一道瞄准光斑扫过保险箱。这里出货可能不错，可对面显然也是这么想的。', choices: [
+    { text: '低头硬搜，拼手速', hint: '10 秒；本地点搜索有 65% 概率掉血 30–55；下一箱寻宝 +3', seconds: 10, effects: { threat: true, luck: 3 }, result: '快不快不知道，危险是真的。每搜一箱都可能吃枪。' },
+    { text: '等烟雾散开，换个角度', hint: '110 秒；解除本地点高危状态', seconds: 110, effects: { clearThreat: true }, result: '你终于找到死角。多花一点时间，少交一点装备。' },
   ] },
 ];

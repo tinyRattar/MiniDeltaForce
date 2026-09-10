@@ -1,0 +1,12 @@
+import { readFileSync, writeFileSync } from 'node:fs';
+import { ITEMS } from '../src/data/items.js';
+import { CONTAINER_TYPES } from '../src/data/containers.js';
+const keep = ITEMS.filter(item => Number.isFinite(item.value) && item.value > 0);
+const ids = new Set(keep.map(item => item.id));
+let source = readFileSync('src/data/items.js', 'utf8');
+const from = source.indexOf('export const ITEMS = '), to = source.indexOf('export const ITEM_ICON_URLS');
+source = source.slice(0, from) + 'export const ITEMS = ' + JSON.stringify(keep, null, 2) + ';\n\n' + source.slice(to);
+writeFileSync('src/data/items.js', source);
+for (const type of Object.values(CONTAINER_TYPES)) type.pools = type.pools.filter(entry => ids.has(entry.itemId || entry[0]));
+writeFileSync('src/data/containers.js', '// Positive-value loot only. Raw scraped snapshots remain in data/.\nexport const CONTAINER_TYPES = ' + JSON.stringify(CONTAINER_TYPES, null, 2) + ';\n');
+console.log(`Removed ${ITEMS.length - keep.length} zero/invalid-value entries from the catalog and container pools.`);

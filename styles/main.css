@@ -2061,3 +2061,120 @@ dialog.compact-modal {
     opacity:.3
   }
 }
+/* v3: always-visible tactical state and compartment inventory */
+.tactical-hud { position: sticky; top: 0; z-index: 12; max-width: 1080px; margin: 20px auto 0; padding: 14px 22px 10px; border: 1px solid #66816f; border-radius: 12px; background: #1e2e25f5; backdrop-filter: blur(16px); box-shadow: 0 8px 24px #0005; }
+.hud-metrics { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+.hud-metrics > div, .hud-bag { min-width: 0; border-right: 1px solid #4c6253; padding: 0 16px 0 0; }
+.hud-metrics > div:last-child { border: 0; }
+.hud-metrics small { display: block; font-size: 10px; color: #a5b6aa; }
+.hud-metrics strong { display: block; color: #d7f7e2; font-size: 25px; line-height: 1.3; font-variant-numeric: tabular-nums; }
+.hud-bag { border-top: 0; border-left: 0; border-bottom: 0; border-radius: 0; background: none; text-align: left; }
+.hud-health { display: flex; align-items: center; gap: 12px; border-top: 1px solid #405549; padding-top: 7px; margin-top: 10px; font-size: 12px; }
+.hud-health > span { white-space: nowrap; }
+.hud-health progress { flex: 1; height: 6px; }
+.hud-health button { min-height: 32px; padding: 4px 13px; }
+.hud-health b { font-size: 10px; }
+.danger-text, .danger-text strong { color: #ff9f8e !important; }
+.danger-notice { border: 1px solid #cb725e; border-left: 4px solid #f39478; background: #4f2924; color: #ffd5be; border-radius: 9px; padding: 14px 18px; margin-bottom: 16px; font-size: 13px; }
+.continue-search { background: #ffd55f; color: #24210f; border: 2px solid #ffe799; box-shadow: 0 3px 18px #f4bc3930; font-weight: 800; min-height: 48px; padding: 12px 18px; }
+.continue-search:hover:not(:disabled) { background: #ffe794; border-color: #fff0b6; }
+.loadout-strip { border: 1px solid var(--line); border-radius: 10px; padding: 20px; background: #1d2a22; margin: 20px 0; }
+.loadout-strip > div { display: flex; gap: 12px 24px; flex-wrap: wrap; }
+.loadout-strip span { color: var(--muted); font-size: 12px; }
+.loadout-strip b { color: var(--mint); }
+.loadout-strip p { font-size: 11px; margin: 10px 0; }
+.loadout-strip button { margin-top: 10px; }
+.size-label { font-size: 10px; color: #d2ddcf; }
+.loot-card > .place-link { border: 0; background: transparent; text-decoration: underline; font-size: 10px; margin-top: 4px; min-height: 36px; color: #e1eedf; }
+.loot-card > button { min-height: 44px; }
+.extract-zone { padding: 25px; }
+.extract-zone > strong { color: var(--mint); font-size: 20px; }
+.extract-zone > p { font-size: 12px; margin: 10px 0 20px; }
+.map-details { border: 1px solid var(--line); border-radius: 10px; padding: 14px; margin: 10px 0; }
+.map-details summary { cursor: pointer; color: var(--mint); font-size: 13px; min-height: 32px; }
+.map-details svg { display: block; width: 100%; border-radius: 8px; background: #15211b; margin-top: 10px; }
+.map-details p { font-size: 10px; margin-top: 10px; }
+.failed-result .result-seal { border-color: #f29288; color: #f29288; }
+.failed-result h1 { color: #f6bdab; }
+dialog { padding-top: 48px; }
+.tactical-hud.in-modal { position: sticky; top: 0; margin: 12px 0 24px; padding: 10px 14px; border-radius: 9px; z-index: 4; }
+.in-modal .hud-metrics strong { font-size: 20px; }
+.in-modal .hud-metrics small { font-size: 9px; }
+.inventory-selection { background: #263c2e; border: 1px solid #6c987b; border-radius: 9px; padding: 13px; margin: 10px 0 18px; }
+.inventory-selection > strong { display: block; font-size: 13px; margin-bottom: 10px; }
+.inventory-selection > div { display: flex; flex-wrap: wrap; gap: 6px; }
+.inventory-selection > span { font-size: 11px; color: #bfd2c1; }
+.inventory-rule { font-size: 11px; margin: 12px 0; }
+.space-list { display: grid; gap: 16px; }
+.space-list.compartments { display: flex; flex-wrap: wrap; align-items: flex-start; }
+.space-panel { border: 1px solid #455b4b; background: #132018; border-radius: 9px; padding: 12px; max-width: 100%; }
+.space-heading { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
+.space-heading strong { font-size: 12px; }
+.space-heading small { color: var(--muted); font-size: 10px; }
+.space-heading button { margin-left: auto; padding: 3px 9px; min-height: 30px; }
+.compartments .space-heading { display: grid; gap: 2px; }
+.compartments .space-heading button { margin: 3px 0 0; }
+.grid-scroll { overflow-x: auto; padding: 3px; }
+.inventory-grid { --cell: 44px; display: grid; width: calc(var(--cols) * var(--cell) + (var(--cols) - 1) * 2px); height: calc(var(--rows) * var(--cell) + (var(--rows) - 1) * 2px); grid-template-columns: repeat(var(--cols), var(--cell)); grid-template-rows: repeat(var(--rows), var(--cell)); gap: 2px; }
+.inventory-cell { min-width: 0; min-height: 0; border: 1px solid #445e49; background: #203125; padding: 0; border-radius: 3px; }
+.grid-item { z-index: 1; min-height: 0; min-width: 0; border: 1px solid var(--quality); border-radius: 3px; background: color-mix(in srgb, var(--quality) 18%, #16231a); padding: 3px; overflow: hidden; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.grid-item .item-art { width: 80%; min-height: 0; height: calc(100% - 18px); margin: 0; }
+.grid-item .item-symbol { width: auto; height: auto; min-height: 0; margin: 0; font-size: 21px; line-height: 1; }
+.grid-item strong { width: 100%; font-size: 8px; line-height: 1.4; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; }
+.grid-item small { position: absolute; top: 1px; right: 2px; padding: 0 2px; font-size: 8px; background: #102418bb; color: #dce8da; }
+.grid-item.selected { outline: 3px solid #fff3a0; outline-offset: -3px; filter: brightness(1.3); }
+.grid-item:hover:not(:disabled), .inventory-cell:hover:not(:disabled) { transform: none; }
+.gear-shop { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.gear-card { border: 1px solid var(--line); border-top: 2px solid var(--quality); border-radius: 10px; padding: 18px; background: #1d2a22; }
+.gear-card h3 { font-size: 17px; margin: 6px 0; }
+.gear-card p { font-size: 12px; margin: 7px 0; overflow-wrap: anywhere; }
+.gear-card small { font-size: 10px; color: var(--muted); }
+.gear-card > strong { display: block; font-size: 22px; margin: 15px 0; color: var(--quality); }
+.gear-actions { display: flex; gap: 8px; }
+.gear-actions > button { flex: 1; }
+.shop-meds { display: grid; gap: 12px; }
+.medicine-shop { border: 1px solid var(--line); border-radius: 10px; padding: 18px; display: grid; grid-template-columns: 1fr auto; gap: 15px; }
+.medicine-shop p { font-size: 11px; margin: 7px 0; }
+.medicine-shop small { font-size: 10px; color: var(--muted); }
+.quantity { grid-column: 1 / -1; display: flex; align-items: center; gap: 15px; font-size: 12px; }
+.quantity button { min-width: 44px; }
+@media(max-width:760px) {
+  .tactical-hud { margin: 12px 10px 0; padding: 10px 12px 7px; border-radius: 9px; top: 0; }
+  .hud-metrics { gap: 12px; }
+  .hud-metrics > div, .hud-bag { padding-right: 8px; }
+  .hud-metrics strong { font-size: 21px; }
+  .hud-metrics small { font-size: 9px; }
+  .hud-health { gap: 8px; font-size: 10px; margin-top: 8px; }
+  .hud-health b { font-size: 8px; }
+  .hud-health button { min-height: 32px; padding: 3px 10px; }
+  .search-actions { flex-wrap: wrap; }
+  .search-actions .continue-search { width: 100%; order: 2; font-size: 15px; min-height: 52px; margin-top: 8px; }
+  .search-actions > .primary { margin-left: auto; }
+  .loadout-strip { padding: 16px; }
+  .danger-notice { font-size: 11px; padding: 12px; }
+  .tactical-hud.in-modal { padding: 9px 10px; margin-top: 20px; }
+  .in-modal .hud-metrics strong { font-size: 18px; }
+  .in-modal .hud-metrics small { font-size: 8px; }
+  .in-modal .hud-metrics { gap: 8px; }
+  .inventory-grid { --cell: 44px; }
+  .space-panel { padding: 9px; }
+  .space-list { gap: 9px; }
+  .space-list.compartments { gap: 7px; }
+  .compartments .space-heading strong { font-size: 10px; }
+  .compartments .space-heading small { font-size: 8px; }
+  .inventory-selection button { font-size: 10px; }
+  .inventory-rule { font-size: 10px; }
+  .gear-shop { grid-template-columns: 1fr; }
+  .gear-card { padding: 16px; }
+  .gear-card h3 { font-size: 17px; }
+  .gear-card > strong { margin: 10px 0; }
+  .medicine-shop { padding: 14px; gap: 10px; }
+  .medicine-shop strong { font-size: 13px; }
+  .medicine-shop > button { padding: 9px; font-size: 10px; }
+  dialog { padding-top: 44px; }
+}
+/* Keep mobile panels closable even after scrolling a large backpack or shop. */
+dialog { padding-top: 12px; }
+.dialog-toolbar { position: sticky; top: 0; z-index: 20; display: flex; justify-content: flex-end; height: 44px; background: #19221e; }
+.dialog-toolbar .modal-close { position: static; width: 44px; height: 44px; min-height: 44px; }
+.tactical-hud.in-modal { top: 44px; }

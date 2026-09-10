@@ -1,7 +1,4 @@
-// pools are container-first loot tables. Each entry is
-// { itemId, weight }, where weight is relative inside the same container.
-// Category-based generation is handled by scripts/rebuild-loot-data.mjs, but
-// the generated table stays explicit so special items can be tuned per container.
+// Positive-value loot only. Raw scraped snapshots remain in data/.
 export const CONTAINER_TYPES = {
   "bird-nest": {
     "name": "鸟窝",
@@ -169,14 +166,6 @@ export const CONTAINER_TYPES = {
         "weight": 1260
       },
       {
-        "itemId": "collectible-15200000134",
-        "weight": 1260
-      },
-      {
-        "itemId": "collectible-15200000138",
-        "weight": 1260
-      },
-      {
         "itemId": "lighter",
         "weight": 1260
       },
@@ -238,10 +227,6 @@ export const CONTAINER_TYPES = {
       },
       {
         "itemId": "collectible-15080050193",
-        "weight": 990
-      },
-      {
-        "itemId": "collectible-15200000073",
         "weight": 990
       },
       {
@@ -361,14 +346,6 @@ export const CONTAINER_TYPES = {
         "weight": 540
       },
       {
-        "itemId": "collectible-15200000139",
-        "weight": 540
-      },
-      {
-        "itemId": "collectible-15200000163",
-        "weight": 540
-      },
-      {
         "itemId": "collectible-15040010014",
         "weight": 330
       },
@@ -393,10 +370,6 @@ export const CONTAINER_TYPES = {
         "weight": 330
       },
       {
-        "itemId": "collectible-15080050024",
-        "weight": 330
-      },
-      {
         "itemId": "collectible-15080050124",
         "weight": 330
       },
@@ -406,10 +379,6 @@ export const CONTAINER_TYPES = {
       },
       {
         "itemId": "collectible-15080050182",
-        "weight": 330
-      },
-      {
-        "itemId": "collectible-15200000126",
         "weight": 330
       },
       {
@@ -445,14 +414,6 @@ export const CONTAINER_TYPES = {
         "weight": 270
       },
       {
-        "itemId": "fabric",
-        "weight": 270
-      },
-      {
-        "itemId": "toolbox-item",
-        "weight": 270
-      },
-      {
         "itemId": "wireless-drill",
         "weight": 270
       },
@@ -466,10 +427,6 @@ export const CONTAINER_TYPES = {
       },
       {
         "itemId": "collectible-15080050068",
-        "weight": 180
-      },
-      {
-        "itemId": "collectible-15080050070",
         "weight": 180
       },
       {
@@ -493,76 +450,12 @@ export const CONTAINER_TYPES = {
         "weight": 180
       },
       {
-        "itemId": "collectible-15200000135",
-        "weight": 180
-      },
-      {
-        "itemId": "collectible-15200000140",
-        "weight": 180
-      },
-      {
-        "itemId": "collectible-15200000164",
-        "weight": 180
-      },
-      {
-        "itemId": "collectible-15200000183",
-        "weight": 180
-      },
-      {
         "itemId": "collectible-15080050043",
         "weight": 168.779
       },
       {
         "itemId": "collectible-15080050134",
         "weight": 142.917
-      },
-      {
-        "itemId": "collectible-15080050025",
-        "weight": 99
-      },
-      {
-        "itemId": "collectible-15200000048",
-        "weight": 99
-      },
-      {
-        "itemId": "collectible-15200000068",
-        "weight": 99
-      },
-      {
-        "itemId": "collectible-15200000070",
-        "weight": 99
-      },
-      {
-        "itemId": "collectible-15200000075",
-        "weight": 99
-      },
-      {
-        "itemId": "collectible-15200000114",
-        "weight": 99
-      },
-      {
-        "itemId": "collectible-15200000130",
-        "weight": 99
-      },
-      {
-        "itemId": "collectible-15200000151",
-        "weight": 99
-      },
-      {
-        "itemId": "collectible-15200000154",
-        "weight": 99
-      },
-      {
-        "itemId": "collectible-15200000155",
-        "weight": 99
-      },
-      {
-        "itemId": "collectible-15200000157",
-        "weight": 99
-      },
-      {
-        "itemId": "collectible-15200000167",
-        "weight": 99
       },
       {
         "itemId": "collectible-15080050143",
@@ -585,19 +478,7 @@ export const CONTAINER_TYPES = {
         "weight": 90
       },
       {
-        "itemId": "collectible-15020050004",
-        "weight": 90
-      },
-      {
-        "itemId": "collectible-15020050006",
-        "weight": 90
-      },
-      {
         "itemId": "collectible-15080050119",
-        "weight": 90
-      },
-      {
-        "itemId": "collectible-15080050130",
         "weight": 90
       },
       {
@@ -653,22 +534,6 @@ export const CONTAINER_TYPES = {
         "weight": 61.278
       },
       {
-        "itemId": "collectible-15200000141",
-        "weight": 54
-      },
-      {
-        "itemId": "collectible-15200000142",
-        "weight": 54
-      },
-      {
-        "itemId": "collectible-15200000165",
-        "weight": 54
-      },
-      {
-        "itemId": "collectible-15200000184",
-        "weight": 54
-      },
-      {
         "itemId": "collectible-15080050163",
         "weight": 52.303
       },
@@ -709,90 +574,6 @@ export const CONTAINER_TYPES = {
         "weight": 34.65
       },
       {
-        "itemId": "collectible-15080050197",
-        "weight": 24.75
-      },
-      {
-        "itemId": "collectible-15200000034",
-        "weight": 24.75
-      },
-      {
-        "itemId": "collectible-15200000049",
-        "weight": 24.75
-      },
-      {
-        "itemId": "collectible-15200000058",
-        "weight": 24.75
-      },
-      {
-        "itemId": "collectible-15200000059",
-        "weight": 24.75
-      },
-      {
-        "itemId": "collectible-15200000069",
-        "weight": 24.75
-      },
-      {
-        "itemId": "collectible-15200000071",
-        "weight": 24.75
-      },
-      {
-        "itemId": "collectible-15200000072",
-        "weight": 24.75
-      },
-      {
-        "itemId": "collectible-15200000115",
-        "weight": 24.75
-      },
-      {
-        "itemId": "collectible-15200000117",
-        "weight": 24.75
-      },
-      {
-        "itemId": "collectible-15200000123",
-        "weight": 24.75
-      },
-      {
-        "itemId": "collectible-15200000124",
-        "weight": 24.75
-      },
-      {
-        "itemId": "collectible-15200000125",
-        "weight": 24.75
-      },
-      {
-        "itemId": "collectible-15200000127",
-        "weight": 24.75
-      },
-      {
-        "itemId": "collectible-15200000131",
-        "weight": 24.75
-      },
-      {
-        "itemId": "collectible-15200000137",
-        "weight": 24.75
-      },
-      {
-        "itemId": "collectible-15200000152",
-        "weight": 24.75
-      },
-      {
-        "itemId": "collectible-15200000153",
-        "weight": 24.75
-      },
-      {
-        "itemId": "collectible-15200000156",
-        "weight": 24.75
-      },
-      {
-        "itemId": "collectible-15200000158",
-        "weight": 24.75
-      },
-      {
-        "itemId": "collectible-15200000168",
-        "weight": 24.75
-      },
-      {
         "itemId": "collectible-15080050174",
         "weight": 22.914
       },
@@ -803,26 +584,6 @@ export const CONTAINER_TYPES = {
       {
         "itemId": "collectible-15080050179",
         "weight": 18.376
-      },
-      {
-        "itemId": "collectible-15080050069",
-        "weight": 13.5
-      },
-      {
-        "itemId": "collectible-15080050173",
-        "weight": 13.5
-      },
-      {
-        "itemId": "collectible-15200000143",
-        "weight": 13.5
-      },
-      {
-        "itemId": "collectible-15200000166",
-        "weight": 13.5
-      },
-      {
-        "itemId": "collectible-15200000185",
-        "weight": 13.5
       },
       {
         "itemId": "collectible-15030050019",
@@ -911,14 +672,6 @@ export const CONTAINER_TYPES = {
       {
         "itemId": "watch",
         "weight": 8.662
-      },
-      {
-        "itemId": "collectible-15080050144",
-        "weight": 6.75
-      },
-      {
-        "itemId": "collectible-15080050220",
-        "weight": 6.75
       },
       {
         "itemId": "collectible-15060080015",
@@ -1049,10 +802,6 @@ export const CONTAINER_TYPES = {
       },
       {
         "itemId": "collectible-15080050193",
-        "weight": 990
-      },
-      {
-        "itemId": "collectible-15200000073",
         "weight": 990
       },
       {
@@ -1276,14 +1025,6 @@ export const CONTAINER_TYPES = {
         "weight": 420
       },
       {
-        "itemId": "collectible-15200000134",
-        "weight": 420
-      },
-      {
-        "itemId": "collectible-15200000138",
-        "weight": 420
-      },
-      {
         "itemId": "lighter",
         "weight": 420
       },
@@ -1316,10 +1057,6 @@ export const CONTAINER_TYPES = {
         "weight": 330
       },
       {
-        "itemId": "collectible-15080050024",
-        "weight": 330
-      },
-      {
         "itemId": "collectible-15080050124",
         "weight": 330
       },
@@ -1329,10 +1066,6 @@ export const CONTAINER_TYPES = {
       },
       {
         "itemId": "collectible-15080050182",
-        "weight": 330
-      },
-      {
-        "itemId": "collectible-15200000126",
         "weight": 330
       },
       {
@@ -1400,14 +1133,6 @@ export const CONTAINER_TYPES = {
         "weight": 180
       },
       {
-        "itemId": "collectible-15200000139",
-        "weight": 180
-      },
-      {
-        "itemId": "collectible-15200000163",
-        "weight": 180
-      },
-      {
         "itemId": "collectible-15080050043",
         "weight": 168.779
       },
@@ -1466,54 +1191,6 @@ export const CONTAINER_TYPES = {
       {
         "itemId": "collectible-15080050036",
         "weight": 113.841
-      },
-      {
-        "itemId": "collectible-15080050025",
-        "weight": 99
-      },
-      {
-        "itemId": "collectible-15200000048",
-        "weight": 99
-      },
-      {
-        "itemId": "collectible-15200000068",
-        "weight": 99
-      },
-      {
-        "itemId": "collectible-15200000070",
-        "weight": 99
-      },
-      {
-        "itemId": "collectible-15200000075",
-        "weight": 99
-      },
-      {
-        "itemId": "collectible-15200000114",
-        "weight": 99
-      },
-      {
-        "itemId": "collectible-15200000130",
-        "weight": 99
-      },
-      {
-        "itemId": "collectible-15200000151",
-        "weight": 99
-      },
-      {
-        "itemId": "collectible-15200000154",
-        "weight": 99
-      },
-      {
-        "itemId": "collectible-15200000155",
-        "weight": 99
-      },
-      {
-        "itemId": "collectible-15200000157",
-        "weight": 99
-      },
-      {
-        "itemId": "collectible-15200000167",
-        "weight": 99
       },
       {
         "itemId": "collectible-15080050143",
@@ -1592,10 +1269,6 @@ export const CONTAINER_TYPES = {
         "weight": 60
       },
       {
-        "itemId": "collectible-15080050070",
-        "weight": 60
-      },
-      {
         "itemId": "collectible-15080050136",
         "weight": 60
       },
@@ -1612,22 +1285,6 @@ export const CONTAINER_TYPES = {
         "weight": 60
       },
       {
-        "itemId": "collectible-15080050206",
-        "weight": 60
-      },
-      {
-        "itemId": "collectible-15080050207",
-        "weight": 60
-      },
-      {
-        "itemId": "collectible-15080050208",
-        "weight": 60
-      },
-      {
-        "itemId": "collectible-15080050209",
-        "weight": 60
-      },
-      {
         "itemId": "collectible-15080050215",
         "weight": 60
       },
@@ -1641,38 +1298,6 @@ export const CONTAINER_TYPES = {
       },
       {
         "itemId": "collectible-15080050219",
-        "weight": 60
-      },
-      {
-        "itemId": "collectible-15200000074",
-        "weight": 60
-      },
-      {
-        "itemId": "collectible-15200000135",
-        "weight": 60
-      },
-      {
-        "itemId": "collectible-15200000140",
-        "weight": 60
-      },
-      {
-        "itemId": "collectible-15200000148",
-        "weight": 60
-      },
-      {
-        "itemId": "collectible-15200000149",
-        "weight": 60
-      },
-      {
-        "itemId": "collectible-15200000150",
-        "weight": 60
-      },
-      {
-        "itemId": "collectible-15200000164",
-        "weight": 60
-      },
-      {
-        "itemId": "collectible-15200000183",
         "weight": 60
       },
       {
@@ -1732,90 +1357,6 @@ export const CONTAINER_TYPES = {
         "weight": 26.311
       },
       {
-        "itemId": "collectible-15080050197",
-        "weight": 24.75
-      },
-      {
-        "itemId": "collectible-15200000034",
-        "weight": 24.75
-      },
-      {
-        "itemId": "collectible-15200000049",
-        "weight": 24.75
-      },
-      {
-        "itemId": "collectible-15200000058",
-        "weight": 24.75
-      },
-      {
-        "itemId": "collectible-15200000059",
-        "weight": 24.75
-      },
-      {
-        "itemId": "collectible-15200000069",
-        "weight": 24.75
-      },
-      {
-        "itemId": "collectible-15200000071",
-        "weight": 24.75
-      },
-      {
-        "itemId": "collectible-15200000072",
-        "weight": 24.75
-      },
-      {
-        "itemId": "collectible-15200000115",
-        "weight": 24.75
-      },
-      {
-        "itemId": "collectible-15200000117",
-        "weight": 24.75
-      },
-      {
-        "itemId": "collectible-15200000123",
-        "weight": 24.75
-      },
-      {
-        "itemId": "collectible-15200000124",
-        "weight": 24.75
-      },
-      {
-        "itemId": "collectible-15200000125",
-        "weight": 24.75
-      },
-      {
-        "itemId": "collectible-15200000127",
-        "weight": 24.75
-      },
-      {
-        "itemId": "collectible-15200000131",
-        "weight": 24.75
-      },
-      {
-        "itemId": "collectible-15200000137",
-        "weight": 24.75
-      },
-      {
-        "itemId": "collectible-15200000152",
-        "weight": 24.75
-      },
-      {
-        "itemId": "collectible-15200000153",
-        "weight": 24.75
-      },
-      {
-        "itemId": "collectible-15200000156",
-        "weight": 24.75
-      },
-      {
-        "itemId": "collectible-15200000158",
-        "weight": 24.75
-      },
-      {
-        "itemId": "collectible-15200000168",
-        "weight": 24.75
-      },
-      {
         "itemId": "collectible-15080050034",
         "weight": 19.293
       },
@@ -1824,59 +1365,11 @@ export const CONTAINER_TYPES = {
         "weight": 19.035
       },
       {
-        "itemId": "collectible-15080050063",
-        "weight": 18
-      },
-      {
         "itemId": "collectible-15080050148",
         "weight": 18
       },
       {
         "itemId": "collectible-15080050149",
-        "weight": 18
-      },
-      {
-        "itemId": "collectible-15080050198",
-        "weight": 18
-      },
-      {
-        "itemId": "collectible-15090010040",
-        "weight": 18
-      },
-      {
-        "itemId": "collectible-15200000129",
-        "weight": 18
-      },
-      {
-        "itemId": "collectible-15200000141",
-        "weight": 18
-      },
-      {
-        "itemId": "collectible-15200000142",
-        "weight": 18
-      },
-      {
-        "itemId": "collectible-15200000145",
-        "weight": 18
-      },
-      {
-        "itemId": "collectible-15200000146",
-        "weight": 18
-      },
-      {
-        "itemId": "collectible-15200000147",
-        "weight": 18
-      },
-      {
-        "itemId": "collectible-15200000162",
-        "weight": 18
-      },
-      {
-        "itemId": "collectible-15200000165",
-        "weight": 18
-      },
-      {
-        "itemId": "collectible-15200000184",
         "weight": 18
       },
       {
@@ -1934,18 +1427,6 @@ export const CONTAINER_TYPES = {
       {
         "itemId": "collectible-15080050013",
         "weight": 12.213
-      },
-      {
-        "itemId": "collectible-15030050013",
-        "weight": 11.25
-      },
-      {
-        "itemId": "collectible-15080050204",
-        "weight": 11.25
-      },
-      {
-        "itemId": "collectible-15080050205",
-        "weight": 11.25
       },
       {
         "itemId": "collectible-15080050191",
@@ -2046,30 +1527,6 @@ export const CONTAINER_TYPES = {
       {
         "itemId": "collectible-15080050071",
         "weight": 6.3
-      },
-      {
-        "itemId": "collectible-15080050069",
-        "weight": 4.5
-      },
-      {
-        "itemId": "collectible-15080050173",
-        "weight": 4.5
-      },
-      {
-        "itemId": "collectible-15200000143",
-        "weight": 4.5
-      },
-      {
-        "itemId": "collectible-15200000144",
-        "weight": 4.5
-      },
-      {
-        "itemId": "collectible-15200000166",
-        "weight": 4.5
-      },
-      {
-        "itemId": "collectible-15200000185",
-        "weight": 4.5
       },
       {
         "itemId": "camera",
@@ -2311,10 +1768,6 @@ export const CONTAINER_TYPES = {
         "weight": 756
       },
       {
-        "itemId": "collectible-15200000073",
-        "weight": 756
-      },
-      {
         "itemId": "collectible-15020050008",
         "weight": 612
       },
@@ -2443,10 +1896,6 @@ export const CONTAINER_TYPES = {
         "weight": 252
       },
       {
-        "itemId": "collectible-15080050024",
-        "weight": 252
-      },
-      {
         "itemId": "collectible-15080050096",
         "weight": 252
       },
@@ -2464,10 +1913,6 @@ export const CONTAINER_TYPES = {
       },
       {
         "itemId": "collectible-15080050213",
-        "weight": 252
-      },
-      {
-        "itemId": "collectible-15200000126",
         "weight": 252
       },
       {
@@ -2575,88 +2020,8 @@ export const CONTAINER_TYPES = {
         "weight": 84
       },
       {
-        "itemId": "collectible-15080050206",
-        "weight": 84
-      },
-      {
-        "itemId": "collectible-15080050207",
-        "weight": 84
-      },
-      {
-        "itemId": "collectible-15080050208",
-        "weight": 84
-      },
-      {
-        "itemId": "collectible-15080050209",
-        "weight": 84
-      },
-      {
         "itemId": "collectible-15080050216",
         "weight": 84
-      },
-      {
-        "itemId": "collectible-15200000074",
-        "weight": 84
-      },
-      {
-        "itemId": "collectible-15200000148",
-        "weight": 84
-      },
-      {
-        "itemId": "collectible-15200000149",
-        "weight": 84
-      },
-      {
-        "itemId": "collectible-15200000150",
-        "weight": 84
-      },
-      {
-        "itemId": "collectible-15080050025",
-        "weight": 75.6
-      },
-      {
-        "itemId": "collectible-15200000048",
-        "weight": 75.6
-      },
-      {
-        "itemId": "collectible-15200000068",
-        "weight": 75.6
-      },
-      {
-        "itemId": "collectible-15200000070",
-        "weight": 75.6
-      },
-      {
-        "itemId": "collectible-15200000075",
-        "weight": 75.6
-      },
-      {
-        "itemId": "collectible-15200000114",
-        "weight": 75.6
-      },
-      {
-        "itemId": "collectible-15200000130",
-        "weight": 75.6
-      },
-      {
-        "itemId": "collectible-15200000151",
-        "weight": 75.6
-      },
-      {
-        "itemId": "collectible-15200000154",
-        "weight": 75.6
-      },
-      {
-        "itemId": "collectible-15200000155",
-        "weight": 75.6
-      },
-      {
-        "itemId": "collectible-15200000157",
-        "weight": 75.6
-      },
-      {
-        "itemId": "collectible-15200000167",
-        "weight": 75.6
       },
       {
         "itemId": "collectible-15080050143",
@@ -2696,10 +2061,6 @@ export const CONTAINER_TYPES = {
       },
       {
         "itemId": "collectible-15080050214",
-        "weight": 60
-      },
-      {
-        "itemId": "collectible-15200000061",
         "weight": 60
       },
       {
@@ -2803,43 +2164,11 @@ export const CONTAINER_TYPES = {
         "weight": 25.887
       },
       {
-        "itemId": "collectible-15080050063",
-        "weight": 25.2
-      },
-      {
         "itemId": "collectible-15080050148",
         "weight": 25.2
       },
       {
         "itemId": "collectible-15080050149",
-        "weight": 25.2
-      },
-      {
-        "itemId": "collectible-15080050198",
-        "weight": 25.2
-      },
-      {
-        "itemId": "collectible-15090010040",
-        "weight": 25.2
-      },
-      {
-        "itemId": "collectible-15200000129",
-        "weight": 25.2
-      },
-      {
-        "itemId": "collectible-15200000145",
-        "weight": 25.2
-      },
-      {
-        "itemId": "collectible-15200000146",
-        "weight": 25.2
-      },
-      {
-        "itemId": "collectible-15200000147",
-        "weight": 25.2
-      },
-      {
-        "itemId": "collectible-15200000162",
         "weight": 25.2
       },
       {
@@ -2867,90 +2196,6 @@ export const CONTAINER_TYPES = {
         "weight": 19.015
       },
       {
-        "itemId": "collectible-15080050197",
-        "weight": 18.9
-      },
-      {
-        "itemId": "collectible-15200000034",
-        "weight": 18.9
-      },
-      {
-        "itemId": "collectible-15200000049",
-        "weight": 18.9
-      },
-      {
-        "itemId": "collectible-15200000058",
-        "weight": 18.9
-      },
-      {
-        "itemId": "collectible-15200000059",
-        "weight": 18.9
-      },
-      {
-        "itemId": "collectible-15200000069",
-        "weight": 18.9
-      },
-      {
-        "itemId": "collectible-15200000071",
-        "weight": 18.9
-      },
-      {
-        "itemId": "collectible-15200000072",
-        "weight": 18.9
-      },
-      {
-        "itemId": "collectible-15200000115",
-        "weight": 18.9
-      },
-      {
-        "itemId": "collectible-15200000117",
-        "weight": 18.9
-      },
-      {
-        "itemId": "collectible-15200000123",
-        "weight": 18.9
-      },
-      {
-        "itemId": "collectible-15200000124",
-        "weight": 18.9
-      },
-      {
-        "itemId": "collectible-15200000125",
-        "weight": 18.9
-      },
-      {
-        "itemId": "collectible-15200000127",
-        "weight": 18.9
-      },
-      {
-        "itemId": "collectible-15200000131",
-        "weight": 18.9
-      },
-      {
-        "itemId": "collectible-15200000137",
-        "weight": 18.9
-      },
-      {
-        "itemId": "collectible-15200000152",
-        "weight": 18.9
-      },
-      {
-        "itemId": "collectible-15200000153",
-        "weight": 18.9
-      },
-      {
-        "itemId": "collectible-15200000156",
-        "weight": 18.9
-      },
-      {
-        "itemId": "collectible-15200000158",
-        "weight": 18.9
-      },
-      {
-        "itemId": "collectible-15200000168",
-        "weight": 18.9
-      },
-      {
         "itemId": "collectible-15080050150",
         "weight": 17.945
       },
@@ -2965,18 +2210,6 @@ export const CONTAINER_TYPES = {
       {
         "itemId": "collectible-15060040003",
         "weight": 16.13
-      },
-      {
-        "itemId": "collectible-15030050013",
-        "weight": 15.3
-      },
-      {
-        "itemId": "collectible-15080050204",
-        "weight": 15.3
-      },
-      {
-        "itemId": "collectible-15080050205",
-        "weight": 15.3
       },
       {
         "itemId": "collectible-15080050191",
@@ -3096,10 +2329,6 @@ export const CONTAINER_TYPES = {
       },
       {
         "itemId": "collectible-15080050192",
-        "weight": 6.3
-      },
-      {
-        "itemId": "collectible-15200000144",
         "weight": 6.3
       },
       {
@@ -3450,39 +2679,7 @@ export const CONTAINER_TYPES = {
         "weight": 132
       },
       {
-        "itemId": "collectible-15080050206",
-        "weight": 132
-      },
-      {
-        "itemId": "collectible-15080050207",
-        "weight": 132
-      },
-      {
-        "itemId": "collectible-15080050208",
-        "weight": 132
-      },
-      {
-        "itemId": "collectible-15080050209",
-        "weight": 132
-      },
-      {
         "itemId": "collectible-15080050216",
-        "weight": 132
-      },
-      {
-        "itemId": "collectible-15200000074",
-        "weight": 132
-      },
-      {
-        "itemId": "collectible-15200000148",
-        "weight": 132
-      },
-      {
-        "itemId": "collectible-15200000149",
-        "weight": 132
-      },
-      {
-        "itemId": "collectible-15200000150",
         "weight": 132
       },
       {
@@ -3542,10 +2739,6 @@ export const CONTAINER_TYPES = {
         "weight": 49.14
       },
       {
-        "itemId": "collectible-15080050063",
-        "weight": 39.6
-      },
-      {
         "itemId": "collectible-15080050148",
         "weight": 39.6
       },
@@ -3554,48 +2747,8 @@ export const CONTAINER_TYPES = {
         "weight": 39.6
       },
       {
-        "itemId": "collectible-15080050198",
-        "weight": 39.6
-      },
-      {
-        "itemId": "collectible-15090010040",
-        "weight": 39.6
-      },
-      {
-        "itemId": "collectible-15200000129",
-        "weight": 39.6
-      },
-      {
-        "itemId": "collectible-15200000145",
-        "weight": 39.6
-      },
-      {
-        "itemId": "collectible-15200000146",
-        "weight": 39.6
-      },
-      {
-        "itemId": "collectible-15200000147",
-        "weight": 39.6
-      },
-      {
-        "itemId": "collectible-15200000162",
-        "weight": 39.6
-      },
-      {
         "itemId": "collectible-15080050140",
         "weight": 38.984
-      },
-      {
-        "itemId": "collectible-15030050013",
-        "weight": 35.1
-      },
-      {
-        "itemId": "collectible-15080050204",
-        "weight": 35.1
-      },
-      {
-        "itemId": "collectible-15080050205",
-        "weight": 35.1
       },
       {
         "itemId": "collectible-15070040001",
@@ -3688,10 +2841,6 @@ export const CONTAINER_TYPES = {
       {
         "itemId": "radio",
         "weight": 12.285
-      },
-      {
-        "itemId": "collectible-15200000144",
-        "weight": 9.9
       },
       {
         "itemId": "collectible-15070040003",
@@ -4061,14 +3210,6 @@ export const CONTAINER_TYPES = {
         "weight": 270
       },
       {
-        "itemId": "fabric",
-        "weight": 270
-      },
-      {
-        "itemId": "toolbox-item",
-        "weight": 270
-      },
-      {
         "itemId": "wireless-drill",
         "weight": 270
       },
@@ -4121,19 +3262,7 @@ export const CONTAINER_TYPES = {
         "weight": 90
       },
       {
-        "itemId": "collectible-15020050004",
-        "weight": 90
-      },
-      {
-        "itemId": "collectible-15020050006",
-        "weight": 90
-      },
-      {
         "itemId": "collectible-15080050119",
-        "weight": 90
-      },
-      {
-        "itemId": "collectible-15080050130",
         "weight": 90
       },
       {
@@ -4185,39 +3314,7 @@ export const CONTAINER_TYPES = {
         "weight": 60
       },
       {
-        "itemId": "collectible-15080050206",
-        "weight": 60
-      },
-      {
-        "itemId": "collectible-15080050207",
-        "weight": 60
-      },
-      {
-        "itemId": "collectible-15080050208",
-        "weight": 60
-      },
-      {
-        "itemId": "collectible-15080050209",
-        "weight": 60
-      },
-      {
         "itemId": "collectible-15080050216",
-        "weight": 60
-      },
-      {
-        "itemId": "collectible-15200000074",
-        "weight": 60
-      },
-      {
-        "itemId": "collectible-15200000148",
-        "weight": 60
-      },
-      {
-        "itemId": "collectible-15200000149",
-        "weight": 60
-      },
-      {
-        "itemId": "collectible-15200000150",
         "weight": 60
       },
       {
@@ -4241,18 +3338,6 @@ export const CONTAINER_TYPES = {
         "weight": 47.25
       },
       {
-        "itemId": "collectible-15030050013",
-        "weight": 33.75
-      },
-      {
-        "itemId": "collectible-15080050204",
-        "weight": 33.75
-      },
-      {
-        "itemId": "collectible-15080050205",
-        "weight": 33.75
-      },
-      {
         "itemId": "collectible-15080050174",
         "weight": 22.914
       },
@@ -4261,43 +3346,11 @@ export const CONTAINER_TYPES = {
         "weight": 18.376
       },
       {
-        "itemId": "collectible-15080050063",
-        "weight": 18
-      },
-      {
         "itemId": "collectible-15080050148",
         "weight": 18
       },
       {
         "itemId": "collectible-15080050149",
-        "weight": 18
-      },
-      {
-        "itemId": "collectible-15080050198",
-        "weight": 18
-      },
-      {
-        "itemId": "collectible-15090010040",
-        "weight": 18
-      },
-      {
-        "itemId": "collectible-15200000129",
-        "weight": 18
-      },
-      {
-        "itemId": "collectible-15200000145",
-        "weight": 18
-      },
-      {
-        "itemId": "collectible-15200000146",
-        "weight": 18
-      },
-      {
-        "itemId": "collectible-15200000147",
-        "weight": 18
-      },
-      {
-        "itemId": "collectible-15200000162",
         "weight": 18
       },
       {
@@ -4393,14 +3446,6 @@ export const CONTAINER_TYPES = {
         "weight": 9.45
       },
       {
-        "itemId": "collectible-15080050144",
-        "weight": 6.75
-      },
-      {
-        "itemId": "collectible-15080050220",
-        "weight": 6.75
-      },
-      {
         "itemId": "collectible-15080050171",
         "weight": 6.685
       },
@@ -4411,10 +3456,6 @@ export const CONTAINER_TYPES = {
       {
         "itemId": "collectible-15080050062",
         "weight": 6.3
-      },
-      {
-        "itemId": "collectible-15200000144",
-        "weight": 4.5
       },
       {
         "itemId": "collectible-15020010031",
@@ -4728,39 +3769,7 @@ export const CONTAINER_TYPES = {
         "weight": 96
       },
       {
-        "itemId": "collectible-15080050206",
-        "weight": 96
-      },
-      {
-        "itemId": "collectible-15080050207",
-        "weight": 96
-      },
-      {
-        "itemId": "collectible-15080050208",
-        "weight": 96
-      },
-      {
-        "itemId": "collectible-15080050209",
-        "weight": 96
-      },
-      {
         "itemId": "collectible-15080050216",
-        "weight": 96
-      },
-      {
-        "itemId": "collectible-15200000074",
-        "weight": 96
-      },
-      {
-        "itemId": "collectible-15200000148",
-        "weight": 96
-      },
-      {
-        "itemId": "collectible-15200000149",
-        "weight": 96
-      },
-      {
-        "itemId": "collectible-15200000150",
         "weight": 96
       },
       {
@@ -4792,55 +3801,11 @@ export const CONTAINER_TYPES = {
         "weight": 52.92
       },
       {
-        "itemId": "collectible-15030050013",
-        "weight": 37.8
-      },
-      {
-        "itemId": "collectible-15080050204",
-        "weight": 37.8
-      },
-      {
-        "itemId": "collectible-15080050205",
-        "weight": 37.8
-      },
-      {
-        "itemId": "collectible-15080050063",
-        "weight": 28.8
-      },
-      {
         "itemId": "collectible-15080050148",
         "weight": 28.8
       },
       {
         "itemId": "collectible-15080050149",
-        "weight": 28.8
-      },
-      {
-        "itemId": "collectible-15080050198",
-        "weight": 28.8
-      },
-      {
-        "itemId": "collectible-15090010040",
-        "weight": 28.8
-      },
-      {
-        "itemId": "collectible-15200000129",
-        "weight": 28.8
-      },
-      {
-        "itemId": "collectible-15200000145",
-        "weight": 28.8
-      },
-      {
-        "itemId": "collectible-15200000146",
-        "weight": 28.8
-      },
-      {
-        "itemId": "collectible-15200000147",
-        "weight": 28.8
-      },
-      {
-        "itemId": "collectible-15200000162",
         "weight": 28.8
       },
       {
@@ -4938,10 +3903,6 @@ export const CONTAINER_TYPES = {
       {
         "itemId": "collectible-15080050062",
         "weight": 10.08
-      },
-      {
-        "itemId": "collectible-15200000144",
-        "weight": 7.2
       },
       {
         "itemId": "collectible-15070040003",
@@ -5123,14 +4084,6 @@ export const CONTAINER_TYPES = {
         "weight": 1332
       },
       {
-        "itemId": "fabric",
-        "weight": 1332
-      },
-      {
-        "itemId": "toolbox-item",
-        "weight": 1332
-      },
-      {
         "itemId": "wireless-drill",
         "weight": 1332
       },
@@ -5159,19 +4112,7 @@ export const CONTAINER_TYPES = {
         "weight": 444
       },
       {
-        "itemId": "collectible-15020050004",
-        "weight": 444
-      },
-      {
-        "itemId": "collectible-15020050006",
-        "weight": 444
-      },
-      {
         "itemId": "collectible-15080050119",
-        "weight": 444
-      },
-      {
-        "itemId": "collectible-15080050130",
         "weight": 444
       },
       {
@@ -5235,10 +4176,6 @@ export const CONTAINER_TYPES = {
         "weight": 288
       },
       {
-        "itemId": "fuel",
-        "weight": 288
-      },
-      {
         "itemId": "gas-tank",
         "weight": 288
       },
@@ -5293,10 +4230,6 @@ export const CONTAINER_TYPES = {
       {
         "itemId": "collectible-15080050174",
         "weight": 113.045
-      },
-      {
-        "itemId": "collectible-15020010035",
-        "weight": 96
       },
       {
         "itemId": "collectible-15080050102",
@@ -5381,14 +4314,6 @@ export const CONTAINER_TYPES = {
       {
         "itemId": "collectible-15080050036",
         "weight": 45.537
-      },
-      {
-        "itemId": "collectible-15080050144",
-        "weight": 33.3
-      },
-      {
-        "itemId": "collectible-15080050220",
-        "weight": 33.3
       },
       {
         "itemId": "collectible-15080050101",
@@ -5479,14 +4404,6 @@ export const CONTAINER_TYPES = {
         "weight": 7.614
       },
       {
-        "itemId": "collectible-15020010033",
-        "weight": 7.2
-      },
-      {
-        "itemId": "collectible-15080050196",
-        "weight": 7.2
-      },
-      {
         "itemId": "collectible-15080050033",
         "weight": 6.3
       },
@@ -5497,18 +4414,6 @@ export const CONTAINER_TYPES = {
       {
         "itemId": "collectible-15080050189",
         "weight": 6.3
-      },
-      {
-        "itemId": "collectible-15030050013",
-        "weight": 4.5
-      },
-      {
-        "itemId": "collectible-15080050204",
-        "weight": 4.5
-      },
-      {
-        "itemId": "collectible-15080050205",
-        "weight": 4.5
       },
       {
         "itemId": "collectible-15080050098",
@@ -5754,14 +4659,6 @@ export const CONTAINER_TYPES = {
         "weight": 1080
       },
       {
-        "itemId": "fabric",
-        "weight": 1080
-      },
-      {
-        "itemId": "toolbox-item",
-        "weight": 1080
-      },
-      {
         "itemId": "wireless-drill",
         "weight": 1080
       },
@@ -5775,10 +4672,6 @@ export const CONTAINER_TYPES = {
       },
       {
         "itemId": "collectible-15080050109",
-        "weight": 540
-      },
-      {
-        "itemId": "fuel",
         "weight": 540
       },
       {
@@ -5822,19 +4715,7 @@ export const CONTAINER_TYPES = {
         "weight": 360
       },
       {
-        "itemId": "collectible-15020050004",
-        "weight": 360
-      },
-      {
-        "itemId": "collectible-15020050006",
-        "weight": 360
-      },
-      {
         "itemId": "collectible-15080050119",
-        "weight": 360
-      },
-      {
-        "itemId": "collectible-15080050130",
         "weight": 360
       },
       {
@@ -5852,10 +4733,6 @@ export const CONTAINER_TYPES = {
       {
         "itemId": "collectible-15080050108",
         "weight": 358.686
-      },
-      {
-        "itemId": "collectible-15020010035",
-        "weight": 180
       },
       {
         "itemId": "collectible-15080050008",
@@ -5891,10 +4768,6 @@ export const CONTAINER_TYPES = {
       },
       {
         "itemId": "collectible-15080050193",
-        "weight": 180
-      },
-      {
-        "itemId": "collectible-15200000073",
         "weight": 180
       },
       {
@@ -5934,10 +4807,6 @@ export const CONTAINER_TYPES = {
         "weight": 60
       },
       {
-        "itemId": "collectible-15080050024",
-        "weight": 60
-      },
-      {
         "itemId": "collectible-15080050124",
         "weight": 60
       },
@@ -5947,10 +4816,6 @@ export const CONTAINER_TYPES = {
       },
       {
         "itemId": "collectible-15080050182",
-        "weight": 60
-      },
-      {
-        "itemId": "collectible-15200000126",
         "weight": 60
       },
       {
@@ -5974,14 +4839,6 @@ export const CONTAINER_TYPES = {
         "weight": 30.687
       },
       {
-        "itemId": "collectible-15080050144",
-        "weight": 27
-      },
-      {
-        "itemId": "collectible-15080050220",
-        "weight": 27
-      },
-      {
         "itemId": "collectible-15080050134",
         "weight": 25.985
       },
@@ -6000,54 +4857,6 @@ export const CONTAINER_TYPES = {
       {
         "itemId": "collectible-15080050210",
         "weight": 18.9
-      },
-      {
-        "itemId": "collectible-15080050025",
-        "weight": 18
-      },
-      {
-        "itemId": "collectible-15200000048",
-        "weight": 18
-      },
-      {
-        "itemId": "collectible-15200000068",
-        "weight": 18
-      },
-      {
-        "itemId": "collectible-15200000070",
-        "weight": 18
-      },
-      {
-        "itemId": "collectible-15200000075",
-        "weight": 18
-      },
-      {
-        "itemId": "collectible-15200000114",
-        "weight": 18
-      },
-      {
-        "itemId": "collectible-15200000130",
-        "weight": 18
-      },
-      {
-        "itemId": "collectible-15200000151",
-        "weight": 18
-      },
-      {
-        "itemId": "collectible-15200000154",
-        "weight": 18
-      },
-      {
-        "itemId": "collectible-15200000155",
-        "weight": 18
-      },
-      {
-        "itemId": "collectible-15200000157",
-        "weight": 18
-      },
-      {
-        "itemId": "collectible-15200000167",
-        "weight": 18
       },
       {
         "itemId": "collectible-15080050143",
@@ -6072,14 +4881,6 @@ export const CONTAINER_TYPES = {
       {
         "itemId": "collectible-15200000032",
         "weight": 16.021
-      },
-      {
-        "itemId": "collectible-15020010033",
-        "weight": 13.5
-      },
-      {
-        "itemId": "collectible-15080050196",
-        "weight": 13.5
       },
       {
         "itemId": "collectible-15080050004",
@@ -6160,90 +4961,6 @@ export const CONTAINER_TYPES = {
       {
         "itemId": "collectible-15080050177",
         "weight": 4.725
-      },
-      {
-        "itemId": "collectible-15080050197",
-        "weight": 4.5
-      },
-      {
-        "itemId": "collectible-15200000034",
-        "weight": 4.5
-      },
-      {
-        "itemId": "collectible-15200000049",
-        "weight": 4.5
-      },
-      {
-        "itemId": "collectible-15200000058",
-        "weight": 4.5
-      },
-      {
-        "itemId": "collectible-15200000059",
-        "weight": 4.5
-      },
-      {
-        "itemId": "collectible-15200000069",
-        "weight": 4.5
-      },
-      {
-        "itemId": "collectible-15200000071",
-        "weight": 4.5
-      },
-      {
-        "itemId": "collectible-15200000072",
-        "weight": 4.5
-      },
-      {
-        "itemId": "collectible-15200000115",
-        "weight": 4.5
-      },
-      {
-        "itemId": "collectible-15200000117",
-        "weight": 4.5
-      },
-      {
-        "itemId": "collectible-15200000123",
-        "weight": 4.5
-      },
-      {
-        "itemId": "collectible-15200000124",
-        "weight": 4.5
-      },
-      {
-        "itemId": "collectible-15200000125",
-        "weight": 4.5
-      },
-      {
-        "itemId": "collectible-15200000127",
-        "weight": 4.5
-      },
-      {
-        "itemId": "collectible-15200000131",
-        "weight": 4.5
-      },
-      {
-        "itemId": "collectible-15200000137",
-        "weight": 4.5
-      },
-      {
-        "itemId": "collectible-15200000152",
-        "weight": 4.5
-      },
-      {
-        "itemId": "collectible-15200000153",
-        "weight": 4.5
-      },
-      {
-        "itemId": "collectible-15200000156",
-        "weight": 4.5
-      },
-      {
-        "itemId": "collectible-15200000158",
-        "weight": 4.5
-      },
-      {
-        "itemId": "collectible-15200000168",
-        "weight": 4.5
       },
       {
         "itemId": "africa-heart",
@@ -6597,14 +5314,6 @@ export const CONTAINER_TYPES = {
         "weight": 630
       },
       {
-        "itemId": "fabric",
-        "weight": 630
-      },
-      {
-        "itemId": "toolbox-item",
-        "weight": 630
-      },
-      {
         "itemId": "wireless-drill",
         "weight": 630
       },
@@ -6618,10 +5327,6 @@ export const CONTAINER_TYPES = {
       },
       {
         "itemId": "collectible-15080050109",
-        "weight": 576
-      },
-      {
-        "itemId": "fuel",
         "weight": 576
       },
       {
@@ -6677,14 +5382,6 @@ export const CONTAINER_TYPES = {
         "weight": 420
       },
       {
-        "itemId": "collectible-15200000134",
-        "weight": 420
-      },
-      {
-        "itemId": "collectible-15200000138",
-        "weight": 420
-      },
-      {
         "itemId": "lighter",
         "weight": 420
       },
@@ -6709,10 +5406,6 @@ export const CONTAINER_TYPES = {
         "weight": 414
       },
       {
-        "itemId": "collectible-15200000073",
-        "weight": 414
-      },
-      {
         "itemId": "collectible-15080050108",
         "weight": 382.599
       },
@@ -6725,19 +5418,7 @@ export const CONTAINER_TYPES = {
         "weight": 210
       },
       {
-        "itemId": "collectible-15020050004",
-        "weight": 210
-      },
-      {
-        "itemId": "collectible-15020050006",
-        "weight": 210
-      },
-      {
         "itemId": "collectible-15080050119",
-        "weight": 210
-      },
-      {
-        "itemId": "collectible-15080050130",
         "weight": 210
       },
       {
@@ -6751,10 +5432,6 @@ export const CONTAINER_TYPES = {
       {
         "itemId": "wrench",
         "weight": 210
-      },
-      {
-        "itemId": "collectible-15020010035",
-        "weight": 192
       },
       {
         "itemId": "collectible-15080050102",
@@ -6821,14 +5498,6 @@ export const CONTAINER_TYPES = {
         "weight": 180
       },
       {
-        "itemId": "collectible-15200000139",
-        "weight": 180
-      },
-      {
-        "itemId": "collectible-15200000163",
-        "weight": 180
-      },
-      {
         "itemId": "collectible-15040010014",
         "weight": 138
       },
@@ -6853,10 +5522,6 @@ export const CONTAINER_TYPES = {
         "weight": 138
       },
       {
-        "itemId": "collectible-15080050024",
-        "weight": 138
-      },
-      {
         "itemId": "collectible-15080050124",
         "weight": 138
       },
@@ -6866,10 +5531,6 @@ export const CONTAINER_TYPES = {
       },
       {
         "itemId": "collectible-15080050182",
-        "weight": 138
-      },
-      {
-        "itemId": "collectible-15200000126",
         "weight": 138
       },
       {
@@ -6893,10 +5554,6 @@ export const CONTAINER_TYPES = {
         "weight": 60
       },
       {
-        "itemId": "collectible-15080050070",
-        "weight": 60
-      },
-      {
         "itemId": "collectible-15080050136",
         "weight": 60
       },
@@ -6917,22 +5574,6 @@ export const CONTAINER_TYPES = {
         "weight": 60
       },
       {
-        "itemId": "collectible-15200000135",
-        "weight": 60
-      },
-      {
-        "itemId": "collectible-15200000140",
-        "weight": 60
-      },
-      {
-        "itemId": "collectible-15200000164",
-        "weight": 60
-      },
-      {
-        "itemId": "collectible-15200000183",
-        "weight": 60
-      },
-      {
         "itemId": "collectible-15080050134",
         "weight": 59.765
       },
@@ -6947,54 +5588,6 @@ export const CONTAINER_TYPES = {
       {
         "itemId": "collectible-15080050179",
         "weight": 42.876
-      },
-      {
-        "itemId": "collectible-15080050025",
-        "weight": 41.4
-      },
-      {
-        "itemId": "collectible-15200000048",
-        "weight": 41.4
-      },
-      {
-        "itemId": "collectible-15200000068",
-        "weight": 41.4
-      },
-      {
-        "itemId": "collectible-15200000070",
-        "weight": 41.4
-      },
-      {
-        "itemId": "collectible-15200000075",
-        "weight": 41.4
-      },
-      {
-        "itemId": "collectible-15200000114",
-        "weight": 41.4
-      },
-      {
-        "itemId": "collectible-15200000130",
-        "weight": 41.4
-      },
-      {
-        "itemId": "collectible-15200000151",
-        "weight": 41.4
-      },
-      {
-        "itemId": "collectible-15200000154",
-        "weight": 41.4
-      },
-      {
-        "itemId": "collectible-15200000155",
-        "weight": 41.4
-      },
-      {
-        "itemId": "collectible-15200000157",
-        "weight": 41.4
-      },
-      {
-        "itemId": "collectible-15200000167",
-        "weight": 41.4
       },
       {
         "itemId": "collectible-15080050143",
@@ -7081,22 +5674,6 @@ export const CONTAINER_TYPES = {
         "weight": 20.16
       },
       {
-        "itemId": "collectible-15200000141",
-        "weight": 18
-      },
-      {
-        "itemId": "collectible-15200000142",
-        "weight": 18
-      },
-      {
-        "itemId": "collectible-15200000165",
-        "weight": 18
-      },
-      {
-        "itemId": "collectible-15200000184",
-        "weight": 18
-      },
-      {
         "itemId": "collectible-15080050163",
         "weight": 17.434
       },
@@ -7113,14 +5690,6 @@ export const CONTAINER_TYPES = {
         "weight": 16.148
       },
       {
-        "itemId": "collectible-15080050144",
-        "weight": 15.75
-      },
-      {
-        "itemId": "collectible-15080050220",
-        "weight": 15.75
-      },
-      {
         "itemId": "collectible-15080050082",
         "weight": 14.49
       },
@@ -7133,104 +5702,12 @@ export const CONTAINER_TYPES = {
         "weight": 14.47
       },
       {
-        "itemId": "collectible-15020010033",
-        "weight": 14.4
-      },
-      {
-        "itemId": "collectible-15080050196",
-        "weight": 14.4
-      },
-      {
         "itemId": "collectible-15080050132",
         "weight": 12.515
       },
       {
         "itemId": "collectible-15080050180",
         "weight": 12.407
-      },
-      {
-        "itemId": "collectible-15080050197",
-        "weight": 10.35
-      },
-      {
-        "itemId": "collectible-15200000034",
-        "weight": 10.35
-      },
-      {
-        "itemId": "collectible-15200000049",
-        "weight": 10.35
-      },
-      {
-        "itemId": "collectible-15200000058",
-        "weight": 10.35
-      },
-      {
-        "itemId": "collectible-15200000059",
-        "weight": 10.35
-      },
-      {
-        "itemId": "collectible-15200000069",
-        "weight": 10.35
-      },
-      {
-        "itemId": "collectible-15200000071",
-        "weight": 10.35
-      },
-      {
-        "itemId": "collectible-15200000072",
-        "weight": 10.35
-      },
-      {
-        "itemId": "collectible-15200000115",
-        "weight": 10.35
-      },
-      {
-        "itemId": "collectible-15200000117",
-        "weight": 10.35
-      },
-      {
-        "itemId": "collectible-15200000123",
-        "weight": 10.35
-      },
-      {
-        "itemId": "collectible-15200000124",
-        "weight": 10.35
-      },
-      {
-        "itemId": "collectible-15200000125",
-        "weight": 10.35
-      },
-      {
-        "itemId": "collectible-15200000127",
-        "weight": 10.35
-      },
-      {
-        "itemId": "collectible-15200000131",
-        "weight": 10.35
-      },
-      {
-        "itemId": "collectible-15200000137",
-        "weight": 10.35
-      },
-      {
-        "itemId": "collectible-15200000152",
-        "weight": 10.35
-      },
-      {
-        "itemId": "collectible-15200000153",
-        "weight": 10.35
-      },
-      {
-        "itemId": "collectible-15200000156",
-        "weight": 10.35
-      },
-      {
-        "itemId": "collectible-15200000158",
-        "weight": 10.35
-      },
-      {
-        "itemId": "collectible-15200000168",
-        "weight": 10.35
       },
       {
         "itemId": "collectible-15080050071",
@@ -7271,26 +5748,6 @@ export const CONTAINER_TYPES = {
       {
         "itemId": "collectible-15080050177",
         "weight": 5.04
-      },
-      {
-        "itemId": "collectible-15080050069",
-        "weight": 4.5
-      },
-      {
-        "itemId": "collectible-15080050173",
-        "weight": 4.5
-      },
-      {
-        "itemId": "collectible-15200000143",
-        "weight": 4.5
-      },
-      {
-        "itemId": "collectible-15200000166",
-        "weight": 4.5
-      },
-      {
-        "itemId": "collectible-15200000185",
-        "weight": 4.5
       },
       {
         "itemId": "africa-heart",
@@ -7552,14 +6009,6 @@ export const CONTAINER_TYPES = {
         "weight": 372
       },
       {
-        "itemId": "consumable-14070000016",
-        "weight": 372
-      },
-      {
-        "itemId": "consumable-14070000017",
-        "weight": 372
-      },
-      {
         "itemId": "consumable-14060000005",
         "weight": 369.582
       },
@@ -7584,24 +6033,12 @@ export const CONTAINER_TYPES = {
         "weight": 228
       },
       {
-        "itemId": "collectible-15200000061",
-        "weight": 228
-      },
-      {
         "itemId": "collectible-15080050127",
         "weight": 223.465
       },
       {
         "itemId": "collectible-15080050117",
         "weight": 209.296
-      },
-      {
-        "itemId": "consumable-14070000018",
-        "weight": 111.6
-      },
-      {
-        "itemId": "consumable-14070000019",
-        "weight": 111.6
       },
       {
         "itemId": "collectible-15080050115",
@@ -7839,14 +6276,6 @@ export const CONTAINER_TYPES = {
         "weight": 312
       },
       {
-        "itemId": "consumable-14070000016",
-        "weight": 312
-      },
-      {
-        "itemId": "consumable-14070000017",
-        "weight": 312
-      },
-      {
         "itemId": "consumable-14060000005",
         "weight": 309.972
       },
@@ -7867,10 +6296,6 @@ export const CONTAINER_TYPES = {
         "weight": 288
       },
       {
-        "itemId": "collectible-15200000061",
-        "weight": 288
-      },
-      {
         "itemId": "collectible-15080050127",
         "weight": 282.272
       },
@@ -7881,14 +6306,6 @@ export const CONTAINER_TYPES = {
       {
         "itemId": "collectible-15080050117",
         "weight": 264.374
-      },
-      {
-        "itemId": "consumable-14070000018",
-        "weight": 93.6
-      },
-      {
-        "itemId": "consumable-14070000019",
-        "weight": 93.6
       },
       {
         "itemId": "collectible-15080050115",
@@ -8142,14 +6559,6 @@ export const CONTAINER_TYPES = {
         "weight": 1470
       },
       {
-        "itemId": "collectible-15200000134",
-        "weight": 1470
-      },
-      {
-        "itemId": "collectible-15200000138",
-        "weight": 1470
-      },
-      {
         "itemId": "lighter",
         "weight": 1470
       },
@@ -8330,14 +6739,6 @@ export const CONTAINER_TYPES = {
         "weight": 630
       },
       {
-        "itemId": "collectible-15200000139",
-        "weight": 630
-      },
-      {
-        "itemId": "collectible-15200000163",
-        "weight": 630
-      },
-      {
         "itemId": "collectible-15060010001",
         "weight": 546
       },
@@ -8387,14 +6788,6 @@ export const CONTAINER_TYPES = {
       },
       {
         "itemId": "collectible-15040010022",
-        "weight": 432
-      },
-      {
-        "itemId": "fabric",
-        "weight": 432
-      },
-      {
-        "itemId": "toolbox-item",
         "weight": 432
       },
       {
@@ -8490,10 +6883,6 @@ export const CONTAINER_TYPES = {
         "weight": 210
       },
       {
-        "itemId": "collectible-15080050070",
-        "weight": 210
-      },
-      {
         "itemId": "collectible-15080050136",
         "weight": 210
       },
@@ -8514,22 +6903,6 @@ export const CONTAINER_TYPES = {
         "weight": 210
       },
       {
-        "itemId": "collectible-15200000135",
-        "weight": 210
-      },
-      {
-        "itemId": "collectible-15200000140",
-        "weight": 210
-      },
-      {
-        "itemId": "collectible-15200000164",
-        "weight": 210
-      },
-      {
-        "itemId": "collectible-15200000183",
-        "weight": 210
-      },
-      {
         "itemId": "collectible-15020010034",
         "weight": 180
       },
@@ -8539,10 +6912,6 @@ export const CONTAINER_TYPES = {
       },
       {
         "itemId": "collectible-15080050109",
-        "weight": 180
-      },
-      {
-        "itemId": "fuel",
         "weight": 180
       },
       {
@@ -8558,19 +6927,7 @@ export const CONTAINER_TYPES = {
         "weight": 144
       },
       {
-        "itemId": "collectible-15020050004",
-        "weight": 144
-      },
-      {
-        "itemId": "collectible-15020050006",
-        "weight": 144
-      },
-      {
         "itemId": "collectible-15080050119",
-        "weight": 144
-      },
-      {
-        "itemId": "collectible-15080050130",
         "weight": 144
       },
       {
@@ -8658,10 +7015,6 @@ export const CONTAINER_TYPES = {
         "weight": 78
       },
       {
-        "itemId": "collectible-15200000061",
-        "weight": 78
-      },
-      {
         "itemId": "collectible-15080050127",
         "weight": 76.449
       },
@@ -8670,28 +7023,8 @@ export const CONTAINER_TYPES = {
         "weight": 71.601
       },
       {
-        "itemId": "collectible-15200000141",
-        "weight": 63
-      },
-      {
-        "itemId": "collectible-15200000142",
-        "weight": 63
-      },
-      {
-        "itemId": "collectible-15200000165",
-        "weight": 63
-      },
-      {
-        "itemId": "collectible-15200000184",
-        "weight": 63
-      },
-      {
         "itemId": "collectible-15080050163",
         "weight": 61.02
-      },
-      {
-        "itemId": "collectible-15020010035",
-        "weight": 60
       },
       {
         "itemId": "collectible-15080050102",
@@ -8810,26 +7143,6 @@ export const CONTAINER_TYPES = {
         "weight": 16.275
       },
       {
-        "itemId": "collectible-15080050069",
-        "weight": 15.75
-      },
-      {
-        "itemId": "collectible-15080050173",
-        "weight": 15.75
-      },
-      {
-        "itemId": "collectible-15200000143",
-        "weight": 15.75
-      },
-      {
-        "itemId": "collectible-15200000166",
-        "weight": 15.75
-      },
-      {
-        "itemId": "collectible-15200000185",
-        "weight": 15.75
-      },
-      {
         "itemId": "collectible-15040010023",
         "weight": 15.12
       },
@@ -8866,32 +7179,12 @@ export const CONTAINER_TYPES = {
         "weight": 11.34
       },
       {
-        "itemId": "collectible-15080050144",
-        "weight": 10.8
-      },
-      {
-        "itemId": "collectible-15080050220",
-        "weight": 10.8
-      },
-      {
         "itemId": "collectible-15080050118",
         "weight": 10.524
       },
       {
         "itemId": "collectible-15080050192",
         "weight": 8.19
-      },
-      {
-        "itemId": "collectible-15030050013",
-        "weight": 8.1
-      },
-      {
-        "itemId": "collectible-15080050204",
-        "weight": 8.1
-      },
-      {
-        "itemId": "collectible-15080050205",
-        "weight": 8.1
       },
       {
         "itemId": "collectible-15080050169",
@@ -8924,14 +7217,6 @@ export const CONTAINER_TYPES = {
       {
         "itemId": "collectible-15080050131",
         "weight": 5.512
-      },
-      {
-        "itemId": "collectible-15020010033",
-        "weight": 4.5
-      },
-      {
-        "itemId": "collectible-15080050196",
-        "weight": 4.5
       },
       {
         "itemId": "collectible-15020010031",
@@ -9233,14 +7518,6 @@ export const CONTAINER_TYPES = {
         "weight": 1176
       },
       {
-        "itemId": "collectible-15200000134",
-        "weight": 1176
-      },
-      {
-        "itemId": "collectible-15200000138",
-        "weight": 1176
-      },
-      {
         "itemId": "lighter",
         "weight": 1176
       },
@@ -9445,14 +7722,6 @@ export const CONTAINER_TYPES = {
         "weight": 504
       },
       {
-        "itemId": "collectible-15200000139",
-        "weight": 504
-      },
-      {
-        "itemId": "collectible-15200000163",
-        "weight": 504
-      },
-      {
         "itemId": "collectible-15020050008",
         "weight": 432
       },
@@ -9525,14 +7794,6 @@ export const CONTAINER_TYPES = {
         "weight": 414
       },
       {
-        "itemId": "fabric",
-        "weight": 414
-      },
-      {
-        "itemId": "toolbox-item",
-        "weight": 414
-      },
-      {
         "itemId": "wireless-drill",
         "weight": 414
       },
@@ -9550,10 +7811,6 @@ export const CONTAINER_TYPES = {
       },
       {
         "itemId": "collectible-15080050109",
-        "weight": 234
-      },
-      {
-        "itemId": "fuel",
         "weight": 234
       },
       {
@@ -9597,10 +7854,6 @@ export const CONTAINER_TYPES = {
         "weight": 168
       },
       {
-        "itemId": "collectible-15080050070",
-        "weight": 168
-      },
-      {
         "itemId": "collectible-15080050136",
         "weight": 168
       },
@@ -9618,22 +7871,6 @@ export const CONTAINER_TYPES = {
       },
       {
         "itemId": "collectible-15080050219",
-        "weight": 168
-      },
-      {
-        "itemId": "collectible-15200000135",
-        "weight": 168
-      },
-      {
-        "itemId": "collectible-15200000140",
-        "weight": 168
-      },
-      {
-        "itemId": "collectible-15200000164",
-        "weight": 168
-      },
-      {
-        "itemId": "collectible-15200000183",
         "weight": 168
       },
       {
@@ -9697,19 +7934,7 @@ export const CONTAINER_TYPES = {
         "weight": 138
       },
       {
-        "itemId": "collectible-15020050004",
-        "weight": 138
-      },
-      {
-        "itemId": "collectible-15020050006",
-        "weight": 138
-      },
-      {
         "itemId": "collectible-15080050119",
-        "weight": 138
-      },
-      {
-        "itemId": "collectible-15080050130",
         "weight": 138
       },
       {
@@ -9727,10 +7952,6 @@ export const CONTAINER_TYPES = {
       {
         "itemId": "collectible-15080050036",
         "weight": 109.288
-      },
-      {
-        "itemId": "collectible-15020010035",
-        "weight": 78
       },
       {
         "itemId": "collectible-15080050102",
@@ -9765,10 +7986,6 @@ export const CONTAINER_TYPES = {
         "weight": 72
       },
       {
-        "itemId": "collectible-15200000061",
-        "weight": 72
-      },
-      {
         "itemId": "collectible-15080050127",
         "weight": 70.568
       },
@@ -9779,22 +7996,6 @@ export const CONTAINER_TYPES = {
       {
         "itemId": "collectible-15040040007",
         "weight": 54.393
-      },
-      {
-        "itemId": "collectible-15200000141",
-        "weight": 50.4
-      },
-      {
-        "itemId": "collectible-15200000142",
-        "weight": 50.4
-      },
-      {
-        "itemId": "collectible-15200000165",
-        "weight": 50.4
-      },
-      {
-        "itemId": "collectible-15200000184",
-        "weight": 50.4
       },
       {
         "itemId": "collectible-15080050163",
@@ -9933,48 +8134,8 @@ export const CONTAINER_TYPES = {
         "weight": 13.29
       },
       {
-        "itemId": "collectible-15080050069",
-        "weight": 12.6
-      },
-      {
-        "itemId": "collectible-15080050173",
-        "weight": 12.6
-      },
-      {
-        "itemId": "collectible-15200000143",
-        "weight": 12.6
-      },
-      {
-        "itemId": "collectible-15200000166",
-        "weight": 12.6
-      },
-      {
-        "itemId": "collectible-15200000185",
-        "weight": 12.6
-      },
-      {
-        "itemId": "collectible-15030050013",
-        "weight": 10.8
-      },
-      {
-        "itemId": "collectible-15080050204",
-        "weight": 10.8
-      },
-      {
-        "itemId": "collectible-15080050205",
-        "weight": 10.8
-      },
-      {
         "itemId": "collectible-15080050212",
         "weight": 10.485
-      },
-      {
-        "itemId": "collectible-15080050144",
-        "weight": 10.35
-      },
-      {
-        "itemId": "collectible-15080050220",
-        "weight": 10.35
       },
       {
         "itemId": "collectible-15080050169",
@@ -9995,14 +8156,6 @@ export const CONTAINER_TYPES = {
       {
         "itemId": "collectible-15080050192",
         "weight": 7.56
-      },
-      {
-        "itemId": "collectible-15020010033",
-        "weight": 5.85
-      },
-      {
-        "itemId": "collectible-15080050196",
-        "weight": 5.85
       },
       {
         "itemId": "collectible-15060080015",
@@ -10384,14 +8537,6 @@ export const CONTAINER_TYPES = {
         "weight": 432
       },
       {
-        "itemId": "fabric",
-        "weight": 432
-      },
-      {
-        "itemId": "toolbox-item",
-        "weight": 432
-      },
-      {
         "itemId": "wireless-drill",
         "weight": 432
       },
@@ -10476,10 +8621,6 @@ export const CONTAINER_TYPES = {
         "weight": 324
       },
       {
-        "itemId": "fuel",
-        "weight": 324
-      },
-      {
         "itemId": "gas-tank",
         "weight": 324
       },
@@ -10528,14 +8669,6 @@ export const CONTAINER_TYPES = {
         "weight": 144
       },
       {
-        "itemId": "collectible-15020050004",
-        "weight": 144
-      },
-      {
-        "itemId": "collectible-15020050006",
-        "weight": 144
-      },
-      {
         "itemId": "collectible-15020050008",
         "weight": 144
       },
@@ -10572,10 +8705,6 @@ export const CONTAINER_TYPES = {
         "weight": 144
       },
       {
-        "itemId": "collectible-15080050130",
-        "weight": 144
-      },
-      {
         "itemId": "collectible-15080050194",
         "weight": 144
       },
@@ -10598,10 +8727,6 @@ export const CONTAINER_TYPES = {
       {
         "itemId": "collectible-15030040010",
         "weight": 125.051
-      },
-      {
-        "itemId": "collectible-15020010035",
-        "weight": 108
       },
       {
         "itemId": "collectible-15080050102",
@@ -10644,14 +8769,6 @@ export const CONTAINER_TYPES = {
         "weight": 108
       },
       {
-        "itemId": "consumable-14070000016",
-        "weight": 108
-      },
-      {
-        "itemId": "consumable-14070000017",
-        "weight": 108
-      },
-      {
         "itemId": "consumable-14060000005",
         "weight": 107.298
       },
@@ -10677,10 +8794,6 @@ export const CONTAINER_TYPES = {
       },
       {
         "itemId": "collectible-15080050214",
-        "weight": 72
-      },
-      {
-        "itemId": "collectible-15200000061",
         "weight": 72
       },
       {
@@ -10754,14 +8867,6 @@ export const CONTAINER_TYPES = {
       {
         "itemId": "collectible-15080050036",
         "weight": 36.429
-      },
-      {
-        "itemId": "consumable-14070000018",
-        "weight": 32.4
-      },
-      {
-        "itemId": "consumable-14070000019",
-        "weight": 32.4
       },
       {
         "itemId": "collectible-15080050179",
@@ -10856,14 +8961,6 @@ export const CONTAINER_TYPES = {
         "weight": 11.049
       },
       {
-        "itemId": "collectible-15080050144",
-        "weight": 10.8
-      },
-      {
-        "itemId": "collectible-15080050220",
-        "weight": 10.8
-      },
-      {
         "itemId": "collectible-15080050090",
         "weight": 10.798
       },
@@ -10890,14 +8987,6 @@ export const CONTAINER_TYPES = {
       {
         "itemId": "collectible-15080050035",
         "weight": 8.419
-      },
-      {
-        "itemId": "collectible-15020010033",
-        "weight": 8.1
-      },
-      {
-        "itemId": "collectible-15080050196",
-        "weight": 8.1
       },
       {
         "itemId": "collectible-15080050192",
@@ -10938,18 +9027,6 @@ export const CONTAINER_TYPES = {
       {
         "itemId": "collectible-15080050211",
         "weight": 3.78
-      },
-      {
-        "itemId": "collectible-15030050013",
-        "weight": 3.6
-      },
-      {
-        "itemId": "collectible-15080050204",
-        "weight": 3.6
-      },
-      {
-        "itemId": "collectible-15080050205",
-        "weight": 3.6
       },
       {
         "itemId": "collectible-15080050098",
@@ -11243,14 +9320,6 @@ export const CONTAINER_TYPES = {
         "weight": 216
       },
       {
-        "itemId": "fabric",
-        "weight": 216
-      },
-      {
-        "itemId": "toolbox-item",
-        "weight": 216
-      },
-      {
         "itemId": "wireless-drill",
         "weight": 216
       },
@@ -11271,10 +9340,6 @@ export const CONTAINER_TYPES = {
         "weight": 180
       },
       {
-        "itemId": "fuel",
-        "weight": 180
-      },
-      {
         "itemId": "gas-tank",
         "weight": 180
       },
@@ -11291,19 +9356,7 @@ export const CONTAINER_TYPES = {
         "weight": 72
       },
       {
-        "itemId": "collectible-15020050004",
-        "weight": 72
-      },
-      {
-        "itemId": "collectible-15020050006",
-        "weight": 72
-      },
-      {
         "itemId": "collectible-15080050119",
-        "weight": 72
-      },
-      {
-        "itemId": "collectible-15080050130",
         "weight": 72
       },
       {
@@ -11317,10 +9370,6 @@ export const CONTAINER_TYPES = {
       {
         "itemId": "wrench",
         "weight": 72
-      },
-      {
-        "itemId": "collectible-15020010035",
-        "weight": 60
       },
       {
         "itemId": "collectible-15080050102",
@@ -11385,22 +9434,6 @@ export const CONTAINER_TYPES = {
       {
         "itemId": "collectible-15080050210",
         "weight": 6.3
-      },
-      {
-        "itemId": "collectible-15080050144",
-        "weight": 5.4
-      },
-      {
-        "itemId": "collectible-15080050220",
-        "weight": 5.4
-      },
-      {
-        "itemId": "collectible-15020010033",
-        "weight": 4.5
-      },
-      {
-        "itemId": "collectible-15080050196",
-        "weight": 4.5
       },
       {
         "itemId": "collectible-15020010031",
@@ -11682,14 +9715,6 @@ export const CONTAINER_TYPES = {
         "weight": 252
       },
       {
-        "itemId": "fabric",
-        "weight": 252
-      },
-      {
-        "itemId": "toolbox-item",
-        "weight": 252
-      },
-      {
         "itemId": "wireless-drill",
         "weight": 252
       },
@@ -11786,19 +9811,7 @@ export const CONTAINER_TYPES = {
         "weight": 84
       },
       {
-        "itemId": "collectible-15020050004",
-        "weight": 84
-      },
-      {
-        "itemId": "collectible-15020050006",
-        "weight": 84
-      },
-      {
         "itemId": "collectible-15080050119",
-        "weight": 84
-      },
-      {
-        "itemId": "collectible-15080050130",
         "weight": 84
       },
       {
@@ -11890,14 +9903,6 @@ export const CONTAINER_TYPES = {
         "weight": 36
       },
       {
-        "itemId": "consumable-14070000016",
-        "weight": 36
-      },
-      {
-        "itemId": "consumable-14070000017",
-        "weight": 36
-      },
-      {
         "itemId": "consumable-14060000005",
         "weight": 35.766
       },
@@ -11954,14 +9959,6 @@ export const CONTAINER_TYPES = {
         "weight": 11.03
       },
       {
-        "itemId": "consumable-14070000018",
-        "weight": 10.8
-      },
-      {
-        "itemId": "consumable-14070000019",
-        "weight": 10.8
-      },
-      {
         "itemId": "collectible-15030050019",
         "weight": 10.59
       },
@@ -11990,32 +9987,12 @@ export const CONTAINER_TYPES = {
         "weight": 6.3
       },
       {
-        "itemId": "collectible-15080050144",
-        "weight": 6.3
-      },
-      {
         "itemId": "collectible-15080050189",
-        "weight": 6.3
-      },
-      {
-        "itemId": "collectible-15080050220",
         "weight": 6.3
       },
       {
         "itemId": "consumable-14060000001",
         "weight": 4.833
-      },
-      {
-        "itemId": "collectible-15030050013",
-        "weight": 4.5
-      },
-      {
-        "itemId": "collectible-15080050204",
-        "weight": 4.5
-      },
-      {
-        "itemId": "collectible-15080050205",
-        "weight": 4.5
       },
       {
         "itemId": "consumable-14020000006",
@@ -12341,14 +10318,6 @@ export const CONTAINER_TYPES = {
         "weight": 432
       },
       {
-        "itemId": "fabric",
-        "weight": 432
-      },
-      {
-        "itemId": "toolbox-item",
-        "weight": 432
-      },
-      {
         "itemId": "wireless-drill",
         "weight": 432
       },
@@ -12453,19 +10422,7 @@ export const CONTAINER_TYPES = {
         "weight": 144
       },
       {
-        "itemId": "collectible-15020050004",
-        "weight": 144
-      },
-      {
-        "itemId": "collectible-15020050006",
-        "weight": 144
-      },
-      {
         "itemId": "collectible-15080050119",
-        "weight": 144
-      },
-      {
-        "itemId": "collectible-15080050130",
         "weight": 144
       },
       {
@@ -12561,14 +10518,6 @@ export const CONTAINER_TYPES = {
         "weight": 60
       },
       {
-        "itemId": "consumable-14070000016",
-        "weight": 60
-      },
-      {
-        "itemId": "consumable-14070000017",
-        "weight": 60
-      },
-      {
         "itemId": "consumable-14060000005",
         "weight": 59.61
       },
@@ -12625,14 +10574,6 @@ export const CONTAINER_TYPES = {
         "weight": 18.155
       },
       {
-        "itemId": "consumable-14070000018",
-        "weight": 18
-      },
-      {
-        "itemId": "consumable-14070000019",
-        "weight": 18
-      },
-      {
         "itemId": "ballistic-computer",
         "weight": 17.649
       },
@@ -12653,14 +10594,6 @@ export const CONTAINER_TYPES = {
         "weight": 12.182
       },
       {
-        "itemId": "collectible-15080050144",
-        "weight": 10.8
-      },
-      {
-        "itemId": "collectible-15080050220",
-        "weight": 10.8
-      },
-      {
         "itemId": "collectible-15080050033",
         "weight": 10.08
       },
@@ -12675,18 +10608,6 @@ export const CONTAINER_TYPES = {
       {
         "itemId": "consumable-14060000001",
         "weight": 8.056
-      },
-      {
-        "itemId": "collectible-15030050013",
-        "weight": 7.2
-      },
-      {
-        "itemId": "collectible-15080050204",
-        "weight": 7.2
-      },
-      {
-        "itemId": "collectible-15080050205",
-        "weight": 7.2
       },
       {
         "itemId": "consumable-14020000006",
@@ -13104,14 +11025,6 @@ export const CONTAINER_TYPES = {
         "weight": 396
       },
       {
-        "itemId": "fabric",
-        "weight": 396
-      },
-      {
-        "itemId": "toolbox-item",
-        "weight": 396
-      },
-      {
         "itemId": "wireless-drill",
         "weight": 396
       },
@@ -13189,10 +11102,6 @@ export const CONTAINER_TYPES = {
       },
       {
         "itemId": "field-med",
-        "weight": 216
-      },
-      {
-        "itemId": "fuel",
         "weight": 216
       },
       {
@@ -13292,19 +11201,7 @@ export const CONTAINER_TYPES = {
         "weight": 132
       },
       {
-        "itemId": "collectible-15020050004",
-        "weight": 132
-      },
-      {
-        "itemId": "collectible-15020050006",
-        "weight": 132
-      },
-      {
         "itemId": "collectible-15080050119",
-        "weight": 132
-      },
-      {
-        "itemId": "collectible-15080050130",
         "weight": 132
       },
       {
@@ -13342,14 +11239,6 @@ export const CONTAINER_TYPES = {
       {
         "itemId": "collectible-15080050193",
         "weight": 108
-      },
-      {
-        "itemId": "collectible-15200000073",
-        "weight": 108
-      },
-      {
-        "itemId": "collectible-15020010035",
-        "weight": 72
       },
       {
         "itemId": "collectible-15080050102",
@@ -13392,14 +11281,6 @@ export const CONTAINER_TYPES = {
         "weight": 72
       },
       {
-        "itemId": "consumable-14070000016",
-        "weight": 72
-      },
-      {
-        "itemId": "consumable-14070000017",
-        "weight": 72
-      },
-      {
         "itemId": "consumable-14060000005",
         "weight": 71.532
       },
@@ -13421,10 +11302,6 @@ export const CONTAINER_TYPES = {
       },
       {
         "itemId": "collectible-15080050214",
-        "weight": 60
-      },
-      {
-        "itemId": "collectible-15200000061",
         "weight": 60
       },
       {
@@ -13484,10 +11361,6 @@ export const CONTAINER_TYPES = {
         "weight": 36
       },
       {
-        "itemId": "collectible-15080050024",
-        "weight": 36
-      },
-      {
         "itemId": "collectible-15080050124",
         "weight": 36
       },
@@ -13497,10 +11370,6 @@ export const CONTAINER_TYPES = {
       },
       {
         "itemId": "collectible-15080050182",
-        "weight": 36
-      },
-      {
-        "itemId": "collectible-15200000126",
         "weight": 36
       },
       {
@@ -13538,14 +11407,6 @@ export const CONTAINER_TYPES = {
       {
         "itemId": "collectible-15080050035",
         "weight": 25.258
-      },
-      {
-        "itemId": "consumable-14070000018",
-        "weight": 21.6
-      },
-      {
-        "itemId": "consumable-14070000019",
-        "weight": 21.6
       },
       {
         "itemId": "collectible-15080050034",
@@ -13616,66 +11477,6 @@ export const CONTAINER_TYPES = {
         "weight": 11.075
       },
       {
-        "itemId": "collectible-15030050013",
-        "weight": 10.8
-      },
-      {
-        "itemId": "collectible-15080050025",
-        "weight": 10.8
-      },
-      {
-        "itemId": "collectible-15080050204",
-        "weight": 10.8
-      },
-      {
-        "itemId": "collectible-15080050205",
-        "weight": 10.8
-      },
-      {
-        "itemId": "collectible-15200000048",
-        "weight": 10.8
-      },
-      {
-        "itemId": "collectible-15200000068",
-        "weight": 10.8
-      },
-      {
-        "itemId": "collectible-15200000070",
-        "weight": 10.8
-      },
-      {
-        "itemId": "collectible-15200000075",
-        "weight": 10.8
-      },
-      {
-        "itemId": "collectible-15200000114",
-        "weight": 10.8
-      },
-      {
-        "itemId": "collectible-15200000130",
-        "weight": 10.8
-      },
-      {
-        "itemId": "collectible-15200000151",
-        "weight": 10.8
-      },
-      {
-        "itemId": "collectible-15200000154",
-        "weight": 10.8
-      },
-      {
-        "itemId": "collectible-15200000155",
-        "weight": 10.8
-      },
-      {
-        "itemId": "collectible-15200000157",
-        "weight": 10.8
-      },
-      {
-        "itemId": "collectible-15200000167",
-        "weight": 10.8
-      },
-      {
         "itemId": "collectible-15080050143",
         "weight": 10.735
       },
@@ -13686,14 +11487,6 @@ export const CONTAINER_TYPES = {
       {
         "itemId": "collectible-15080050137",
         "weight": 10.324
-      },
-      {
-        "itemId": "collectible-15080050144",
-        "weight": 9.9
-      },
-      {
-        "itemId": "collectible-15080050220",
-        "weight": 9.9
       },
       {
         "itemId": "collectible-15080050165",
@@ -13774,14 +11567,6 @@ export const CONTAINER_TYPES = {
       {
         "itemId": "collectible-15080050192",
         "weight": 6.3
-      },
-      {
-        "itemId": "collectible-15020010033",
-        "weight": 5.4
-      },
-      {
-        "itemId": "collectible-15080050196",
-        "weight": 5.4
       },
       {
         "itemId": "collectible-15080050092",
@@ -13874,90 +11659,6 @@ export const CONTAINER_TYPES = {
       {
         "itemId": "collectible-15080050211",
         "weight": 3.465
-      },
-      {
-        "itemId": "collectible-15080050197",
-        "weight": 2.7
-      },
-      {
-        "itemId": "collectible-15200000034",
-        "weight": 2.7
-      },
-      {
-        "itemId": "collectible-15200000049",
-        "weight": 2.7
-      },
-      {
-        "itemId": "collectible-15200000058",
-        "weight": 2.7
-      },
-      {
-        "itemId": "collectible-15200000059",
-        "weight": 2.7
-      },
-      {
-        "itemId": "collectible-15200000069",
-        "weight": 2.7
-      },
-      {
-        "itemId": "collectible-15200000071",
-        "weight": 2.7
-      },
-      {
-        "itemId": "collectible-15200000072",
-        "weight": 2.7
-      },
-      {
-        "itemId": "collectible-15200000115",
-        "weight": 2.7
-      },
-      {
-        "itemId": "collectible-15200000117",
-        "weight": 2.7
-      },
-      {
-        "itemId": "collectible-15200000123",
-        "weight": 2.7
-      },
-      {
-        "itemId": "collectible-15200000124",
-        "weight": 2.7
-      },
-      {
-        "itemId": "collectible-15200000125",
-        "weight": 2.7
-      },
-      {
-        "itemId": "collectible-15200000127",
-        "weight": 2.7
-      },
-      {
-        "itemId": "collectible-15200000131",
-        "weight": 2.7
-      },
-      {
-        "itemId": "collectible-15200000137",
-        "weight": 2.7
-      },
-      {
-        "itemId": "collectible-15200000152",
-        "weight": 2.7
-      },
-      {
-        "itemId": "collectible-15200000153",
-        "weight": 2.7
-      },
-      {
-        "itemId": "collectible-15200000156",
-        "weight": 2.7
-      },
-      {
-        "itemId": "collectible-15200000158",
-        "weight": 2.7
-      },
-      {
-        "itemId": "collectible-15200000168",
-        "weight": 2.7
       },
       {
         "itemId": "collectible-15080050098",
@@ -14363,14 +12064,6 @@ export const CONTAINER_TYPES = {
         "weight": 588
       },
       {
-        "itemId": "collectible-15200000134",
-        "weight": 588
-      },
-      {
-        "itemId": "collectible-15200000138",
-        "weight": 588
-      },
-      {
         "itemId": "lighter",
         "weight": 588
       },
@@ -14439,39 +12132,7 @@ export const CONTAINER_TYPES = {
         "weight": 300
       },
       {
-        "itemId": "collectible-15080050206",
-        "weight": 300
-      },
-      {
-        "itemId": "collectible-15080050207",
-        "weight": 300
-      },
-      {
-        "itemId": "collectible-15080050208",
-        "weight": 300
-      },
-      {
-        "itemId": "collectible-15080050209",
-        "weight": 300
-      },
-      {
         "itemId": "collectible-15080050216",
-        "weight": 300
-      },
-      {
-        "itemId": "collectible-15200000074",
-        "weight": 300
-      },
-      {
-        "itemId": "collectible-15200000148",
-        "weight": 300
-      },
-      {
-        "itemId": "collectible-15200000149",
-        "weight": 300
-      },
-      {
-        "itemId": "collectible-15200000150",
         "weight": 300
       },
       {
@@ -14492,10 +12153,6 @@ export const CONTAINER_TYPES = {
       },
       {
         "itemId": "collectible-15080050193",
-        "weight": 288
-      },
-      {
-        "itemId": "collectible-15200000073",
         "weight": 288
       },
       {
@@ -14544,14 +12201,6 @@ export const CONTAINER_TYPES = {
       },
       {
         "itemId": "collectible-15080050076",
-        "weight": 252
-      },
-      {
-        "itemId": "collectible-15200000139",
-        "weight": 252
-      },
-      {
-        "itemId": "collectible-15200000163",
         "weight": 252
       },
       {
@@ -14627,10 +12276,6 @@ export const CONTAINER_TYPES = {
         "weight": 96
       },
       {
-        "itemId": "collectible-15080050024",
-        "weight": 96
-      },
-      {
         "itemId": "collectible-15080050124",
         "weight": 96
       },
@@ -14643,16 +12288,8 @@ export const CONTAINER_TYPES = {
         "weight": 96
       },
       {
-        "itemId": "collectible-15200000126",
-        "weight": 96
-      },
-      {
         "itemId": "collectible-15080050036",
         "weight": 91.073
-      },
-      {
-        "itemId": "collectible-15080050063",
-        "weight": 90
       },
       {
         "itemId": "collectible-15080050148",
@@ -14660,34 +12297,6 @@ export const CONTAINER_TYPES = {
       },
       {
         "itemId": "collectible-15080050149",
-        "weight": 90
-      },
-      {
-        "itemId": "collectible-15080050198",
-        "weight": 90
-      },
-      {
-        "itemId": "collectible-15090010040",
-        "weight": 90
-      },
-      {
-        "itemId": "collectible-15200000129",
-        "weight": 90
-      },
-      {
-        "itemId": "collectible-15200000145",
-        "weight": 90
-      },
-      {
-        "itemId": "collectible-15200000146",
-        "weight": 90
-      },
-      {
-        "itemId": "collectible-15200000147",
-        "weight": 90
-      },
-      {
-        "itemId": "collectible-15200000162",
         "weight": 90
       },
       {
@@ -14704,10 +12313,6 @@ export const CONTAINER_TYPES = {
       },
       {
         "itemId": "collectible-15080050068",
-        "weight": 84
-      },
-      {
-        "itemId": "collectible-15080050070",
         "weight": 84
       },
       {
@@ -14728,22 +12333,6 @@ export const CONTAINER_TYPES = {
       },
       {
         "itemId": "collectible-15080050219",
-        "weight": 84
-      },
-      {
-        "itemId": "collectible-15200000135",
-        "weight": 84
-      },
-      {
-        "itemId": "collectible-15200000140",
-        "weight": 84
-      },
-      {
-        "itemId": "collectible-15200000164",
-        "weight": 84
-      },
-      {
-        "itemId": "collectible-15200000183",
         "weight": 84
       },
       {
@@ -14803,54 +12392,6 @@ export const CONTAINER_TYPES = {
         "weight": 31.295
       },
       {
-        "itemId": "collectible-15080050025",
-        "weight": 28.8
-      },
-      {
-        "itemId": "collectible-15200000048",
-        "weight": 28.8
-      },
-      {
-        "itemId": "collectible-15200000068",
-        "weight": 28.8
-      },
-      {
-        "itemId": "collectible-15200000070",
-        "weight": 28.8
-      },
-      {
-        "itemId": "collectible-15200000075",
-        "weight": 28.8
-      },
-      {
-        "itemId": "collectible-15200000114",
-        "weight": 28.8
-      },
-      {
-        "itemId": "collectible-15200000130",
-        "weight": 28.8
-      },
-      {
-        "itemId": "collectible-15200000151",
-        "weight": 28.8
-      },
-      {
-        "itemId": "collectible-15200000154",
-        "weight": 28.8
-      },
-      {
-        "itemId": "collectible-15200000155",
-        "weight": 28.8
-      },
-      {
-        "itemId": "collectible-15200000157",
-        "weight": 28.8
-      },
-      {
-        "itemId": "collectible-15200000167",
-        "weight": 28.8
-      },
-      {
         "itemId": "collectible-15080050143",
         "weight": 28.627
       },
@@ -14883,22 +12424,6 @@ export const CONTAINER_TYPES = {
         "weight": 25.634
       },
       {
-        "itemId": "collectible-15200000141",
-        "weight": 25.2
-      },
-      {
-        "itemId": "collectible-15200000142",
-        "weight": 25.2
-      },
-      {
-        "itemId": "collectible-15200000165",
-        "weight": 25.2
-      },
-      {
-        "itemId": "collectible-15200000184",
-        "weight": 25.2
-      },
-      {
         "itemId": "collectible-15080050163",
         "weight": 24.408
       },
@@ -14917,10 +12442,6 @@ export const CONTAINER_TYPES = {
       {
         "itemId": "collectible-15080050002",
         "weight": 22.924
-      },
-      {
-        "itemId": "collectible-15200000144",
-        "weight": 22.5
       },
       {
         "itemId": "ballistic-computer",
@@ -15007,18 +12528,6 @@ export const CONTAINER_TYPES = {
         "weight": 10.08
       },
       {
-        "itemId": "collectible-15030050013",
-        "weight": 9
-      },
-      {
-        "itemId": "collectible-15080050204",
-        "weight": 9
-      },
-      {
-        "itemId": "collectible-15080050205",
-        "weight": 9
-      },
-      {
         "itemId": "collectible-15080050071",
         "weight": 8.82
       },
@@ -15049,110 +12558,6 @@ export const CONTAINER_TYPES = {
       {
         "itemId": "secret-server",
         "weight": 7.875
-      },
-      {
-        "itemId": "collectible-15080050197",
-        "weight": 7.2
-      },
-      {
-        "itemId": "collectible-15200000034",
-        "weight": 7.2
-      },
-      {
-        "itemId": "collectible-15200000049",
-        "weight": 7.2
-      },
-      {
-        "itemId": "collectible-15200000058",
-        "weight": 7.2
-      },
-      {
-        "itemId": "collectible-15200000059",
-        "weight": 7.2
-      },
-      {
-        "itemId": "collectible-15200000069",
-        "weight": 7.2
-      },
-      {
-        "itemId": "collectible-15200000071",
-        "weight": 7.2
-      },
-      {
-        "itemId": "collectible-15200000072",
-        "weight": 7.2
-      },
-      {
-        "itemId": "collectible-15200000115",
-        "weight": 7.2
-      },
-      {
-        "itemId": "collectible-15200000117",
-        "weight": 7.2
-      },
-      {
-        "itemId": "collectible-15200000123",
-        "weight": 7.2
-      },
-      {
-        "itemId": "collectible-15200000124",
-        "weight": 7.2
-      },
-      {
-        "itemId": "collectible-15200000125",
-        "weight": 7.2
-      },
-      {
-        "itemId": "collectible-15200000127",
-        "weight": 7.2
-      },
-      {
-        "itemId": "collectible-15200000131",
-        "weight": 7.2
-      },
-      {
-        "itemId": "collectible-15200000137",
-        "weight": 7.2
-      },
-      {
-        "itemId": "collectible-15200000152",
-        "weight": 7.2
-      },
-      {
-        "itemId": "collectible-15200000153",
-        "weight": 7.2
-      },
-      {
-        "itemId": "collectible-15200000156",
-        "weight": 7.2
-      },
-      {
-        "itemId": "collectible-15200000158",
-        "weight": 7.2
-      },
-      {
-        "itemId": "collectible-15200000168",
-        "weight": 7.2
-      },
-      {
-        "itemId": "collectible-15080050069",
-        "weight": 6.3
-      },
-      {
-        "itemId": "collectible-15080050173",
-        "weight": 6.3
-      },
-      {
-        "itemId": "collectible-15200000143",
-        "weight": 6.3
-      },
-      {
-        "itemId": "collectible-15200000166",
-        "weight": 6.3
-      },
-      {
-        "itemId": "collectible-15200000185",
-        "weight": 6.3
       },
       {
         "itemId": "camera",
@@ -15450,14 +12855,6 @@ export const CONTAINER_TYPES = {
         "weight": 1680
       },
       {
-        "itemId": "collectible-15200000134",
-        "weight": 1680
-      },
-      {
-        "itemId": "collectible-15200000138",
-        "weight": 1680
-      },
-      {
         "itemId": "lighter",
         "weight": 1680
       },
@@ -15638,14 +13035,6 @@ export const CONTAINER_TYPES = {
         "weight": 720
       },
       {
-        "itemId": "collectible-15200000139",
-        "weight": 720
-      },
-      {
-        "itemId": "collectible-15200000163",
-        "weight": 720
-      },
-      {
         "itemId": "collectible-15040010003",
         "weight": 588
       },
@@ -15810,10 +13199,6 @@ export const CONTAINER_TYPES = {
         "weight": 252
       },
       {
-        "itemId": "collectible-15200000073",
-        "weight": 252
-      },
-      {
         "itemId": "collectible-15060080005",
         "weight": 240
       },
@@ -15823,10 +13208,6 @@ export const CONTAINER_TYPES = {
       },
       {
         "itemId": "collectible-15080050068",
-        "weight": 240
-      },
-      {
-        "itemId": "collectible-15080050070",
         "weight": 240
       },
       {
@@ -15847,22 +13228,6 @@ export const CONTAINER_TYPES = {
       },
       {
         "itemId": "collectible-15080050219",
-        "weight": 240
-      },
-      {
-        "itemId": "collectible-15200000135",
-        "weight": 240
-      },
-      {
-        "itemId": "collectible-15200000140",
-        "weight": 240
-      },
-      {
-        "itemId": "collectible-15200000164",
-        "weight": 240
-      },
-      {
-        "itemId": "collectible-15200000183",
         "weight": 240
       },
       {
@@ -15898,14 +13263,6 @@ export const CONTAINER_TYPES = {
         "weight": 180
       },
       {
-        "itemId": "fabric",
-        "weight": 180
-      },
-      {
-        "itemId": "toolbox-item",
-        "weight": 180
-      },
-      {
         "itemId": "wireless-drill",
         "weight": 180
       },
@@ -15930,39 +13287,7 @@ export const CONTAINER_TYPES = {
         "weight": 108
       },
       {
-        "itemId": "collectible-15080050206",
-        "weight": 108
-      },
-      {
-        "itemId": "collectible-15080050207",
-        "weight": 108
-      },
-      {
-        "itemId": "collectible-15080050208",
-        "weight": 108
-      },
-      {
-        "itemId": "collectible-15080050209",
-        "weight": 108
-      },
-      {
         "itemId": "collectible-15080050216",
-        "weight": 108
-      },
-      {
-        "itemId": "collectible-15200000074",
-        "weight": 108
-      },
-      {
-        "itemId": "collectible-15200000148",
-        "weight": 108
-      },
-      {
-        "itemId": "collectible-15200000149",
-        "weight": 108
-      },
-      {
-        "itemId": "collectible-15200000150",
         "weight": 108
       },
       {
@@ -15987,14 +13312,6 @@ export const CONTAINER_TYPES = {
       },
       {
         "itemId": "consumable-14070000005",
-        "weight": 108
-      },
-      {
-        "itemId": "consumable-14070000016",
-        "weight": 108
-      },
-      {
-        "itemId": "consumable-14070000017",
         "weight": 108
       },
       {
@@ -16030,10 +13347,6 @@ export const CONTAINER_TYPES = {
         "weight": 84
       },
       {
-        "itemId": "collectible-15080050024",
-        "weight": 84
-      },
-      {
         "itemId": "collectible-15080050124",
         "weight": 84
       },
@@ -16044,26 +13357,6 @@ export const CONTAINER_TYPES = {
       {
         "itemId": "collectible-15080050182",
         "weight": 84
-      },
-      {
-        "itemId": "collectible-15200000126",
-        "weight": 84
-      },
-      {
-        "itemId": "collectible-15200000141",
-        "weight": 72
-      },
-      {
-        "itemId": "collectible-15200000142",
-        "weight": 72
-      },
-      {
-        "itemId": "collectible-15200000165",
-        "weight": 72
-      },
-      {
-        "itemId": "collectible-15200000184",
-        "weight": 72
       },
       {
         "itemId": "collectible-15080050163",
@@ -16086,19 +13379,7 @@ export const CONTAINER_TYPES = {
         "weight": 60
       },
       {
-        "itemId": "collectible-15020050004",
-        "weight": 60
-      },
-      {
-        "itemId": "collectible-15020050006",
-        "weight": 60
-      },
-      {
         "itemId": "collectible-15080050119",
-        "weight": 60
-      },
-      {
-        "itemId": "collectible-15080050130",
         "weight": 60
       },
       {
@@ -16134,51 +13415,11 @@ export const CONTAINER_TYPES = {
         "weight": 36.379
       },
       {
-        "itemId": "collectible-15080050063",
-        "weight": 32.4
-      },
-      {
         "itemId": "collectible-15080050148",
         "weight": 32.4
       },
       {
         "itemId": "collectible-15080050149",
-        "weight": 32.4
-      },
-      {
-        "itemId": "collectible-15080050198",
-        "weight": 32.4
-      },
-      {
-        "itemId": "collectible-15090010040",
-        "weight": 32.4
-      },
-      {
-        "itemId": "collectible-15200000129",
-        "weight": 32.4
-      },
-      {
-        "itemId": "collectible-15200000145",
-        "weight": 32.4
-      },
-      {
-        "itemId": "collectible-15200000146",
-        "weight": 32.4
-      },
-      {
-        "itemId": "collectible-15200000147",
-        "weight": 32.4
-      },
-      {
-        "itemId": "collectible-15200000162",
-        "weight": 32.4
-      },
-      {
-        "itemId": "consumable-14070000018",
-        "weight": 32.4
-      },
-      {
-        "itemId": "consumable-14070000019",
         "weight": 32.4
       },
       {
@@ -16190,55 +13431,7 @@ export const CONTAINER_TYPES = {
         "weight": 25.963
       },
       {
-        "itemId": "collectible-15080050025",
-        "weight": 25.2
-      },
-      {
         "itemId": "collectible-15080050071",
-        "weight": 25.2
-      },
-      {
-        "itemId": "collectible-15200000048",
-        "weight": 25.2
-      },
-      {
-        "itemId": "collectible-15200000068",
-        "weight": 25.2
-      },
-      {
-        "itemId": "collectible-15200000070",
-        "weight": 25.2
-      },
-      {
-        "itemId": "collectible-15200000075",
-        "weight": 25.2
-      },
-      {
-        "itemId": "collectible-15200000114",
-        "weight": 25.2
-      },
-      {
-        "itemId": "collectible-15200000130",
-        "weight": 25.2
-      },
-      {
-        "itemId": "collectible-15200000151",
-        "weight": 25.2
-      },
-      {
-        "itemId": "collectible-15200000154",
-        "weight": 25.2
-      },
-      {
-        "itemId": "collectible-15200000155",
-        "weight": 25.2
-      },
-      {
-        "itemId": "collectible-15200000157",
-        "weight": 25.2
-      },
-      {
-        "itemId": "collectible-15200000167",
         "weight": 25.2
       },
       {
@@ -16280,26 +13473,6 @@ export const CONTAINER_TYPES = {
       {
         "itemId": "collectible-15080050191",
         "weight": 18.155
-      },
-      {
-        "itemId": "collectible-15080050069",
-        "weight": 18
-      },
-      {
-        "itemId": "collectible-15080050173",
-        "weight": 18
-      },
-      {
-        "itemId": "collectible-15200000143",
-        "weight": 18
-      },
-      {
-        "itemId": "collectible-15200000166",
-        "weight": 18
-      },
-      {
-        "itemId": "collectible-15200000185",
-        "weight": 18
       },
       {
         "itemId": "collectible-15080050004",
@@ -16378,10 +13551,6 @@ export const CONTAINER_TYPES = {
         "weight": 8.82
       },
       {
-        "itemId": "collectible-15200000144",
-        "weight": 8.1
-      },
-      {
         "itemId": "collectible-15030050019",
         "weight": 7.564
       },
@@ -16404,98 +13573,6 @@ export const CONTAINER_TYPES = {
       {
         "itemId": "collectible-15080050131",
         "weight": 6.3
-      },
-      {
-        "itemId": "collectible-15080050197",
-        "weight": 6.3
-      },
-      {
-        "itemId": "collectible-15200000034",
-        "weight": 6.3
-      },
-      {
-        "itemId": "collectible-15200000049",
-        "weight": 6.3
-      },
-      {
-        "itemId": "collectible-15200000058",
-        "weight": 6.3
-      },
-      {
-        "itemId": "collectible-15200000059",
-        "weight": 6.3
-      },
-      {
-        "itemId": "collectible-15200000069",
-        "weight": 6.3
-      },
-      {
-        "itemId": "collectible-15200000071",
-        "weight": 6.3
-      },
-      {
-        "itemId": "collectible-15200000072",
-        "weight": 6.3
-      },
-      {
-        "itemId": "collectible-15200000115",
-        "weight": 6.3
-      },
-      {
-        "itemId": "collectible-15200000117",
-        "weight": 6.3
-      },
-      {
-        "itemId": "collectible-15200000123",
-        "weight": 6.3
-      },
-      {
-        "itemId": "collectible-15200000124",
-        "weight": 6.3
-      },
-      {
-        "itemId": "collectible-15200000125",
-        "weight": 6.3
-      },
-      {
-        "itemId": "collectible-15200000127",
-        "weight": 6.3
-      },
-      {
-        "itemId": "collectible-15200000131",
-        "weight": 6.3
-      },
-      {
-        "itemId": "collectible-15200000137",
-        "weight": 6.3
-      },
-      {
-        "itemId": "collectible-15200000152",
-        "weight": 6.3
-      },
-      {
-        "itemId": "collectible-15200000153",
-        "weight": 6.3
-      },
-      {
-        "itemId": "collectible-15200000156",
-        "weight": 6.3
-      },
-      {
-        "itemId": "collectible-15200000158",
-        "weight": 6.3
-      },
-      {
-        "itemId": "collectible-15200000168",
-        "weight": 6.3
-      },
-      {
-        "itemId": "collectible-15080050144",
-        "weight": 4.5
-      },
-      {
-        "itemId": "collectible-15080050220",
-        "weight": 4.5
       },
       {
         "itemId": "collectible-15070040003",
@@ -16833,14 +13910,6 @@ export const CONTAINER_TYPES = {
         "weight": 1260
       },
       {
-        "itemId": "collectible-15200000134",
-        "weight": 1260
-      },
-      {
-        "itemId": "collectible-15200000138",
-        "weight": 1260
-      },
-      {
         "itemId": "lighter",
         "weight": 1260
       },
@@ -17041,14 +14110,6 @@ export const CONTAINER_TYPES = {
         "weight": 540
       },
       {
-        "itemId": "collectible-15200000139",
-        "weight": 540
-      },
-      {
-        "itemId": "collectible-15200000163",
-        "weight": 540
-      },
-      {
         "itemId": "cement-bag",
         "weight": 432
       },
@@ -17078,14 +14139,6 @@ export const CONTAINER_TYPES = {
       },
       {
         "itemId": "collectible-15040010022",
-        "weight": 432
-      },
-      {
-        "itemId": "fabric",
-        "weight": 432
-      },
-      {
-        "itemId": "toolbox-item",
         "weight": 432
       },
       {
@@ -17201,10 +14254,6 @@ export const CONTAINER_TYPES = {
         "weight": 180
       },
       {
-        "itemId": "collectible-15080050070",
-        "weight": 180
-      },
-      {
         "itemId": "collectible-15080050136",
         "weight": 180
       },
@@ -17225,35 +14274,11 @@ export const CONTAINER_TYPES = {
         "weight": 180
       },
       {
-        "itemId": "collectible-15200000135",
-        "weight": 180
-      },
-      {
-        "itemId": "collectible-15200000140",
-        "weight": 180
-      },
-      {
-        "itemId": "collectible-15200000164",
-        "weight": 180
-      },
-      {
-        "itemId": "collectible-15200000183",
-        "weight": 180
-      },
-      {
         "itemId": "collectible-15020010024",
         "weight": 144
       },
       {
         "itemId": "collectible-15020050003",
-        "weight": 144
-      },
-      {
-        "itemId": "collectible-15020050004",
-        "weight": 144
-      },
-      {
-        "itemId": "collectible-15020050006",
         "weight": 144
       },
       {
@@ -17297,10 +14322,6 @@ export const CONTAINER_TYPES = {
         "weight": 144
       },
       {
-        "itemId": "collectible-15080050130",
-        "weight": 144
-      },
-      {
         "itemId": "collectible-15080050193",
         "weight": 144
       },
@@ -17310,10 +14331,6 @@ export const CONTAINER_TYPES = {
       },
       {
         "itemId": "collectible-15200000044",
-        "weight": 144
-      },
-      {
-        "itemId": "collectible-15200000073",
         "weight": 144
       },
       {
@@ -17349,14 +14366,6 @@ export const CONTAINER_TYPES = {
         "weight": 96
       },
       {
-        "itemId": "consumable-14070000016",
-        "weight": 96
-      },
-      {
-        "itemId": "consumable-14070000017",
-        "weight": 96
-      },
-      {
         "itemId": "consumable-14060000005",
         "weight": 95.376
       },
@@ -17381,60 +14390,12 @@ export const CONTAINER_TYPES = {
         "weight": 84
       },
       {
-        "itemId": "collectible-15080050206",
-        "weight": 84
-      },
-      {
-        "itemId": "collectible-15080050207",
-        "weight": 84
-      },
-      {
-        "itemId": "collectible-15080050208",
-        "weight": 84
-      },
-      {
-        "itemId": "collectible-15080050209",
-        "weight": 84
-      },
-      {
         "itemId": "collectible-15080050216",
-        "weight": 84
-      },
-      {
-        "itemId": "collectible-15200000074",
-        "weight": 84
-      },
-      {
-        "itemId": "collectible-15200000148",
-        "weight": 84
-      },
-      {
-        "itemId": "collectible-15200000149",
-        "weight": 84
-      },
-      {
-        "itemId": "collectible-15200000150",
         "weight": 84
       },
       {
         "itemId": "consumable-14070000007",
         "weight": 81.722
-      },
-      {
-        "itemId": "collectible-15200000141",
-        "weight": 54
-      },
-      {
-        "itemId": "collectible-15200000142",
-        "weight": 54
-      },
-      {
-        "itemId": "collectible-15200000165",
-        "weight": 54
-      },
-      {
-        "itemId": "collectible-15200000184",
-        "weight": 54
       },
       {
         "itemId": "collectible-15080050163",
@@ -17477,10 +14438,6 @@ export const CONTAINER_TYPES = {
         "weight": 48
       },
       {
-        "itemId": "collectible-15080050024",
-        "weight": 48
-      },
-      {
         "itemId": "collectible-15080050057",
         "weight": 48
       },
@@ -17502,14 +14459,6 @@ export const CONTAINER_TYPES = {
       },
       {
         "itemId": "collectible-15080050214",
-        "weight": 48
-      },
-      {
-        "itemId": "collectible-15200000061",
-        "weight": 48
-      },
-      {
-        "itemId": "collectible-15200000126",
         "weight": 48
       },
       {
@@ -17541,51 +14490,11 @@ export const CONTAINER_TYPES = {
         "weight": 29.401
       },
       {
-        "itemId": "consumable-14070000018",
-        "weight": 28.8
-      },
-      {
-        "itemId": "consumable-14070000019",
-        "weight": 28.8
-      },
-      {
-        "itemId": "collectible-15080050063",
-        "weight": 25.2
-      },
-      {
         "itemId": "collectible-15080050148",
         "weight": 25.2
       },
       {
         "itemId": "collectible-15080050149",
-        "weight": 25.2
-      },
-      {
-        "itemId": "collectible-15080050198",
-        "weight": 25.2
-      },
-      {
-        "itemId": "collectible-15090010040",
-        "weight": 25.2
-      },
-      {
-        "itemId": "collectible-15200000129",
-        "weight": 25.2
-      },
-      {
-        "itemId": "collectible-15200000145",
-        "weight": 25.2
-      },
-      {
-        "itemId": "collectible-15200000146",
-        "weight": 25.2
-      },
-      {
-        "itemId": "collectible-15200000147",
-        "weight": 25.2
-      },
-      {
-        "itemId": "collectible-15200000162",
         "weight": 25.2
       },
       {
@@ -17629,54 +14538,6 @@ export const CONTAINER_TYPES = {
         "weight": 15.12
       },
       {
-        "itemId": "collectible-15080050025",
-        "weight": 14.4
-      },
-      {
-        "itemId": "collectible-15200000048",
-        "weight": 14.4
-      },
-      {
-        "itemId": "collectible-15200000068",
-        "weight": 14.4
-      },
-      {
-        "itemId": "collectible-15200000070",
-        "weight": 14.4
-      },
-      {
-        "itemId": "collectible-15200000075",
-        "weight": 14.4
-      },
-      {
-        "itemId": "collectible-15200000114",
-        "weight": 14.4
-      },
-      {
-        "itemId": "collectible-15200000130",
-        "weight": 14.4
-      },
-      {
-        "itemId": "collectible-15200000151",
-        "weight": 14.4
-      },
-      {
-        "itemId": "collectible-15200000154",
-        "weight": 14.4
-      },
-      {
-        "itemId": "collectible-15200000155",
-        "weight": 14.4
-      },
-      {
-        "itemId": "collectible-15200000157",
-        "weight": 14.4
-      },
-      {
-        "itemId": "collectible-15200000167",
-        "weight": 14.4
-      },
-      {
         "itemId": "collectible-15080050143",
         "weight": 14.313
       },
@@ -17697,26 +14558,6 @@ export const CONTAINER_TYPES = {
         "weight": 13.766
       },
       {
-        "itemId": "collectible-15080050069",
-        "weight": 13.5
-      },
-      {
-        "itemId": "collectible-15080050173",
-        "weight": 13.5
-      },
-      {
-        "itemId": "collectible-15200000143",
-        "weight": 13.5
-      },
-      {
-        "itemId": "collectible-15200000166",
-        "weight": 13.5
-      },
-      {
-        "itemId": "collectible-15200000185",
-        "weight": 13.5
-      },
-      {
         "itemId": "collectible-15080050165",
         "weight": 13.004
       },
@@ -17735,14 +14576,6 @@ export const CONTAINER_TYPES = {
       {
         "itemId": "collectible-15200000032",
         "weight": 12.817
-      },
-      {
-        "itemId": "collectible-15080050144",
-        "weight": 10.8
-      },
-      {
-        "itemId": "collectible-15080050220",
-        "weight": 10.8
       },
       {
         "itemId": "collectible-15080050129",
@@ -17817,10 +14650,6 @@ export const CONTAINER_TYPES = {
         "weight": 6.99
       },
       {
-        "itemId": "collectible-15200000144",
-        "weight": 6.3
-      },
-      {
         "itemId": "collectible-15080050133",
         "weight": 5.617
       },
@@ -17867,90 +14696,6 @@ export const CONTAINER_TYPES = {
       {
         "itemId": "collectible-15080050211",
         "weight": 3.78
-      },
-      {
-        "itemId": "collectible-15080050197",
-        "weight": 3.6
-      },
-      {
-        "itemId": "collectible-15200000034",
-        "weight": 3.6
-      },
-      {
-        "itemId": "collectible-15200000049",
-        "weight": 3.6
-      },
-      {
-        "itemId": "collectible-15200000058",
-        "weight": 3.6
-      },
-      {
-        "itemId": "collectible-15200000059",
-        "weight": 3.6
-      },
-      {
-        "itemId": "collectible-15200000069",
-        "weight": 3.6
-      },
-      {
-        "itemId": "collectible-15200000071",
-        "weight": 3.6
-      },
-      {
-        "itemId": "collectible-15200000072",
-        "weight": 3.6
-      },
-      {
-        "itemId": "collectible-15200000115",
-        "weight": 3.6
-      },
-      {
-        "itemId": "collectible-15200000117",
-        "weight": 3.6
-      },
-      {
-        "itemId": "collectible-15200000123",
-        "weight": 3.6
-      },
-      {
-        "itemId": "collectible-15200000124",
-        "weight": 3.6
-      },
-      {
-        "itemId": "collectible-15200000125",
-        "weight": 3.6
-      },
-      {
-        "itemId": "collectible-15200000127",
-        "weight": 3.6
-      },
-      {
-        "itemId": "collectible-15200000131",
-        "weight": 3.6
-      },
-      {
-        "itemId": "collectible-15200000137",
-        "weight": 3.6
-      },
-      {
-        "itemId": "collectible-15200000152",
-        "weight": 3.6
-      },
-      {
-        "itemId": "collectible-15200000153",
-        "weight": 3.6
-      },
-      {
-        "itemId": "collectible-15200000156",
-        "weight": 3.6
-      },
-      {
-        "itemId": "collectible-15200000158",
-        "weight": 3.6
-      },
-      {
-        "itemId": "collectible-15200000168",
-        "weight": 3.6
       },
       {
         "itemId": "consumable-14060000003",
@@ -18232,14 +14977,6 @@ export const CONTAINER_TYPES = {
         "weight": 1260
       },
       {
-        "itemId": "collectible-15200000134",
-        "weight": 1260
-      },
-      {
-        "itemId": "collectible-15200000138",
-        "weight": 1260
-      },
-      {
         "itemId": "lighter",
         "weight": 1260
       },
@@ -18400,14 +15137,6 @@ export const CONTAINER_TYPES = {
         "weight": 540
       },
       {
-        "itemId": "collectible-15200000139",
-        "weight": 540
-      },
-      {
-        "itemId": "collectible-15200000163",
-        "weight": 540
-      },
-      {
         "itemId": "collectible-15020010001",
         "weight": 480
       },
@@ -18465,10 +15194,6 @@ export const CONTAINER_TYPES = {
       },
       {
         "itemId": "collectible-15080050193",
-        "weight": 432
-      },
-      {
-        "itemId": "collectible-15200000073",
         "weight": 432
       },
       {
@@ -18648,10 +15373,6 @@ export const CONTAINER_TYPES = {
         "weight": 180
       },
       {
-        "itemId": "collectible-15080050070",
-        "weight": 180
-      },
-      {
         "itemId": "collectible-15080050096",
         "weight": 180
       },
@@ -18677,22 +15398,6 @@ export const CONTAINER_TYPES = {
       },
       {
         "itemId": "collectible-15080050219",
-        "weight": 180
-      },
-      {
-        "itemId": "collectible-15200000135",
-        "weight": 180
-      },
-      {
-        "itemId": "collectible-15200000140",
-        "weight": 180
-      },
-      {
-        "itemId": "collectible-15200000164",
-        "weight": 180
-      },
-      {
-        "itemId": "collectible-15200000183",
         "weight": 180
       },
       {
@@ -18752,10 +15457,6 @@ export const CONTAINER_TYPES = {
         "weight": 144
       },
       {
-        "itemId": "collectible-15080050024",
-        "weight": 144
-      },
-      {
         "itemId": "collectible-15080050124",
         "weight": 144
       },
@@ -18765,10 +15466,6 @@ export const CONTAINER_TYPES = {
       },
       {
         "itemId": "collectible-15080050182",
-        "weight": 144
-      },
-      {
-        "itemId": "collectible-15200000126",
         "weight": 144
       },
       {
@@ -18852,14 +15549,6 @@ export const CONTAINER_TYPES = {
         "weight": 108
       },
       {
-        "itemId": "fabric",
-        "weight": 108
-      },
-      {
-        "itemId": "toolbox-item",
-        "weight": 108
-      },
-      {
         "itemId": "wireless-drill",
         "weight": 108
       },
@@ -18896,39 +15585,7 @@ export const CONTAINER_TYPES = {
         "weight": 60
       },
       {
-        "itemId": "collectible-15080050206",
-        "weight": 60
-      },
-      {
-        "itemId": "collectible-15080050207",
-        "weight": 60
-      },
-      {
-        "itemId": "collectible-15080050208",
-        "weight": 60
-      },
-      {
-        "itemId": "collectible-15080050209",
-        "weight": 60
-      },
-      {
         "itemId": "collectible-15080050216",
-        "weight": 60
-      },
-      {
-        "itemId": "collectible-15200000074",
-        "weight": 60
-      },
-      {
-        "itemId": "collectible-15200000148",
-        "weight": 60
-      },
-      {
-        "itemId": "collectible-15200000149",
-        "weight": 60
-      },
-      {
-        "itemId": "collectible-15200000150",
         "weight": 60
       },
       {
@@ -18956,32 +15613,8 @@ export const CONTAINER_TYPES = {
         "weight": 60
       },
       {
-        "itemId": "consumable-14070000016",
-        "weight": 60
-      },
-      {
-        "itemId": "consumable-14070000017",
-        "weight": 60
-      },
-      {
         "itemId": "consumable-14060000005",
         "weight": 59.61
-      },
-      {
-        "itemId": "collectible-15200000141",
-        "weight": 54
-      },
-      {
-        "itemId": "collectible-15200000142",
-        "weight": 54
-      },
-      {
-        "itemId": "collectible-15200000165",
-        "weight": 54
-      },
-      {
-        "itemId": "collectible-15200000184",
-        "weight": 54
       },
       {
         "itemId": "collectible-15080050163",
@@ -19002,54 +15635,6 @@ export const CONTAINER_TYPES = {
       {
         "itemId": "collectible-15060080014",
         "weight": 43.41
-      },
-      {
-        "itemId": "collectible-15080050025",
-        "weight": 43.2
-      },
-      {
-        "itemId": "collectible-15200000048",
-        "weight": 43.2
-      },
-      {
-        "itemId": "collectible-15200000068",
-        "weight": 43.2
-      },
-      {
-        "itemId": "collectible-15200000070",
-        "weight": 43.2
-      },
-      {
-        "itemId": "collectible-15200000075",
-        "weight": 43.2
-      },
-      {
-        "itemId": "collectible-15200000114",
-        "weight": 43.2
-      },
-      {
-        "itemId": "collectible-15200000130",
-        "weight": 43.2
-      },
-      {
-        "itemId": "collectible-15200000151",
-        "weight": 43.2
-      },
-      {
-        "itemId": "collectible-15200000154",
-        "weight": 43.2
-      },
-      {
-        "itemId": "collectible-15200000155",
-        "weight": 43.2
-      },
-      {
-        "itemId": "collectible-15200000157",
-        "weight": 43.2
-      },
-      {
-        "itemId": "collectible-15200000167",
-        "weight": 43.2
       },
       {
         "itemId": "collectible-15080050143",
@@ -19092,19 +15677,7 @@ export const CONTAINER_TYPES = {
         "weight": 36
       },
       {
-        "itemId": "collectible-15020050004",
-        "weight": 36
-      },
-      {
-        "itemId": "collectible-15020050006",
-        "weight": 36
-      },
-      {
         "itemId": "collectible-15080050119",
-        "weight": 36
-      },
-      {
-        "itemId": "collectible-15080050130",
         "weight": 36
       },
       {
@@ -19196,51 +15769,11 @@ export const CONTAINER_TYPES = {
         "weight": 18.9
       },
       {
-        "itemId": "collectible-15080050063",
-        "weight": 18
-      },
-      {
         "itemId": "collectible-15080050148",
         "weight": 18
       },
       {
         "itemId": "collectible-15080050149",
-        "weight": 18
-      },
-      {
-        "itemId": "collectible-15080050198",
-        "weight": 18
-      },
-      {
-        "itemId": "collectible-15090010040",
-        "weight": 18
-      },
-      {
-        "itemId": "collectible-15200000129",
-        "weight": 18
-      },
-      {
-        "itemId": "collectible-15200000145",
-        "weight": 18
-      },
-      {
-        "itemId": "collectible-15200000146",
-        "weight": 18
-      },
-      {
-        "itemId": "collectible-15200000147",
-        "weight": 18
-      },
-      {
-        "itemId": "collectible-15200000162",
-        "weight": 18
-      },
-      {
-        "itemId": "consumable-14070000018",
-        "weight": 18
-      },
-      {
-        "itemId": "consumable-14070000019",
         "weight": 18
       },
       {
@@ -19276,26 +15809,6 @@ export const CONTAINER_TYPES = {
         "weight": 13.582
       },
       {
-        "itemId": "collectible-15080050069",
-        "weight": 13.5
-      },
-      {
-        "itemId": "collectible-15080050173",
-        "weight": 13.5
-      },
-      {
-        "itemId": "collectible-15200000143",
-        "weight": 13.5
-      },
-      {
-        "itemId": "collectible-15200000166",
-        "weight": 13.5
-      },
-      {
-        "itemId": "collectible-15200000185",
-        "weight": 13.5
-      },
-      {
         "itemId": "collectible-15080050150",
         "weight": 12.818
       },
@@ -19316,108 +15829,12 @@ export const CONTAINER_TYPES = {
         "weight": 12.213
       },
       {
-        "itemId": "collectible-15080050197",
-        "weight": 10.8
-      },
-      {
-        "itemId": "collectible-15200000034",
-        "weight": 10.8
-      },
-      {
-        "itemId": "collectible-15200000049",
-        "weight": 10.8
-      },
-      {
-        "itemId": "collectible-15200000058",
-        "weight": 10.8
-      },
-      {
-        "itemId": "collectible-15200000059",
-        "weight": 10.8
-      },
-      {
-        "itemId": "collectible-15200000069",
-        "weight": 10.8
-      },
-      {
-        "itemId": "collectible-15200000071",
-        "weight": 10.8
-      },
-      {
-        "itemId": "collectible-15200000072",
-        "weight": 10.8
-      },
-      {
-        "itemId": "collectible-15200000115",
-        "weight": 10.8
-      },
-      {
-        "itemId": "collectible-15200000117",
-        "weight": 10.8
-      },
-      {
-        "itemId": "collectible-15200000123",
-        "weight": 10.8
-      },
-      {
-        "itemId": "collectible-15200000124",
-        "weight": 10.8
-      },
-      {
-        "itemId": "collectible-15200000125",
-        "weight": 10.8
-      },
-      {
-        "itemId": "collectible-15200000127",
-        "weight": 10.8
-      },
-      {
-        "itemId": "collectible-15200000131",
-        "weight": 10.8
-      },
-      {
-        "itemId": "collectible-15200000137",
-        "weight": 10.8
-      },
-      {
-        "itemId": "collectible-15200000152",
-        "weight": 10.8
-      },
-      {
-        "itemId": "collectible-15200000153",
-        "weight": 10.8
-      },
-      {
-        "itemId": "collectible-15200000156",
-        "weight": 10.8
-      },
-      {
-        "itemId": "collectible-15200000158",
-        "weight": 10.8
-      },
-      {
-        "itemId": "collectible-15200000168",
-        "weight": 10.8
-      },
-      {
         "itemId": "collectible-15080050191",
         "weight": 10.086
       },
       {
         "itemId": "collectible-15080050174",
         "weight": 9.166
-      },
-      {
-        "itemId": "collectible-15030050013",
-        "weight": 9
-      },
-      {
-        "itemId": "collectible-15080050204",
-        "weight": 9
-      },
-      {
-        "itemId": "collectible-15080050205",
-        "weight": 9
       },
       {
         "itemId": "consumable-14060000001",
@@ -19466,10 +15883,6 @@ export const CONTAINER_TYPES = {
       {
         "itemId": "collectible-15030050019",
         "weight": 4.539
-      },
-      {
-        "itemId": "collectible-15200000144",
-        "weight": 4.5
       },
       {
         "itemId": "africa-heart",
@@ -19614,14 +16027,6 @@ export const CONTAINER_TYPES = {
       {
         "itemId": "radio",
         "weight": 3.15
-      },
-      {
-        "itemId": "collectible-15080050144",
-        "weight": 2.7
-      },
-      {
-        "itemId": "collectible-15080050220",
-        "weight": 2.7
       },
       {
         "itemId": "collectible-15070040003",
@@ -19847,14 +16252,6 @@ export const CONTAINER_TYPES = {
         "weight": 1092
       },
       {
-        "itemId": "collectible-15200000134",
-        "weight": 1092
-      },
-      {
-        "itemId": "collectible-15200000138",
-        "weight": 1092
-      },
-      {
         "itemId": "lighter",
         "weight": 1092
       },
@@ -20020,18 +16417,6 @@ export const CONTAINER_TYPES = {
       },
       {
         "itemId": "collectible-15080050193",
-        "weight": 468
-      },
-      {
-        "itemId": "collectible-15200000073",
-        "weight": 468
-      },
-      {
-        "itemId": "collectible-15200000139",
-        "weight": 468
-      },
-      {
-        "itemId": "collectible-15200000163",
         "weight": 468
       },
       {
@@ -20315,15 +16700,7 @@ export const CONTAINER_TYPES = {
         "weight": 156
       },
       {
-        "itemId": "collectible-15080050024",
-        "weight": 156
-      },
-      {
         "itemId": "collectible-15080050068",
-        "weight": 156
-      },
-      {
-        "itemId": "collectible-15080050070",
         "weight": 156
       },
       {
@@ -20356,26 +16733,6 @@ export const CONTAINER_TYPES = {
       },
       {
         "itemId": "collectible-15080050219",
-        "weight": 156
-      },
-      {
-        "itemId": "collectible-15200000126",
-        "weight": 156
-      },
-      {
-        "itemId": "collectible-15200000135",
-        "weight": 156
-      },
-      {
-        "itemId": "collectible-15200000140",
-        "weight": 156
-      },
-      {
-        "itemId": "collectible-15200000164",
-        "weight": 156
-      },
-      {
-        "itemId": "collectible-15200000183",
         "weight": 156
       },
       {
@@ -20507,14 +16864,6 @@ export const CONTAINER_TYPES = {
         "weight": 72
       },
       {
-        "itemId": "fabric",
-        "weight": 72
-      },
-      {
-        "itemId": "toolbox-item",
-        "weight": 72
-      },
-      {
         "itemId": "wireless-drill",
         "weight": 72
       },
@@ -20547,84 +16896,12 @@ export const CONTAINER_TYPES = {
         "weight": 60
       },
       {
-        "itemId": "consumable-14070000016",
-        "weight": 60
-      },
-      {
-        "itemId": "consumable-14070000017",
-        "weight": 60
-      },
-      {
         "itemId": "consumable-14060000005",
         "weight": 59.61
       },
       {
         "itemId": "consumable-14070000007",
         "weight": 51.076
-      },
-      {
-        "itemId": "collectible-15080050025",
-        "weight": 46.8
-      },
-      {
-        "itemId": "collectible-15200000048",
-        "weight": 46.8
-      },
-      {
-        "itemId": "collectible-15200000068",
-        "weight": 46.8
-      },
-      {
-        "itemId": "collectible-15200000070",
-        "weight": 46.8
-      },
-      {
-        "itemId": "collectible-15200000075",
-        "weight": 46.8
-      },
-      {
-        "itemId": "collectible-15200000114",
-        "weight": 46.8
-      },
-      {
-        "itemId": "collectible-15200000130",
-        "weight": 46.8
-      },
-      {
-        "itemId": "collectible-15200000141",
-        "weight": 46.8
-      },
-      {
-        "itemId": "collectible-15200000142",
-        "weight": 46.8
-      },
-      {
-        "itemId": "collectible-15200000151",
-        "weight": 46.8
-      },
-      {
-        "itemId": "collectible-15200000154",
-        "weight": 46.8
-      },
-      {
-        "itemId": "collectible-15200000155",
-        "weight": 46.8
-      },
-      {
-        "itemId": "collectible-15200000157",
-        "weight": 46.8
-      },
-      {
-        "itemId": "collectible-15200000165",
-        "weight": 46.8
-      },
-      {
-        "itemId": "collectible-15200000167",
-        "weight": 46.8
-      },
-      {
-        "itemId": "collectible-15200000184",
-        "weight": 46.8
       },
       {
         "itemId": "collectible-15080050143",
@@ -20707,47 +16984,11 @@ export const CONTAINER_TYPES = {
         "weight": 36
       },
       {
-        "itemId": "collectible-15080050206",
-        "weight": 36
-      },
-      {
-        "itemId": "collectible-15080050207",
-        "weight": 36
-      },
-      {
-        "itemId": "collectible-15080050208",
-        "weight": 36
-      },
-      {
-        "itemId": "collectible-15080050209",
-        "weight": 36
-      },
-      {
         "itemId": "collectible-15080050214",
         "weight": 36
       },
       {
         "itemId": "collectible-15080050216",
-        "weight": 36
-      },
-      {
-        "itemId": "collectible-15200000061",
-        "weight": 36
-      },
-      {
-        "itemId": "collectible-15200000074",
-        "weight": 36
-      },
-      {
-        "itemId": "collectible-15200000148",
-        "weight": 36
-      },
-      {
-        "itemId": "collectible-15200000149",
-        "weight": 36
-      },
-      {
-        "itemId": "collectible-15200000150",
         "weight": 36
       },
       {
@@ -20831,19 +17072,7 @@ export const CONTAINER_TYPES = {
         "weight": 24
       },
       {
-        "itemId": "collectible-15020050004",
-        "weight": 24
-      },
-      {
-        "itemId": "collectible-15020050006",
-        "weight": 24
-      },
-      {
         "itemId": "collectible-15080050119",
-        "weight": 24
-      },
-      {
-        "itemId": "collectible-15080050130",
         "weight": 24
       },
       {
@@ -20869,14 +17098,6 @@ export const CONTAINER_TYPES = {
       {
         "itemId": "collectible-15080050133",
         "weight": 18.254
-      },
-      {
-        "itemId": "consumable-14070000018",
-        "weight": 18
-      },
-      {
-        "itemId": "consumable-14070000019",
-        "weight": 18
       },
       {
         "itemId": "collectible-15080050034",
@@ -20911,147 +17132,11 @@ export const CONTAINER_TYPES = {
         "weight": 13.86
       },
       {
-        "itemId": "collectible-15080050069",
-        "weight": 11.7
-      },
-      {
-        "itemId": "collectible-15080050173",
-        "weight": 11.7
-      },
-      {
-        "itemId": "collectible-15080050197",
-        "weight": 11.7
-      },
-      {
-        "itemId": "collectible-15200000034",
-        "weight": 11.7
-      },
-      {
-        "itemId": "collectible-15200000049",
-        "weight": 11.7
-      },
-      {
-        "itemId": "collectible-15200000058",
-        "weight": 11.7
-      },
-      {
-        "itemId": "collectible-15200000059",
-        "weight": 11.7
-      },
-      {
-        "itemId": "collectible-15200000069",
-        "weight": 11.7
-      },
-      {
-        "itemId": "collectible-15200000071",
-        "weight": 11.7
-      },
-      {
-        "itemId": "collectible-15200000072",
-        "weight": 11.7
-      },
-      {
-        "itemId": "collectible-15200000115",
-        "weight": 11.7
-      },
-      {
-        "itemId": "collectible-15200000117",
-        "weight": 11.7
-      },
-      {
-        "itemId": "collectible-15200000123",
-        "weight": 11.7
-      },
-      {
-        "itemId": "collectible-15200000124",
-        "weight": 11.7
-      },
-      {
-        "itemId": "collectible-15200000125",
-        "weight": 11.7
-      },
-      {
-        "itemId": "collectible-15200000127",
-        "weight": 11.7
-      },
-      {
-        "itemId": "collectible-15200000131",
-        "weight": 11.7
-      },
-      {
-        "itemId": "collectible-15200000137",
-        "weight": 11.7
-      },
-      {
-        "itemId": "collectible-15200000143",
-        "weight": 11.7
-      },
-      {
-        "itemId": "collectible-15200000152",
-        "weight": 11.7
-      },
-      {
-        "itemId": "collectible-15200000153",
-        "weight": 11.7
-      },
-      {
-        "itemId": "collectible-15200000156",
-        "weight": 11.7
-      },
-      {
-        "itemId": "collectible-15200000158",
-        "weight": 11.7
-      },
-      {
-        "itemId": "collectible-15200000166",
-        "weight": 11.7
-      },
-      {
-        "itemId": "collectible-15200000168",
-        "weight": 11.7
-      },
-      {
-        "itemId": "collectible-15200000185",
-        "weight": 11.7
-      },
-      {
-        "itemId": "collectible-15080050063",
-        "weight": 10.8
-      },
-      {
         "itemId": "collectible-15080050148",
         "weight": 10.8
       },
       {
         "itemId": "collectible-15080050149",
-        "weight": 10.8
-      },
-      {
-        "itemId": "collectible-15080050198",
-        "weight": 10.8
-      },
-      {
-        "itemId": "collectible-15090010040",
-        "weight": 10.8
-      },
-      {
-        "itemId": "collectible-15200000129",
-        "weight": 10.8
-      },
-      {
-        "itemId": "collectible-15200000145",
-        "weight": 10.8
-      },
-      {
-        "itemId": "collectible-15200000146",
-        "weight": 10.8
-      },
-      {
-        "itemId": "collectible-15200000147",
-        "weight": 10.8
-      },
-      {
-        "itemId": "collectible-15200000162",
         "weight": 10.8
       },
       {
@@ -21061,18 +17146,6 @@ export const CONTAINER_TYPES = {
       {
         "itemId": "collectible-15080050115",
         "weight": 10.437
-      },
-      {
-        "itemId": "collectible-15030050013",
-        "weight": 9.9
-      },
-      {
-        "itemId": "collectible-15080050204",
-        "weight": 9.9
-      },
-      {
-        "itemId": "collectible-15080050205",
-        "weight": 9.9
       },
       {
         "itemId": "collectible-15060040003",
@@ -21315,20 +17388,8 @@ export const CONTAINER_TYPES = {
         "weight": 3.026
       },
       {
-        "itemId": "collectible-15200000144",
-        "weight": 2.7
-      },
-      {
         "itemId": "collectible-15040010023",
         "weight": 2.52
-      },
-      {
-        "itemId": "collectible-15080050144",
-        "weight": 1.8
-      },
-      {
-        "itemId": "collectible-15080050220",
-        "weight": 1.8
       },
       {
         "itemId": "consumable-14060000003",
@@ -21694,10 +17755,6 @@ export const CONTAINER_TYPES = {
         "weight": 468
       },
       {
-        "itemId": "collectible-15200000073",
-        "weight": 468
-      },
-      {
         "itemId": "collectible-15010010015",
         "weight": 420
       },
@@ -21746,14 +17803,6 @@ export const CONTAINER_TYPES = {
         "weight": 420
       },
       {
-        "itemId": "collectible-15200000134",
-        "weight": 420
-      },
-      {
-        "itemId": "collectible-15200000138",
-        "weight": 420
-      },
-      {
         "itemId": "lighter",
         "weight": 420
       },
@@ -21778,39 +17827,7 @@ export const CONTAINER_TYPES = {
         "weight": 204
       },
       {
-        "itemId": "collectible-15080050206",
-        "weight": 204
-      },
-      {
-        "itemId": "collectible-15080050207",
-        "weight": 204
-      },
-      {
-        "itemId": "collectible-15080050208",
-        "weight": 204
-      },
-      {
-        "itemId": "collectible-15080050209",
-        "weight": 204
-      },
-      {
         "itemId": "collectible-15080050216",
-        "weight": 204
-      },
-      {
-        "itemId": "collectible-15200000074",
-        "weight": 204
-      },
-      {
-        "itemId": "collectible-15200000148",
-        "weight": 204
-      },
-      {
-        "itemId": "collectible-15200000149",
-        "weight": 204
-      },
-      {
-        "itemId": "collectible-15200000150",
         "weight": 204
       },
       {
@@ -21898,14 +17915,6 @@ export const CONTAINER_TYPES = {
         "weight": 180
       },
       {
-        "itemId": "collectible-15200000139",
-        "weight": 180
-      },
-      {
-        "itemId": "collectible-15200000163",
-        "weight": 180
-      },
-      {
         "itemId": "motherboard",
         "weight": 180
       },
@@ -21942,10 +17951,6 @@ export const CONTAINER_TYPES = {
         "weight": 156
       },
       {
-        "itemId": "collectible-15080050024",
-        "weight": 156
-      },
-      {
         "itemId": "collectible-15080050124",
         "weight": 156
       },
@@ -21955,10 +17960,6 @@ export const CONTAINER_TYPES = {
       },
       {
         "itemId": "collectible-15080050182",
-        "weight": 156
-      },
-      {
-        "itemId": "collectible-15200000126",
         "weight": 156
       },
       {
@@ -21974,43 +17975,11 @@ export const CONTAINER_TYPES = {
         "weight": 67.561
       },
       {
-        "itemId": "collectible-15080050063",
-        "weight": 61.2
-      },
-      {
         "itemId": "collectible-15080050148",
         "weight": 61.2
       },
       {
         "itemId": "collectible-15080050149",
-        "weight": 61.2
-      },
-      {
-        "itemId": "collectible-15080050198",
-        "weight": 61.2
-      },
-      {
-        "itemId": "collectible-15090010040",
-        "weight": 61.2
-      },
-      {
-        "itemId": "collectible-15200000129",
-        "weight": 61.2
-      },
-      {
-        "itemId": "collectible-15200000145",
-        "weight": 61.2
-      },
-      {
-        "itemId": "collectible-15200000146",
-        "weight": 61.2
-      },
-      {
-        "itemId": "collectible-15200000147",
-        "weight": 61.2
-      },
-      {
-        "itemId": "collectible-15200000162",
         "weight": 61.2
       },
       {
@@ -22027,10 +17996,6 @@ export const CONTAINER_TYPES = {
       },
       {
         "itemId": "collectible-15080050068",
-        "weight": 60
-      },
-      {
-        "itemId": "collectible-15080050070",
         "weight": 60
       },
       {
@@ -22054,22 +18019,6 @@ export const CONTAINER_TYPES = {
         "weight": 60
       },
       {
-        "itemId": "collectible-15200000135",
-        "weight": 60
-      },
-      {
-        "itemId": "collectible-15200000140",
-        "weight": 60
-      },
-      {
-        "itemId": "collectible-15200000164",
-        "weight": 60
-      },
-      {
-        "itemId": "collectible-15200000183",
-        "weight": 60
-      },
-      {
         "itemId": "collectible-15080050095",
         "weight": 51.235
       },
@@ -22088,54 +18037,6 @@ export const CONTAINER_TYPES = {
       {
         "itemId": "cpu",
         "weight": 46.943
-      },
-      {
-        "itemId": "collectible-15080050025",
-        "weight": 46.8
-      },
-      {
-        "itemId": "collectible-15200000048",
-        "weight": 46.8
-      },
-      {
-        "itemId": "collectible-15200000068",
-        "weight": 46.8
-      },
-      {
-        "itemId": "collectible-15200000070",
-        "weight": 46.8
-      },
-      {
-        "itemId": "collectible-15200000075",
-        "weight": 46.8
-      },
-      {
-        "itemId": "collectible-15200000114",
-        "weight": 46.8
-      },
-      {
-        "itemId": "collectible-15200000130",
-        "weight": 46.8
-      },
-      {
-        "itemId": "collectible-15200000151",
-        "weight": 46.8
-      },
-      {
-        "itemId": "collectible-15200000154",
-        "weight": 46.8
-      },
-      {
-        "itemId": "collectible-15200000155",
-        "weight": 46.8
-      },
-      {
-        "itemId": "collectible-15200000157",
-        "weight": 46.8
-      },
-      {
-        "itemId": "collectible-15200000167",
-        "weight": 46.8
       },
       {
         "itemId": "collectible-15080050143",
@@ -22270,22 +18171,6 @@ export const CONTAINER_TYPES = {
         "weight": 18.254
       },
       {
-        "itemId": "collectible-15200000141",
-        "weight": 18
-      },
-      {
-        "itemId": "collectible-15200000142",
-        "weight": 18
-      },
-      {
-        "itemId": "collectible-15200000165",
-        "weight": 18
-      },
-      {
-        "itemId": "collectible-15200000184",
-        "weight": 18
-      },
-      {
         "itemId": "collectible-15080050163",
         "weight": 17.434
       },
@@ -22306,24 +18191,8 @@ export const CONTAINER_TYPES = {
         "weight": 16.374
       },
       {
-        "itemId": "collectible-15200000144",
-        "weight": 15.3
-      },
-      {
         "itemId": "collectible-15060080014",
         "weight": 14.47
-      },
-      {
-        "itemId": "collectible-15030050013",
-        "weight": 13.5
-      },
-      {
-        "itemId": "collectible-15080050204",
-        "weight": 13.5
-      },
-      {
-        "itemId": "collectible-15080050205",
-        "weight": 13.5
       },
       {
         "itemId": "collectible-15080050132",
@@ -22332,90 +18201,6 @@ export const CONTAINER_TYPES = {
       {
         "itemId": "collectible-15080050180",
         "weight": 12.407
-      },
-      {
-        "itemId": "collectible-15080050197",
-        "weight": 11.7
-      },
-      {
-        "itemId": "collectible-15200000034",
-        "weight": 11.7
-      },
-      {
-        "itemId": "collectible-15200000049",
-        "weight": 11.7
-      },
-      {
-        "itemId": "collectible-15200000058",
-        "weight": 11.7
-      },
-      {
-        "itemId": "collectible-15200000059",
-        "weight": 11.7
-      },
-      {
-        "itemId": "collectible-15200000069",
-        "weight": 11.7
-      },
-      {
-        "itemId": "collectible-15200000071",
-        "weight": 11.7
-      },
-      {
-        "itemId": "collectible-15200000072",
-        "weight": 11.7
-      },
-      {
-        "itemId": "collectible-15200000115",
-        "weight": 11.7
-      },
-      {
-        "itemId": "collectible-15200000117",
-        "weight": 11.7
-      },
-      {
-        "itemId": "collectible-15200000123",
-        "weight": 11.7
-      },
-      {
-        "itemId": "collectible-15200000124",
-        "weight": 11.7
-      },
-      {
-        "itemId": "collectible-15200000125",
-        "weight": 11.7
-      },
-      {
-        "itemId": "collectible-15200000127",
-        "weight": 11.7
-      },
-      {
-        "itemId": "collectible-15200000131",
-        "weight": 11.7
-      },
-      {
-        "itemId": "collectible-15200000137",
-        "weight": 11.7
-      },
-      {
-        "itemId": "collectible-15200000152",
-        "weight": 11.7
-      },
-      {
-        "itemId": "collectible-15200000153",
-        "weight": 11.7
-      },
-      {
-        "itemId": "collectible-15200000156",
-        "weight": 11.7
-      },
-      {
-        "itemId": "collectible-15200000158",
-        "weight": 11.7
-      },
-      {
-        "itemId": "collectible-15200000168",
-        "weight": 11.7
       },
       {
         "itemId": "collectible-15080050071",
@@ -22508,26 +18293,6 @@ export const CONTAINER_TYPES = {
       {
         "itemId": "radio",
         "weight": 4.725
-      },
-      {
-        "itemId": "collectible-15080050069",
-        "weight": 4.5
-      },
-      {
-        "itemId": "collectible-15080050173",
-        "weight": 4.5
-      },
-      {
-        "itemId": "collectible-15200000143",
-        "weight": 4.5
-      },
-      {
-        "itemId": "collectible-15200000166",
-        "weight": 4.5
-      },
-      {
-        "itemId": "collectible-15200000185",
-        "weight": 4.5
       },
       {
         "itemId": "africa-heart",
