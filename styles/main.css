@@ -2214,6 +2214,13 @@ dialog { padding-top: 12px; }
 .grid-item:active, .loot-card[data-drag-id]:active { cursor:grabbing; }
 .drop-target { outline:2px solid #ffe08c; outline-offset:2px; }
 .drag-ghost { position:fixed; z-index:999; pointer-events:none; max-width:150px; border:1px solid #ffdf80; background:#283a28ee; border-radius:6px; padding:10px; color:#fff0b1; font-size:12px; box-shadow:0 8px 22px #0009; }
+.searched-space { margin:12px 0; }
+.searched-grid .inventory-cell { pointer-events:none; }
+.searched-grid .grid-item { cursor:grab; }
+.container-unknown { border:1px dashed #819387; background:#27382d; }
+.container-unknown > strong { text-align:center; font-size:23px; color:#b4c5b8; }
+.container-hint { font-size:11px; line-height:1.7; margin:10px 0; color:#b3c6b8; }
+.searched-space .grid-scroll { padding-bottom:10px; scrollbar-width:thin; scrollbar-color:#91b79b #1b2d20; }
 .prep-actions { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:20px; }
 .medicine-shop .item-art { float:left; width:48px; height:48px; margin:0 12px 0 0; }
 @media(max-width:760px) {

@@ -1,10 +1,10 @@
-import { ITEMS, QUALITY_ORDER } from '../data/items.js?v=3.1.0';
-import { CONTAINER_TYPES } from '../data/containers.js?v=3.1.0';
-import { REGIONS, REGION_BY_ID, CURIOS, CONTRACTS } from '../data/expedition.js?v=3.1.0';
-import { CONNECTIONS, START_LOCATION_ID } from '../data/map.js?v=3.1.0';
-import { EQUIPMENT, MEDICINES } from '../data/equipment.js?v=3.1.0';
-import { ENCOUNTERS } from '../data/encounters.js?v=3.1.0';
-import { fits, firstFit, usedArea, organize } from './inventory.js?v=3.1.0';
+import { ITEMS, QUALITY_ORDER } from '../data/items.js?v=3.1.1';
+import { CONTAINER_TYPES } from '../data/containers.js?v=3.1.1';
+import { REGIONS, REGION_BY_ID, CURIOS, CONTRACTS } from '../data/expedition.js?v=3.1.1';
+import { CONNECTIONS, START_LOCATION_ID } from '../data/map.js?v=3.1.1';
+import { EQUIPMENT, MEDICINES } from '../data/equipment.js?v=3.1.1';
+import { ENCOUNTERS } from '../data/encounters.js?v=3.1.1';
+import { fits, firstFit, usedArea, organize } from './inventory.js?v=3.1.1';
 
 export const SAVE_KEY = 'mini-delta-force-expedition-v3';
 export const RAID_SECONDS = 30 * 60;
