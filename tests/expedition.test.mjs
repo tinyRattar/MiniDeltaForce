@@ -1,3 +1,4 @@
+import { startAtExit, atWestExit } from './fixtures.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { act, newState, loadState, SAVE_KEY, CATALOG, carried, bagValue, safeValue, freeSlots, nearestExtraction, choiceAvailable, RAID_SECONDS, SEARCH_SECONDS, EXTRACT_SECONDS, rank } from '../src/domain/expedition.js';
@@ -8,7 +9,7 @@ import { CONNECTIONS } from '../src/data/map.js';
 import { BACKPACKS, EQUIPMENT, MEDICINES } from '../src/data/equipment.js';
 import { ENCOUNTERS } from '../src/data/encounters.js';
 import { fits, firstFit, organize, usedArea } from '../src/domain/inventory.js';
-const start=(seed=42)=>act(newState(),{type:'start',seed});
+const start=startAtExit;
 const restore=s=>loadState({getItem:key=>key===SAVE_KEY?JSON.stringify(s):null});
 function travel(s,id='cement-plant'){return act(s,{type:'travel',id,confirm:true});}
 function open(s){return act(s,{type:'open',id:s.run.room.boxes.find(b=>!b.opened).id});}
@@ -23,7 +24,7 @@ test('all zero-value items are absent from catalog and every container pool',()=
   for(const c of Object.values(CONTAINER_TYPES))for(const e of c.pools)assert.ok(CATALOG[e.itemId||e[0]]?.value>0);
 });
 test('user backpack dimensions and independent rig/pocket compartments are preserved',()=>{
-  assert.deepEqual(BACKPACKS.map(b=>b.size),[[3,4],[6,3],[4,5],[5,5],[7,4],[6,5],[7,5],[9,5]]);
+  assert.deepEqual(BACKPACKS.map(b=>b.size),[[3,5],[6,3],[4,5],[5,5],[7,4],[6,5],[7,5],[9,5]]);
   const s=start();assert.deepEqual(s.run.spaces.find(s=>s.kind==='bag')?.width,3);
   assert.equal(s.run.spaces.filter(s=>s.kind==='pockets').length,6);
   assert.ok(s.run.spaces.filter(s=>s.kind==='pockets').every(s=>s.width===1&&s.height===1));
@@ -77,19 +78,20 @@ test('time is charged by actions, reveal/packing costs no time, and zero is a fa
   const t=s.run.timeLeft;s=reveal(s);s=act(s,{type:'takeAll'});assert.equal(s.run.timeLeft,t);
   s=act(s,{type:'closeLoot',confirm:true});s.run.timeLeft=SEARCH_SECONDS;s=open(s);assert.equal(s.run,null);assert.equal(s.lastResult.success,false);assert.match(s.lastResult.reason,/时间/);
 });
-test('nearest extraction uses original connected routes and includes 60 seconds of boarding',()=>{
-  const s=travel(start());assert.deepEqual(nearestExtraction(s.run),{id:'west-extract',seconds:150,path:['west-extract']});
+test('nearest extraction uses original connected routes and includes 10 seconds of boarding',()=>{
+  const s=travel(start());assert.deepEqual(nearestExtraction(s.run),{id:'west-extract',seconds:100,path:['west-extract']});
   for(const region of REGIONS){const r={locationId:region.id},route=nearestExtraction(r);let prev=r.locationId;for(const next of route.path){assert.ok(CONNECTIONS[prev].includes(next));prev=next;}assert.ok(REGION_BY_ID[route.id].extract);}
   assert.throws(()=>act(s,{type:'extract'}),/撤离点/);
 });
-test('exactly 60 seconds left is too late to extract; 61 seconds succeeds',()=>{
-  let s=start();s.run.timeLeft=EXTRACT_SECONDS;s=act(s,{type:'extract'});assert.equal(s.lastResult.success,false);
-  s=start();s.run.timeLeft=EXTRACT_SECONDS+1;s=act(s,{type:'extract'});assert.equal(s.lastResult.success,true);
+test('9 seconds is too late; exactly 10 seconds succeeds; bleeding can still kill during extraction',()=>{
+  let s=start();s.run.timeLeft=EXTRACT_SECONDS-1;s=act(s,{type:'extract'});assert.equal(s.lastResult.success,false);
+  s=start();s.run.timeLeft=EXTRACT_SECONDS;s=act(s,{type:'extract'});assert.equal(s.lastResult.success,true);
+  s=start();s.run.timeLeft=EXTRACT_SECONDS;s.run.hp=2;s.run.bleeding=true;s=act(s,{type:'extract'});assert.equal(s.lastResult.success,false);
 });
 test('failed extraction preserves only safe-box items and loses exactly the carried gear copy',()=>{
-  let state=newState();state.money=100000;state=act(state,{type:'buyGear',id:'small'});let s=act(state,{type:'start',seed:5});
+  let state=newState();state.money=100000;state=act(state,{type:'buyGear',id:'small'});let s=atWestExit(act(state,{type:'start',seed:5}));
   const safe=gift(s,'rat-gift'),lost=gift(s,'boss-watch');s=act(s,{type:'take',source:'ground',id:safe.id,target:'safeBox'});s=act(s,{type:'take',source:'ground',id:lost.id,target:'bag'});
-  s.run.coins=12345;s.run.timeLeft=30;const wallet=s.money;s=act(s,{type:'extract'});
+  s.run.coins=12345;s.run.timeLeft=9;const wallet=s.money;s=act(s,{type:'extract'});
   assert.equal(s.lastResult.total,CATALOG['rat-gift'].value);assert.equal(s.money,wallet+CATALOG['rat-gift'].value);
   assert.equal(s.owned.small,1);assert.equal(s.owned.universal,0);assert.equal(s.equipment.rig,null);assert.equal(s.equipment.bag,'small');
   assert.equal(s.collection['boss-watch'],undefined);assert.equal(s.collection['rat-gift'],1);assert.equal(s.lastResult.bonus,0);assert.equal(s.lastResult.coins,0);
@@ -150,7 +152,7 @@ test('pity and eighth new search location guarantee purple and gold',()=>{
   }
 });
 test('buying/equipping gear charges exact prices, owned spare gear survives, and poor players can restart',()=>{
-  let s=newState();s.money=2000000;const wallet=s.money;s=act(s,{type:'buyGear',id:'gto'});assert.equal(s.money,wallet-EQUIPMENT.gto.price);assert.equal(s.equipment.bag,'gto');s=act(s,{type:'start',seed:1});assert.equal(s.run.spaces.find(s=>s.kind==='bag').width,9);assert.throws(()=>act(s,{type:'equip',id:'small'}));
+  let s=newState();s.money=2000000;const wallet=s.money;s=act(s,{type:'buyGear',id:'gto'});assert.equal(s.money,wallet-EQUIPMENT.gto.price);assert.equal(s.equipment.bag,'gto');s=atWestExit(act(s,{type:'start',seed:1}));assert.equal(s.run.spaces.find(s=>s.kind==='bag').width,9);assert.throws(()=>act(s,{type:'equip',id:'small'}));
   s.run.timeLeft=1;s=act(s,{type:'extract'});assert.equal(s.owned.small,1);assert.equal(s.owned.gto,0);
   s.money=0;s.equipment={bag:null,rig:null};s=act(s,{type:'start',seed:2});assert.equal(freeSlots(s.run,'bag'),0);assert.equal(s.run.spaces.length,7);
 });
@@ -165,7 +167,7 @@ test('invalid inventory saves cannot create overlap or change item sizes on rest
 test('500 seeded raids cover survival, death, inventory and recovery invariants',()=>{
   let successes=0,failures=0,boxes=0;const events=new Set();
   for(let seed=1;seed<=500;seed++){
-    let s=start(seed);const reckless=seed%3===0;
+    let s=act(newState(),{type:'start',seed});const reckless=seed%3===0;
     for(let step=0;step<45&&s.run;step++){
       if(s.run.event){events.add(s.run.event.id);s=resolve(s,reckless?0:1);if(!s.run)break;}
       s=act(s,{type:'takeAll',source:'ground'});
