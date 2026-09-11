@@ -1,5 +1,6 @@
 // Pointer Events support mouse, pen and touch. Click-to-place remains available.
 export function gridDrop(grid, x, y) {
+  if(!grid.dataset.space)return null; // The searched container is a pickup source.
   const rect=grid.getBoundingClientRect(), width=Number(grid.dataset.width), height=Number(grid.dataset.height);
   if(x<rect.left||y<rect.top||x>=rect.right||y>=rect.bottom)return null;
   return {target:grid.dataset.space,x:Math.floor((x-rect.left)/rect.width*width),y:Math.floor((y-rect.top)/rect.height*height)};

@@ -73,3 +73,17 @@ test('search keeps own inventory on the left, container on the right, and manual
   const item=app.state().run.loot.items[0];app.click('selectLoot',{id:item.id,source:'loot'});assert.equal(app.html().includes('<dialog'),false);
   assert.ok(app.html().includes('旋转 ↻'));assert.ok(app.html().includes('data-drag-source="loot"'));
 });
+
+test('searched container renders sized grid items and clicking one quickly packs it without a duplicate',async t=>{
+  const fixture=startAtExit();fixture.run.loot={name:'测试容器',items:[{id:'test-loot',itemId:'rat-gift',revealed:true},{id:'test-hidden',itemId:'boss-watch',revealed:false}]};
+  const app=await ui(t,fixture);
+  assert.ok(app.html().includes('inventory-grid searched-grid'));
+  assert.ok(app.html().includes('style="--cols:8;--rows:8"'));
+  assert.ok(app.html().includes('container-unknown'));
+  assert.ok(app.html().includes('data-action="take" data-source="loot" data-id="test-loot"'));
+  app.click('take',{id:'test-loot',source:'loot'});
+  assert.equal(carried(app.state().run).filter(e=>e.id==='test-loot').length,1);
+  assert.equal(app.html().includes('data-drag-id="test-loot" data-drag-source="loot"'),false);
+  assert.equal(app.state().run.loot.items[0].taken,true);
+  assert.ok(app.html().includes('container-unknown'));
+});
