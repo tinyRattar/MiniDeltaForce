@@ -1,4 +1,4 @@
-import { LOCATIONS } from './map.js?v=3.0.0';
+import { LOCATIONS } from './map.js?v=3.1.0';
 export const REGIONS = LOCATIONS.map(location => ({
   ...location, types: location.containers,
   subtitle: ({ 'admin-west': '楼上有脚步，楼下保险箱还没开。', 'admin-east': '先听脚步，再摸电脑。', river: '沿着河滩走，鼠鼠的路总是很安静。', 'cement-plant': '水泥车里不只有水泥。', 'visitor-center': '游客没留下，旅行箱留下了。' })[location.id] || (location.extract ? '确认周围安全，等待撤离接应。' : '熟悉的零号大坝，未知的这一局。'),
@@ -6,7 +6,7 @@ export const REGIONS = LOCATIONS.map(location => ({
   icon: location.extract ? '⚑' : location.highValue ? '◇' : '▧',
   mood: location.extract ? '撤离区域' : `${location.risk}风险区域`,
   quality: location.highValue ? 2 : location.risk === '高' ? 1 : 0,
-  clue: location.extract ? '接应 60 秒 · 带走背包与胸挂' : `${location.risk}风险 · ${location.highValue ? '贵重容器' : '主题物资'} · 路程 ${location.risk === '高' ? 120 : 90} 秒`,
+  clue: location.extract ? '接应 10 秒 · 带走背包与胸挂' : `${location.risk}风险 · ${location.highValue ? '贵重容器' : '主题物资'} · 路程 ${location.risk === '高' ? 120 : 90} 秒`,
 }));
 export const REGION_BY_ID = Object.fromEntries(REGIONS.map(r => [r.id, r]));
 export const CURIOS = [

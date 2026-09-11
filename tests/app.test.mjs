@@ -1,6 +1,7 @@
+import { startAtExit } from './fixtures.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { act, newState, carried, SAVE_KEY } from '../src/domain/expedition.js';
+import { act, newState, carried, preparation, SAVE_KEY } from '../src/domain/expedition.js';
 let serial=0;
 async function ui(t,fixture=newState()){
   const saved=new Map([[SAVE_KEY,JSON.stringify(fixture)]]),listeners={};
@@ -24,7 +25,7 @@ async function ui(t,fixture=newState()){
 }
 
 test('UI starts a raid, shows persistent metrics, and highlights the continue-search button',async t=>{
-  const app=await ui(t);app.click('start');assert.ok(app.html().indexOf('tactical-hud')<app.html().indexOf('<main>'));
+  const app=await ui(t,startAtExit());assert.ok(app.html().indexOf('tactical-hud')<app.html().indexOf('<main>'));
   for(const text of ['剩余时间','背包空位','预计收益','100/100'])assert.ok(app.html().includes(text));
   app.click('travel',{id:'cement-plant'});const id=app.state().run.room.boxes[0].id;app.click('open',{id});app.click('revealAll');
   assert.match(app.html(),/class="continue-search" data-action="closeLoot"/);
@@ -54,6 +55,21 @@ test('fatal medical action from the camp HUD shows failure result and does not k
   app.click('confirm');assert.equal(app.state().run,null);assert.ok(app.html().includes('这趟，回特勤处了。'));assert.equal(app.html().includes('<dialog'),false);
 });
 test('UI carries a search through extraction and returns unused medicine to stock',async t=>{
-  const app=await ui(t);app.click('start');app.click('travel',{id:'cement-plant'});app.click('open',{id:app.state().run.room.boxes[0].id});app.click('revealAll');app.click('takeAll',{source:'loot'});app.click('closeLoot');if(app.html().includes('<dialog'))app.click('confirm');
+  const app=await ui(t,startAtExit());app.click('travel',{id:'cement-plant'});app.click('open',{id:app.state().run.room.boxes[0].id});app.click('revealAll');app.click('takeAll',{source:'loot'});app.click('closeLoot');if(app.html().includes('<dialog'))app.click('confirm');
   app.click('travel',{id:'west-extract'});app.click('extract');app.click('confirm');assert.equal(app.state().lastResult.success,true);assert.ok(app.html().includes('成功带出来了'));assert.equal(app.state().medicines['consumable-14020000003'],2);
+});
+
+test('pre-deployment screen displays gear images and all compartments, and carries the chosen layout',async t=>{
+  const app=await ui(t);app.click('prep');
+  for(const token of ['出战准备','assets/equipment/small.png','assets/equipment/universal.png','data-region="bag"','data-region="rig"','data-region="safeBox"','data-region="pockets"'])assert.ok(app.html().includes(token),token);
+  const item=carried(preparation(app.state()))[0];app.click('selectCarry',{id:item.id});app.click('place',{target:'safeBox',x:1,y:2});
+  app.click('start');const placed=carried(app.state().run).find(e=>e.id===item.id);assert.deepEqual([placed.spaceKey,placed.x,placed.y],['safeBox',1,2]);
+  assert.ok(app.html().includes('time-dial remaining-dial'));assert.ok(app.html().includes('落地'));
+});
+test('search keeps own inventory on the left, container on the right, and manual placement stays inline',async t=>{
+  const app=await ui(t,startAtExit());app.click('travel',{id:'cement-plant'});app.click('open',{id:app.state().run.room.boxes[0].id});app.click('revealAll');
+  assert.ok(app.html().indexOf('own-inventory')<app.html().indexOf('container-inventory'));
+  for(const kind of ['bag','rig','safeBox','pockets'])assert.ok(app.html().includes('data-region="'+kind+'"'));
+  const item=app.state().run.loot.items[0];app.click('selectLoot',{id:item.id,source:'loot'});assert.equal(app.html().includes('<dialog'),false);
+  assert.ok(app.html().includes('旋转 ↻'));assert.ok(app.html().includes('data-drag-source="loot"'));
 });

@@ -1,0 +1,82 @@
+﻿{
+    "gt5":  {
+                "local":  "./assets/equipment/gt5.png",
+                "url":  "https://playerhub.df.qq.com/playerhub/60004/object/11080005004.png",
+                "name":  "GT5野战背包"
+            },
+    "3h":  {
+               "local":  "./assets/equipment/3h.png",
+               "url":  "https://playerhub.df.qq.com/playerhub/60004/object/11080003002.png",
+               "name":  "3H战术背包"
+           },
+    "drc":  {
+                "local":  "./assets/equipment/drc.png",
+                "url":  "https://playerhub.df.qq.com/playerhub/60004/object/11070004003.png",
+                "name":  "DRC先进侦察胸挂"
+            },
+    "gto":  {
+                "local":  "./assets/equipment/gto.png",
+                "url":  "https://playerhub.df.qq.com/playerhub/60004/object/11080006004.png",
+                "name":  "GTO重型战术包"
+            },
+    "g01":  {
+                "local":  "./assets/equipment/g01.png",
+                "url":  "https://playerhub.df.qq.com/playerhub/60004/object/11070003004.png",
+                "name":  "G01战术弹挂"
+            },
+    "d3":  {
+               "local":  "./assets/equipment/d3.png",
+               "url":  "https://playerhub.df.qq.com/playerhub/60004/object/11080005003.png",
+               "name":  "D3战术登山包"
+           },
+    "universal":  {
+                      "local":  "./assets/equipment/universal.png",
+                      "url":  "https://playerhub.df.qq.com/playerhub/60004/object/11070002004.png",
+                      "name":  "通用战术胸挂"
+                  },
+    "dsa":  {
+                "local":  "./assets/equipment/dsa.png",
+                "url":  "https://playerhub.df.qq.com/playerhub/60004/object/11070003003.png",
+                "name":  "DSA战术胸挂"
+            },
+    "gt1":  {
+                "local":  "./assets/equipment/gt1.png",
+                "url":  "https://playerhub.df.qq.com/playerhub/60004/object/11080004004.png",
+                "name":  "GT1户外登山包"
+            },
+    "bandage":  {
+                    "local":  "./assets/equipment/bandage.png",
+                    "url":  "https://playerhub.df.qq.com/playerhub/60004/object/14040000002.png"
+                },
+    "d7":  {
+               "local":  "./assets/equipment/d7.png",
+               "url":  "https://playerhub.df.qq.com/playerhub/60004/object/11080006003.png",
+               "name":  "D7战术背包"
+           },
+    "ga":  {
+               "local":  "./assets/equipment/ga.png",
+               "url":  "https://playerhub.df.qq.com/playerhub/60004/object/11080003004.png",
+               "name":  "GA野战背包"
+           },
+    "medkit":  {
+                   "local":  "./assets/equipment/medkit.png",
+                   "url":  "https://playerhub.df.qq.com/playerhub/60004/object/14020000002.png"
+               },
+    "consumable-14030000001":  {
+                                   "local":  "./assets/equipment/consumable-14030000001.png",
+                                   "url":  "https://playerhub.df.qq.com/playerhub/60004/object/14030000001.png"
+                               },
+    "field-med":  {
+                      "local":  "./assets/equipment/field-med.png",
+                      "url":  "https://playerhub.df.qq.com/playerhub/60004/object/14020000004.png"
+                  },
+    "small":  {
+                  "local":  "./assets/equipment/small.png",
+                  "url":  "https://playerhub.df.qq.com/playerhub/60004/object/11080002002.png",
+                  "name":  "战术快拆背包"
+              },
+    "consumable-14020000003":  {
+                                   "local":  "./assets/equipment/consumable-14020000003.png",
+                                   "url":  "https://playerhub.df.qq.com/playerhub/60004/object/14020000003.png"
+                               }
+}

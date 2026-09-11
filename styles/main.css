@@ -2178,3 +2178,77 @@ dialog { padding-top: 12px; }
 .dialog-toolbar { position: sticky; top: 0; z-index: 20; display: flex; justify-content: flex-end; height: 44px; background: #19221e; }
 .dialog-toolbar .modal-close { position: static; width: 44px; height: 44px; min-height: 44px; }
 .tactical-hud.in-modal { top: 44px; }
+
+/* Shared loadout and side-by-side searching, including narrow phone screens. */
+.time-dial { --angle:360deg; display:inline-grid; place-items:center; width:24px; height:24px; flex-shrink:0; border-radius:50%; background:conic-gradient(#f5ce69 var(--angle),#415044 0); border:1px solid #b7c7a766; vertical-align:middle; }
+.time-dial > span { font-size:13px; color:#11241b; opacity:.65; }
+.time-dial.remaining-dial { width:30px; height:30px; background:conic-gradient(#b5efce var(--angle),#415044 0); }
+.time-readout { display:flex!important; align-items:center; gap:7px; }
+.time-cost { display:inline-flex; align-items:center; gap:6px; white-space:nowrap; font-size:11px; font-weight:600; }
+.time-cost span { color:inherit; }
+.gear-art { object-fit:contain; width:120px; height:110px; filter:drop-shadow(0 8px 12px #0005); }
+.gear-card > .gear-art { display:block; margin:auto; width:150px; height:130px; }
+.equipped-gear { display:flex; align-items:center; gap:9px; }
+.equipped-gear .gear-art { width:70px; height:70px; }
+.region-gear { display:flex; align-items:center; gap:15px; justify-content:space-between; }
+.region-gear .gear-art { width:70px; height:65px; }
+.region-gear h3 { color:#cee5d0; font-size:15px; }
+.inventory-region { padding:10px 0 18px; scroll-margin-top:12px; }
+.inventory-jumps { display:flex; flex-wrap:wrap; gap:5px; padding:10px 0; border-bottom:1px solid var(--line); }
+.inventory-jumps button { flex:1; padding:8px 5px; min-height:40px; white-space:nowrap; font-size:11px; }
+.inventory-jumps .active { color:#18271c; background:var(--mint); }
+.inventory-scroll { max-height:52dvh; overflow:auto; overscroll-behavior:contain; scrollbar-width:thin; padding-right:5px; }
+.search-workspace { display:grid; grid-template-columns:minmax(0,1.05fr) minmax(0,1fr); gap:18px; align-items:start; margin:18px 0; }
+.own-inventory, .container-inventory { min-width:0; }
+.own-inventory { border:1px solid #5f7866; background:#18251c; border-radius:12px; padding:16px; }
+.search-workspace .modal-heading h2 { font-size:20px; }
+.search-workspace .modal-heading p { font-size:11px; }
+.search-workspace .inventory-selection { margin:8px 0; padding:10px; }
+.search-workspace .loot-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+.search-workspace .search-panel { padding:16px; }
+.search-workspace .search-actions { display:flex; flex-wrap:wrap; gap:8px; }
+.search-workspace .search-actions > button { width:100%; margin:0; }
+.search-workspace .section-heading h2 { font-size:20px; }
+.search-workspace .search-panel .subtle { font-size:10px; }
+.grid-item, .loot-card[data-drag-id] { touch-action:none; user-select:none; -webkit-user-select:none; cursor:grab; }
+.grid-item:active, .loot-card[data-drag-id]:active { cursor:grabbing; }
+.drop-target { outline:2px solid #ffe08c; outline-offset:2px; }
+.drag-ghost { position:fixed; z-index:999; pointer-events:none; max-width:150px; border:1px solid #ffdf80; background:#283a28ee; border-radius:6px; padding:10px; color:#fff0b1; font-size:12px; box-shadow:0 8px 22px #0009; }
+.prep-actions { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:20px; }
+.medicine-shop .item-art { float:left; width:48px; height:48px; margin:0 12px 0 0; }
+@media(max-width:760px) {
+  .time-readout { gap:4px; }
+  .time-dial.remaining-dial { width:21px; height:21px; }
+  .hud-metrics strong { font-size:18px; }
+  .time-cost { font-size:10px; gap:4px; }
+  .search-workspace { gap:8px; grid-template-columns:minmax(0,1.12fr) minmax(0,1fr); margin-inline:-8px; }
+  .own-inventory, .search-workspace .search-panel { padding:8px; border-radius:8px; }
+  .search-workspace .inventory-scroll { max-height:60dvh; padding-right:0; }
+  .search-workspace .loot-grid { grid-template-columns:minmax(0,1fr); }
+  .search-workspace .modal-heading h2, .search-workspace .section-heading h2 { font-size:15px; }
+  .search-workspace .modal-heading p { font-size:10px; line-height:1.5; }
+  .search-workspace .inventory-selection { padding:7px; }
+  .search-workspace .inventory-selection > strong { font-size:10px; }
+  .search-workspace .inventory-selection button { min-height:36px; padding:6px; font-size:9px; }
+  .search-workspace .inventory-jumps { display:grid; grid-template-columns:1fr 1fr; gap:4px; }
+  .search-workspace .inventory-jumps button { font-size:10px; }
+  .search-workspace .inventory-grid { --cell:38px; }
+  .search-workspace .space-panel { padding:5px; }
+  .search-workspace .space-heading { gap:3px; }
+  .search-workspace .space-heading strong { font-size:9px; }
+  .search-workspace .space-heading button { font-size:9px; min-height:28px; }
+  .search-workspace .space-heading small { font-size:8px; }
+  .search-workspace .region-gear { gap:2px; }
+  .search-workspace .region-gear h3 { font-size:12px; }
+  .search-workspace .region-gear .gear-art { width:50px; height:50px; }
+  .search-workspace .loot-card { min-width:0; padding:9px 7px; }
+  .search-workspace .loot-card > strong { font-size:12px; }
+  .search-workspace .loot-card > button { font-size:10px; padding:6px; width:100%; }
+  .search-workspace .loot-card .item-art { width:70px; height:65px; }
+  .search-workspace .loot-card .item-value { font-size:12px; }
+  .search-workspace .search-actions > button { font-size:11px; padding:8px 5px; }
+  .search-workspace .section-heading { flex-wrap:wrap; gap:5px; }
+  .search-workspace .guarantee { font-size:10px; padding:7px; }
+  .prep-actions button { flex:1 1 45%; font-size:12px; }
+  .prep-actions .continue-search { flex-basis:100%; }
+}
