@@ -11,8 +11,8 @@ export const ENCOUNTERS = [
     { text: '来都来了，继续硬搜', hint: '15 秒；本地点每次搜索有 65% 概率掉血 30–55；下一箱寻宝 +2', seconds: 15, effects: { threat: true, luck: 2 }, result: '你选择了财富自由的捷径。现在每开一个箱子，都可能被推到脸上。' },
     { text: '藏好，等他们离开', hint: '120 秒；清除本地点高危状态', seconds: 120, effects: { clearThreat: true }, result: '他们终于走了。箱子还在，命也还在。' },
   ] },
-  { id: 'saeed', title: '那身影像是赛伊德', tag: '首领活动', icon: '♜', text: '烟尘里传来熟悉的吼声。一只表掉在他的巡逻路线上，你的手开始痒了。', choices: [
-    { text: '趁间隙过去摸一下', hint: '60 秒；55% 获得金色旧腕表，45% 掉血 75 并流血', seconds: 60, effects: {}, chance: .55, win: { item: 'boss-watch' }, lose: { damage: 75, bleed: true }, result: '你掐着巡逻间隙冲了出去。', winText: '东西到手。赛伊德没回头，你也没敢回头。', loseText: '他回头了。你现在最需要的藏品是一支针。' },
+  { id: 'saeed', title: '那身影像是赛伊德', tag: '首领活动', icon: '♜', text: '烟尘里传来熟悉的吼声。一把手弩落在他的巡逻路线上，你的手开始痒了。', choices: [
+    { text: '趁间隙过去摸一下', hint: '60 秒；55% 获得金色藏品「赛伊德的手弩」，45% 掉血 75 并流血', seconds: 60, effects: {}, chance: .55, win: { item: 'collectible-15080050094' }, lose: { damage: 75, bleed: true }, result: '你掐着巡逻间隙冲了出去。', winText: '赛伊德的手弩到手。赛伊德没回头，你也没敢回头。', loseText: '他回头了。你现在最需要的藏品是一支针。' },
     { text: '绕路，首领我真打不过', hint: '90 秒；安全离开首领视线', seconds: 90, effects: {}, result: '懂得绕路，也是一种撤离技术。' },
   ] },
   { id: 'mandel', title: '曼德尔砖的信号', tag: '全图都知道', icon: '🧱', text: '信号指向一个废弃货箱。附近安静得可疑，也可能所有人都在等第一个伸手的。', choices: [
