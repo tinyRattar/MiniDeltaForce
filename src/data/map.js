@@ -79,11 +79,11 @@ export const CONNECTIONS = {
   containers: ["admin-west", "admin-east", "barracks", "dam-inside", "parking"],
   "dam-inside": ["containers"],
   "dam-top": ["parking", "maintenance", "east-extract"],
-  parking: ["admin-east", "containers", "dam-top", "main-substation"],
+  parking: ["admin-east", "containers", "dam-top", "main-substation", "maintenance"],
   "main-substation": ["river", "parking", "backup-substation", "field-camp", "maintenance"],
   "backup-substation": ["river", "main-substation", "field-camp"],
   "field-camp": ["backup-substation", "main-substation", "maintenance", "visitor-center"],
-  maintenance: ["dam-top", "main-substation", "field-camp", "visitor-center"],
+  maintenance: ["dam-top", "main-substation", "field-camp", "visitor-center", "parking"],
   "visitor-center": ["maintenance", "field-camp", "east-extract"],
   "east-extract": ["dam-top", "visitor-center"],
 };

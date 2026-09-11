@@ -2215,7 +2215,7 @@ dialog { padding-top: 12px; }
 .drop-target { outline:2px solid #ffe08c; outline-offset:2px; }
 .drag-ghost { position:fixed; z-index:999; pointer-events:none; max-width:150px; border:1px solid #ffdf80; background:#283a28ee; border-radius:6px; padding:10px; color:#fff0b1; font-size:12px; box-shadow:0 8px 22px #0009; }
 .searched-space { margin:12px 0; }
-.searched-grid .inventory-cell { pointer-events:none; }
+.searched-grid .inventory-cell { cursor:crosshair; }
 .searched-grid .grid-item { cursor:grab; }
 .container-unknown { border:1px dashed #819387; background:#27382d; }
 .container-unknown > strong { text-align:center; font-size:23px; color:#b4c5b8; }
@@ -2258,4 +2258,36 @@ dialog { padding-top: 12px; }
   .search-workspace .guarantee { font-size:10px; padding:7px; }
   .prep-actions button { flex:1 1 45%; font-size:12px; }
   .prep-actions .continue-search { flex-basis:100%; }
+}
+/* Compact equipment overview: shared headers, tightly packed independent slots. */
+.inventory-view .modal-heading p { display:none; }
+.inventory-view .modal-heading h2 { font-size:17px; margin:4px 0; }
+.inventory-view .inventory-scroll { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:8px; align-items:start; max-height:65dvh; }
+.inventory-view .inventory-region { padding:8px; border:1px solid #405548; border-radius:7px; min-width:0; }
+.inventory-view .inventory-rule { display:none; }
+.inventory-view .region-gear { min-height:30px; margin-bottom:5px; }
+.inventory-view .region-gear .gear-art { width:36px; height:30px; }
+.inventory-view .region-gear h3 { font-size:12px; margin:0; }
+.inventory-view .space-panel { padding:3px; border:0; border-radius:3px; }
+.inventory-view .space-heading { gap:4px; margin-bottom:4px; }
+.inventory-view .space-heading strong { display:none; }
+.inventory-view .compartments .space-heading { display:none; }
+.inventory-view .space-list.compartments { gap:3px; }
+.inventory-view .grid-scroll { padding:1px; }
+.inventory-view .inventory-selection { padding:7px; margin:6px 0; }
+.inventory-view .inventory-selection > span { font-size:10px; }
+.inventory-view .inventory-jumps { padding:5px 0; margin-bottom:5px; }
+.inventory-view .inventory-jumps button { min-height:32px; }
+.inventory-view .inventory-region[data-region="pockets"] .compartments { display:grid; grid-template-columns:repeat(3,max-content); }
+@media(max-width:760px) {
+  .own-inventory .inventory-scroll { grid-template-columns:minmax(0,1fr); gap:4px; }
+  .own-inventory .inventory-region { padding:4px; }
+  .own-inventory .inventory-grid { --cell:32px; }
+  .own-inventory .region-gear .gear-art { width:28px; height:24px; }
+  .own-inventory .region-gear { min-height:24px; margin-bottom:2px; }
+  .own-inventory .inventory-region[data-region="pockets"] .compartments { display:flex; }
+  .own-inventory .inventory-jumps { display:flex; gap:2px; }
+  .own-inventory .inventory-jumps button { min-width:0; font-size:8px; padding:4px 1px; }
+  .inventory-view .inventory-selection > strong { margin-bottom:5px; }
+  .inventory-view .space-heading button { min-height:24px; padding:1px 5px; }
 }

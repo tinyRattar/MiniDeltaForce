@@ -87,3 +87,13 @@ test('searched container renders sized grid items and clicking one quickly packs
   assert.equal(app.state().run.loot.items[0].taken,true);
   assert.ok(app.html().includes('container-unknown'));
 });
+
+test('UI can place carried items back into container cells or use the quick-return button',async t=>{
+  const s=startAtExit();s.run.loot={name:'空容器',items:[]};const item=carried(s.run)[0];
+  const app=await ui(t,s);app.click('selectCarry',{id:item.id});assert.ok(app.html().includes('放回容器'));
+  assert.ok(app.html().includes('data-space="loot-0" data-width="8" data-height="8"'));
+  app.click('place',{target:'loot-0',x:3,y:4});assert.equal(carried(app.state().run).some(e=>e.id===item.id),false);
+  assert.deepEqual(app.state().run.loot.items[0].containerPlacement,{page:0,x:3,y:4,w:1,h:1});
+  app.click('take',{source:'loot',id:item.id});app.click('selectCarry',{id:item.id});app.click('returnLoot',{id:item.id});
+  assert.equal(app.state().run.loot.items.filter(e=>e.id===item.id&&!e.taken).length,1);
+});
