@@ -1,14 +1,14 @@
 // Snapshot accessed 2026-09-10. Prices are fixed game prices, NOT live quotes.
-// Grid orientation follows the user's supplied fallback. See docs/equipment-sources.md.
+// Internal size is [width, height]. User tiers are specified height x width.
 export const BACKPACKS = [
   { id: 'small', name: '战术快拆背包', size: [3, 5], price: 9375, quality: 'green', note: '绿色档较高参考价 · 15 格' },
-  { id: '3h', name: '3H战术背包', size: [6, 3], price: 14250, quality: 'blue' },
-  { id: 'ga', name: 'GA野战背包', size: [4, 5], price: 23250, quality: 'blue' },
+  { id: '3h', name: '3H战术背包', size: [3, 6], price: 14250, quality: 'blue' },
+  { id: 'ga', name: 'GA野战背包', size: [5, 4], price: 23250, quality: 'blue' },
   { id: 'gt1', name: 'GT1户外登山包', size: [5, 5], price: 59125, quality: 'purple' },
-  { id: 'd3', name: 'D3战术背包', size: [7, 4], price: 114070, quality: 'gold' },
-  { id: 'gt5', name: 'GT5野战背包', size: [6, 5], price: 171000, quality: 'gold' },
-  { id: 'd7', name: 'D7战术背包', size: [7, 5], price: 470000, quality: 'red', note: '游戏内平衡价 · 无可靠成交价' },
-  { id: 'gto', name: 'GTO重型战术包', size: [9, 5], price: 1080000, quality: 'red', note: '游戏内平衡价 · 无可靠成交价' },
+  { id: 'd3', name: 'D3战术背包', size: [4, 7], price: 114070, quality: 'gold' },
+  { id: 'gt5', name: 'GT5野战背包', size: [5, 6], price: 171000, quality: 'gold' },
+  { id: 'd7', name: 'D7战术背包', size: [5, 7], price: 470000, quality: 'red', note: '游戏内平衡价 · 无可靠成交价' },
+  { id: 'gto', name: 'GTO重型战术包', size: [5, 9], price: 1080000, quality: 'red', note: '游戏内平衡价 · 无可靠成交价' },
 ];
 export const RIGS = [
   { id: 'universal', name: '通用战术胸挂', slots: [[1,2],[1,2],[1,2],[1,2],[1,1]], price: 4510, quality: 'green' },

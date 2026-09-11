@@ -1,11 +1,11 @@
-import { ITEMS, QUALITY_ORDER } from '../data/items.js?v=3.1.3';
-import { preserveContainerLayout } from './container-layout.js?v=3.1.3';
-import { CONTAINER_TYPES } from '../data/containers.js?v=3.1.3';
-import { REGIONS, REGION_BY_ID, CURIOS, CONTRACTS } from '../data/expedition.js?v=3.1.3';
-import { CONNECTIONS, START_LOCATION_ID } from '../data/map.js?v=3.1.3';
-import { EQUIPMENT, MEDICINES } from '../data/equipment.js?v=3.1.3';
-import { ENCOUNTERS } from '../data/encounters.js?v=3.1.3';
-import { fits, firstFit, usedArea, organize } from './inventory.js?v=3.1.3';
+import { ITEMS, QUALITY_ORDER } from '../data/items.js?v=3.1.4';
+import { preserveContainerLayout } from './container-layout.js?v=3.1.4';
+import { CONTAINER_TYPES } from '../data/containers.js?v=3.1.4';
+import { REGIONS, REGION_BY_ID, CURIOS, CONTRACTS } from '../data/expedition.js?v=3.1.4';
+import { CONNECTIONS, START_LOCATION_ID } from '../data/map.js?v=3.1.4';
+import { EQUIPMENT, MEDICINES } from '../data/equipment.js?v=3.1.4';
+import { ENCOUNTERS } from '../data/encounters.js?v=3.1.4';
+import { fits, firstFit, usedArea, organize } from './inventory.js?v=3.1.4';
 
 export const SAVE_KEY = 'mini-delta-force-expedition-v3';
 export const RAID_SECONDS = 30 * 60;
@@ -45,7 +45,7 @@ const fail = text => { throw Error(text); };
 const nonnegative = n => Number.isFinite(n) ? Math.max(0, Math.floor(n)) : 0;
 
 export function newState() {
-  return {version:3,money:50000,owned:{...Object.fromEntries(Object.keys(EQUIPMENT).map(id=>[id,0])),small:1,universal:1},equipment:{bag:'small',rig:'universal'},
+  return {version:3,inventoryOrientation:2,money:50000,owned:{...Object.fromEntries(Object.keys(EQUIPMENT).map(id=>[id,0])),small:1,universal:1},equipment:{bag:'small',rig:'universal'},
     medicines:{'consumable-14020000003':2,medkit:1,bandage:2,'field-med':0,'consumable-14030000001':0},
     loadout:{'consumable-14020000003':2,medkit:0,bandage:1,'field-med':0,'consumable-14030000001':0},
     medReserves:{'consumable-14020000003':[60,60],medkit:[80],bandage:[1,1],'field-med':[],'consumable-14030000001':[]},loadoutPlacements:{},collection:{},eventBook:{},stats:{runs:0,successes:0,boxes:0,best:0},run:null,lastResult:null};
@@ -85,10 +85,19 @@ export function loadState(storage) {
       for (const key of ['medicines','loadout']) state[key]=Object.fromEntries(Object.keys(MEDICINES).map(id=>[id,nonnegative(saved[key]?.[id])]));
       state.medReserves = Object.fromEntries(Object.keys(MEDICINES).map(id=>[id,Array.from({length:state.medicines[id]},(_,i)=>{const n=saved.medReserves?.[id]?.[i];return Number.isInteger(n)&&n>0&&n<=medCapacity(id)?n:medCapacity(id);})]));
       state.loadoutPlacements = saved.loadoutPlacements || {};
+      if(saved.inventoryOrientation!==2 && state.equipment.bag!=='small' && EQUIPMENT[state.equipment.bag]?.size?.[0]!==EQUIPMENT[state.equipment.bag]?.size?.[1]){
+        for(const entry of Object.values(state.loadoutPlacements))if(entry?.target==='bag'&&entry.placement){const p=entry.placement;entry.placement={x:p.y,y:p.x,w:p.h,h:p.w};}
+      }
+      state.inventoryOrientation=2;
       if(state.run){
         state.run.spawnId ??= 'west-extract'; state.run.spawnSide ??= 'west';
         const bag=state.run.spaces?.find(s=>s.key==='bag');
         if(state.run.equipment?.bag==='small'&&bag?.width===3&&bag.height===4){bag.height=5;bag.label=EQUIPMENT.small.name;}
+        const size=EQUIPMENT[state.run.equipment?.bag]?.size;
+        if(saved.inventoryOrientation!==2&&bag&&size&&bag.width===size[1]&&bag.height===size[0]&&(size[0]!==size[1])){
+          [bag.width,bag.height]=size;
+          for(const item of bag.items){[item.x,item.y]=[item.y,item.x];[item.w,item.h]=[item.h,item.w];}
+        }
       }
       state.collection = Object.fromEntries(Object.entries(saved.collection||{}).filter(([id,n])=>CATALOG[id]&&nonnegative(n)).map(([id,n])=>[id,nonnegative(n)]));
       state.eventBook = Object.fromEntries(ENCOUNTERS.filter(e=>nonnegative(saved.eventBook?.[e.id])).map(e=>[e.id,nonnegative(saved.eventBook[e.id])]));

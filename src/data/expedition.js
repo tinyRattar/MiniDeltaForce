@@ -1,4 +1,4 @@
-import { LOCATIONS } from './map.js?v=3.1.3';
+import { LOCATIONS } from './map.js?v=3.1.4';
 export const REGIONS = LOCATIONS.map(location => ({
   ...location, types: location.containers,
   subtitle: ({ 'admin-west': '楼上有脚步，楼下保险箱还没开。', 'admin-east': '先听脚步，再摸电脑。', river: '沿着河滩走，鼠鼠的路总是很安静。', 'cement-plant': '水泥车里不只有水泥。', 'visitor-center': '游客没留下，旅行箱留下了。' })[location.id] || (location.extract ? '确认周围安全，等待撤离接应。' : '熟悉的零号大坝，未知的这一局。'),
