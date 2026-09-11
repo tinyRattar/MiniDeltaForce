@@ -1,4 +1,4 @@
-import { firstFit } from './inventory.js?v=3.1.3';
+import { firstFit } from './inventory.js?v=3.1.4';
 
 // Include taken and unrevealed entries so revealing/picking never shifts other loot.
 export function containerLayout(entries, catalog) {

@@ -24,7 +24,7 @@ test('all zero-value items are absent from catalog and every container pool',()=
   for(const c of Object.values(CONTAINER_TYPES))for(const e of c.pools)assert.ok(CATALOG[e.itemId||e[0]]?.value>0);
 });
 test('user backpack dimensions and independent rig/pocket compartments are preserved',()=>{
-  assert.deepEqual(BACKPACKS.map(b=>b.size),[[3,5],[6,3],[4,5],[5,5],[7,4],[6,5],[7,5],[9,5]]);
+  assert.deepEqual(BACKPACKS.map(b=>b.size),[[3,5],[3,6],[5,4],[5,5],[4,7],[5,6],[5,7],[5,9]]);
   const s=start();assert.deepEqual(s.run.spaces.find(s=>s.kind==='bag')?.width,3);
   assert.equal(s.run.spaces.filter(s=>s.kind==='pockets').length,6);
   assert.ok(s.run.spaces.filter(s=>s.kind==='pockets').every(s=>s.width===1&&s.height===1));
@@ -152,7 +152,7 @@ test('pity and eighth new search location guarantee purple and gold',()=>{
   }
 });
 test('buying/equipping gear charges exact prices, owned spare gear survives, and poor players can restart',()=>{
-  let s=newState();s.money=2000000;const wallet=s.money;s=act(s,{type:'buyGear',id:'gto'});assert.equal(s.money,wallet-EQUIPMENT.gto.price);assert.equal(s.equipment.bag,'gto');s=atWestExit(act(s,{type:'start',seed:1}));assert.equal(s.run.spaces.find(s=>s.kind==='bag').width,9);assert.throws(()=>act(s,{type:'equip',id:'small'}));
+  let s=newState();s.money=2000000;const wallet=s.money;s=act(s,{type:'buyGear',id:'gto'});assert.equal(s.money,wallet-EQUIPMENT.gto.price);assert.equal(s.equipment.bag,'gto');s=atWestExit(act(s,{type:'start',seed:1}));assert.equal(s.run.spaces.find(s=>s.kind==='bag').width,5);assert.throws(()=>act(s,{type:'equip',id:'small'}));
   s.run.timeLeft=1;s=act(s,{type:'extract'});assert.equal(s.owned.small,1);assert.equal(s.owned.gto,0);
   s.money=0;s.equipment={bag:null,rig:null};s=act(s,{type:'start',seed:2});assert.equal(freeSlots(s.run,'bag'),0);assert.equal(s.run.spaces.length,7);
 });

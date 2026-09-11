@@ -97,3 +97,11 @@ test('UI can place carried items back into container cells or use the quick-retu
   app.click('take',{source:'loot',id:item.id});app.click('selectCarry',{id:item.id});app.click('returnLoot',{id:item.id});
   assert.equal(app.state().run.loot.items.filter(e=>e.id===item.id&&!e.taken).length,1);
 });
+
+test('large backpack UI exposes five columns and nine rows in preparation and shop',async t=>{
+  const s=newState();s.money=2000000;const configured=act(s,{type:'buyGear',id:'gto'});
+  const app=await ui(t,configured);app.click('prep');
+  assert.ok(app.html().includes('data-space="bag" data-width="5" data-height="9"'));
+  assert.ok(app.html().includes('9高×5宽'));
+  app.click('shop');assert.ok(app.html().includes('9 格高 × 5 格宽'));
+});

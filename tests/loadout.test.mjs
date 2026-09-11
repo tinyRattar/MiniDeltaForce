@@ -54,7 +54,7 @@ test('oversized preparation blocks deployment without losing assets; gear change
   assert.equal(preparation(s).unplaced.length,1);const before=structuredClone(s);assert.throws(()=>act(s,{type:'start',seed:1}),/放不下/);assert.deepEqual(s,before);
   s=act(s,{type:'equip',id:'small'});assert.equal(preparation(s).unplaced.length,0);
   const item=carried(preparation(s))[0];s=act(s,{type:'movePrep',id:item.id,target:'safeBox'});assert.ok(Object.keys(s.loadoutPlacements).length);
-  s=act(s,{type:'buyGear',id:'3h'});assert.deepEqual(s.loadoutPlacements,{});assert.equal(preparation(s).spaces[0].width,6);
+  s=act(s,{type:'buyGear',id:'3h'});assert.deepEqual(s.loadoutPlacements,{});assert.equal(preparation(s).spaces[0].width,3);
 });
 test('old v3 saves expand starter backpack and initialize medicine reserves without losing live cargo',()=>{
   const old=startAtExit();delete old.medReserves;delete old.loadoutPlacements;delete old.run.spawnId;delete old.run.spawnSide;
