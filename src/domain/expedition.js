@@ -1,10 +1,11 @@
-import { ITEMS, QUALITY_ORDER } from '../data/items.js?v=3.1.1';
-import { CONTAINER_TYPES } from '../data/containers.js?v=3.1.1';
-import { REGIONS, REGION_BY_ID, CURIOS, CONTRACTS } from '../data/expedition.js?v=3.1.1';
-import { CONNECTIONS, START_LOCATION_ID } from '../data/map.js?v=3.1.1';
-import { EQUIPMENT, MEDICINES } from '../data/equipment.js?v=3.1.1';
-import { ENCOUNTERS } from '../data/encounters.js?v=3.1.1';
-import { fits, firstFit, usedArea, organize } from './inventory.js?v=3.1.1';
+import { ITEMS, QUALITY_ORDER } from '../data/items.js?v=3.1.2';
+import { preserveContainerLayout } from './container-layout.js?v=3.1.2';
+import { CONTAINER_TYPES } from '../data/containers.js?v=3.1.2';
+import { REGIONS, REGION_BY_ID, CURIOS, CONTRACTS } from '../data/expedition.js?v=3.1.2';
+import { CONNECTIONS, START_LOCATION_ID } from '../data/map.js?v=3.1.2';
+import { EQUIPMENT, MEDICINES } from '../data/equipment.js?v=3.1.2';
+import { ENCOUNTERS } from '../data/encounters.js?v=3.1.2';
+import { fits, firstFit, usedArea, organize } from './inventory.js?v=3.1.2';
 
 export const SAVE_KEY = 'mini-delta-force-expedition-v3';
 export const RAID_SECONDS = 30 * 60;
@@ -93,6 +94,7 @@ export function loadState(storage) {
       state.eventBook = Object.fromEntries(ENCOUNTERS.filter(e=>nonnegative(saved.eventBook?.[e.id])).map(e=>[e.id,nonnegative(saved.eventBook[e.id])]));
       state.stats=Object.fromEntries(Object.keys(newState().stats).map(k=>[k,nonnegative(saved.stats?.[k])]));
       if (state.run&&!validRun(state.run)) { state.run=null; state.notice='进行中的存档格式异常，已保留营地资产并返回整备。'; }
+      if(state.run)state.run.routes=[...CONNECTIONS[state.run.locationId]];
       const r=state.lastResult;
       if (r&&(!Array.isArray(r.items)||r.items.some(e=>!CATALOG[e.itemId])||!r.stats||!Array.isArray(r.newItems)||!Array.isArray(r.lostEquipment)||!['total','cargo','coins','bonus','lostValue'].every(k=>Number.isFinite(r[k])))) state.lastResult=null;
       return state;
@@ -259,15 +261,30 @@ export function act(previous,action){
     }
     case 'reveal':{const item=run.loot?.items.find(e=>!e.revealed);if(!item)fail('已经全部揭晓。');item.revealed=true;if(rank(CATALOG[item.itemId])>=3)run.stats.rare++;break;}
     case 'take':{
+      if(run.loot)preserveContainerLayout(run.loot,CATALOG);
       const source=action.source==='ground'?run.ground:run.loot?.items,item=source?.find(e=>e.id===action.id&&e.revealed&&!e.taken);if(!item)fail('物品还没揭晓，或已经装包。');
       if(!put(run,item,action.target,action.placement))fail('放不下：需要连续空格，且不能跨胸挂小仓或口袋；可旋转或调整位置。');
       if(action.source==='ground')run.ground=run.ground.filter(e=>e.id!==item.id);else item.taken=true;break;
     }
     case 'takeAll':{
+      if(run.loot)preserveContainerLayout(run.loot,CATALOG);
       const source=action.source==='ground'?run.ground:run.loot?.items;if(!source)fail('没有待拾取的物品。');
       for(const item of source.filter(e=>e.revealed&&!e.taken).sort((a,b)=>CATALOG[b.itemId].value-CATALOG[a.itemId].value))if(put(run,item)){
         if(action.source==='ground')run.ground=run.ground.filter(e=>e.id!==item.id);else item.taken=true;
       }break;
+    }
+    case 'returnLoot':{
+      if(!run.loot)fail('需要先打开一个容器。');
+      const source=run.spaces.find(s=>s.items.some(e=>e.id===action.id)),item=source?.items.find(e=>e.id===action.id);
+      if(!item)fail('物品已不在身上。');
+      const pages=preserveContainerLayout(run.loot,CATALOG),page=action.page??0;
+      if(!Number.isInteger(page)||!pages[page])fail('不存在这个容器。');
+      const space={...pages[page],items:pages[page].items.filter(e=>!e.taken)},size=CATALOG[item.itemId].size;
+      const p=action.placement||firstFit(space,[item.w,item.h]);
+      if(!p||!((p.w===size[0]&&p.h===size[1])||(p.w===size[1]&&p.h===size[0]))||!fits(space,p))fail('容器目标位置放不下，请选择连续空格。');
+      source.items=source.items.filter(e=>e.id!==item.id);
+      run.loot.items=run.loot.items.filter(e=>e.id!==item.id);
+      run.loot.items.push({...item,...p,revealed:true,taken:false,containerPlacement:{page,...p}});break;
     }
     case 'move':case 'rotate':{
       const source=run.spaces.find(s=>s.items.some(e=>e.id===action.id)),item=source?.items.find(e=>e.id===action.id);if(!item)fail('物品已不在身上。');
